@@ -1,0 +1,73 @@
+# See https://en.wikipedia.org/wiki/Wavefront_.obj_file
+# This file contains 8 vertices and 12 faces.
+
+# List of Vertices, with (x,y,z[,w]) coordinates, w is optional and defaults to 1.0.
+v -0.5 -0.5  0.5
+v -0.5  0.5  0.5
+v  0.5  0.5  0.5
+v  0.5 -0.5  0.5
+v -0.5 -0.5 -0.5
+v -0.5  0.5 -0.5
+v  0.5  0.5 -0.5
+v  0.5 -0.5 -0.5
+
+# Texture coordinates, in (u[,v][,w]) coordinates, v and w are optional and default to 0.
+# https://en.wikipedia.org/wiki/UV_mapping
+vt 0.000 0.125
+vt 0.375 0.375
+vt 0.000 0.250
+vt 0.000 0.375
+vt 0.000 0.000
+vt 0.375 0.250
+vt 0.125 0.125
+vt 0.500 0.375
+vt 0.125 0.250
+vt 0.125 0.375
+vt 0.125 0.000
+vt 0.375 0.125
+vt 0.500 0.125
+vt 0.500 0.250
+vt 0.375 0.000
+vt 0.500 0.000
+vt 0.000 0.000
+vt 0.250 0.000
+vt 0.250 0.125
+vt 0.250 0.250
+vt 0.250 0.375
+vt 0.000 0.000
+
+# Normals in (x,y,z) form; normals might not be unit.
+vn -0.5 -0.5  0.5
+vn -0.5  0.5  0.5
+vn  0.5  0.5  0.5
+vn  0.5 -0.5  0.5
+vn -0.5 -0.5 -0.5
+vn -0.5  0.5 -0.5
+vn  0.5  0.5 -0.5
+vn  0.5 -0.5 -0.5
+
+# Face Definitions
+# Vertex/texture-coordinate/normal
+#
+# A valid vertex index starts from 1 and matches the corresponding vertex
+# elements of a previously defined vertex list. Each face can contain three
+# or more vertices.
+#
+# A valid texture coordinate index starts from 1 and matches the corresponding
+# element in the previously defined list of texture coordinates.
+#
+# A valid normal index starts from 1 and matches the corresponding element in
+# the previously defined list of normals.
+#
+f 3/14/3 7/8/7 2/6/2
+f 2/6/2 7/8/7 6/2/6
+f 1/16/1 5/13/5 4/15/4
+f 4/15/4 5/13/5 8/12/8
+f 8/11/8 7/7/7 4/5/4
+f 4/5/4 7/7/7 3/1/3
+f 2/21/2 5/9/5 1/20/1
+f 6/10/6 5/9/5 2/21/2
+f 1/11/1 4/18/4 2/7/2
+f 2/7/2 4/18/4 3/19/3
+f 5/9/5 7/4/7 8/3/8
+f 6/10/6 7/4/7 5/9/5
