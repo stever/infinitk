@@ -1,8 +1,9 @@
-﻿using InfiniTK.Meshomatic;
+﻿using InfiniTK.Engine;
+using InfiniTK.Utility;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace InfiniTK
+namespace InfiniTK.Artifacts
 {
     /// <summary>
     /// Stars in the sky using a starfield texture from 

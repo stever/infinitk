@@ -62,36 +62,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Block.cs" />
-    <Compile Include="BlockCollision.cs" />
+    <Compile Include="Engine\Block.cs" />
+    <Compile Include="Engine\BlockCollision.cs" />
     <Compile Include="MonoXna\BoundingBox.cs" />
-    <Compile Include="ColliderCollision.cs" />
+    <Compile Include="Engine\ColliderCollision.cs" />
     <Compile Include="MonoXna\ContainmentType.cs" />
-    <Compile Include="FrameTimer.cs" />
-    <Compile Include="GameEngine.cs" />
-    <Compile Include="IAction.cs" />
-    <Compile Include="ICollide.cs" />
-    <Compile Include="IMove.cs" />
-    <Compile Include="InputStates.cs" />
-    <Compile Include="IPosition.cs" />
-    <Compile Include="IRender.cs" />
-    <Compile Include="Jump.cs" />
-    <Compile Include="JumpState.cs" />
+    <Compile Include="Utility\FrameTimer.cs" />
+    <Compile Include="Engine\GameEngine.cs" />
+    <Compile Include="Engine\IAction.cs" />
+    <Compile Include="Engine\ICollide.cs" />
+    <Compile Include="Engine\IMove.cs" />
+    <Compile Include="Engine\InputStates.cs" />
+    <Compile Include="Engine\IPosition.cs" />
+    <Compile Include="Engine\IRender.cs" />
+    <Compile Include="Engine\Jump.cs" />
+    <Compile Include="Engine\JumpState.cs" />
     <Compile Include="Meshomatic\MeshData.cs" />
-    <Compile Include="MeshObject.cs" />
+    <Compile Include="Engine\MeshObject.cs" />
     <Compile Include="Meshomatic\MeshObjLoader.cs" />
     <Compile Include="Meshomatic\MeshPoint.cs" />
     <Compile Include="Meshomatic\MeshTri.cs" />
     <Compile Include="Meshomatic\MeshVector2.cs" />
     <Compile Include="Meshomatic\MeshVector3.cs" />
-    <Compile Include="MouseDelta.cs" />
-    <Compile Include="Navigator.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Engine\MouseDelta.cs" />
+    <Compile Include="Engine\Navigator.cs" />
+    <Compile Include="Engine\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Starfield.cs" />
-    <Compile Include="Terrain.cs" />
-    <Compile Include="Texture.cs" />
+    <Compile Include="Artifacts\Starfield.cs" />
+    <Compile Include="Artifacts\Terrain.cs" />
+    <Compile Include="Utility\Texture.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

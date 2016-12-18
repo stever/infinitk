@@ -1,4 +1,4 @@
-﻿namespace InfiniTK
+﻿namespace InfiniTK.Engine
 {
     public struct MouseDelta
     {

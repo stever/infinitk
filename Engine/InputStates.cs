@@ -2,7 +2,7 @@
 using log4net;
 using OpenTK.Input;
 
-namespace InfiniTK
+namespace InfiniTK.Engine
 {
     public class InputStates
     {

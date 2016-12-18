@@ -5,7 +5,7 @@ using System.Reflection;
 using log4net;
 using OpenTK.Graphics.OpenGL;
 
-namespace InfiniTK
+namespace InfiniTK.Utility
 {
     public class Texture
     {

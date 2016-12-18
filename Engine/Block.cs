@@ -1,8 +1,9 @@
 ﻿using InfiniTK.MonoXna;
+using InfiniTK.Utility;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace InfiniTK
+namespace InfiniTK.Engine
 {
     public class Block : IRender
     {

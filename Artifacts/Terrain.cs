@@ -1,9 +1,10 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.Reflection;
+using InfiniTK.Utility;
 using log4net;
 
-namespace InfiniTK
+namespace InfiniTK.Artifacts
 {
     public class Terrain
     {

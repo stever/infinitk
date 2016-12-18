@@ -2,7 +2,7 @@
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace InfiniTK
+namespace InfiniTK.Engine
 {
     /// <summary>
     /// Move a bunch of postions at the same time.

@@ -1,8 +1,9 @@
 ﻿using System;
+using InfiniTK.Artifacts;
 using InfiniTK.MonoXna;
 using OpenTK;
 
-namespace InfiniTK
+namespace InfiniTK.Engine
 {
     public class Player : IMove, ICollide
     {

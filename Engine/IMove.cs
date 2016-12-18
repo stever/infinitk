@@ -1,6 +1,6 @@
 ﻿using OpenTK;
 
-namespace InfiniTK
+namespace InfiniTK.Engine
 {
     public interface IMove : IPosition
     {

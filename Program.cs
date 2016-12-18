@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using InfiniTK.Engine;
 using log4net;
 using OpenTK;
 using OpenTK.Input;
@@ -42,13 +43,16 @@ namespace InfiniTK
 
                 VSync = VSyncMode.On;
 
+                // Keyboard
                 Keyboard.KeyRepeat = true;
                 Keyboard.KeyDown += KeyDownHandler;
                 Keyboard.KeyUp += KeyUpHandler;
 
+                // Mouse
                 Mouse.ButtonDown += MouseButtonDownHandler;
                 Mouse.ButtonUp += MouseButtonUpHandler;
 
+                // World
                 gameEngine.LimitFrameRate = false;
                 gameEngine.SetupGame();
             }
@@ -79,6 +83,8 @@ namespace InfiniTK
                 gameEngine.Update();
             }
 
+            #region Mouse
+
             private void MouseButtonDownHandler(object sender, MouseButtonEventArgs e)
             {
                 if (e.Button == MouseButton.Left)
@@ -90,6 +96,10 @@ namespace InfiniTK
                 if (e.Button == MouseButton.Left)
                     gameEngine.DisableMouseControl();
             }
+
+            #endregion
+
+            #region Keyboard
 
             private void KeyDownHandler(object sender, KeyboardKeyEventArgs e)
             {
@@ -116,6 +126,8 @@ namespace InfiniTK
             {
                 gameEngine.KeyUp(e.Key);
             }
+
+            #endregion
         }
     }
 }

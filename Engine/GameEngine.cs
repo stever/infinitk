@@ -2,12 +2,14 @@
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using InfiniTK.Artifacts;
+using InfiniTK.Utility;
 using log4net;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
-namespace InfiniTK
+namespace InfiniTK.Engine
 {
     public class GameEngine
     {
