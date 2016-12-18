@@ -160,12 +160,6 @@ void main()
             }
         }
 
-        public bool LimitFrameRate
-        {
-            get { return frameTimer.LimitFrameRate; }
-            set { frameTimer.LimitFrameRate = value; }
-        }
-
         public void Load()
         {
             blockTemplate.LoadMeshData("Cube.obj");

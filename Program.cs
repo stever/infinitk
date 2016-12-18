@@ -53,7 +53,6 @@ namespace InfiniTK
                 Mouse.ButtonUp += MouseButtonUpHandler;
 
                 // World
-                gameEngine.LimitFrameRate = false;
                 gameEngine.SetupGame();
             }
 
