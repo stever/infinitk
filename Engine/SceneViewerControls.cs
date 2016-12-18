@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using InfiniTK.GameEngine.Actions;
 using log4net;
 using OpenTK.Input;
 
@@ -9,9 +8,6 @@ namespace InfiniTK.Engine
     {
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
-        // TODO: Move the JumpState to the Player class.
-        public Jump.JumpState JumpState { get; set; }
 
         public bool MouseControlEnabled { get; set; }
 
@@ -121,8 +117,6 @@ namespace InfiniTK.Engine
 
         #region Keyboard state variables
 
-        private bool jumpKeyDown;
-
         // Forward and backward movement.
         private bool moveForwardKeyDown;
         private bool moveBackwardKeyDown;
@@ -150,15 +144,6 @@ namespace InfiniTK.Engine
 
         #endregion
 
-        /// <summary>
-        /// Do a complete reset of the controls, except mouse controls.
-        /// </summary>
-        public void Reset()
-        {
-            ResetKeyStates();
-            JumpState = Jump.JumpState.NotJumping;
-        }
-
         #region Keyboard handling methods
 
         /// <summary>
@@ -166,7 +151,6 @@ namespace InfiniTK.Engine
         /// </summary>
         public void ResetKeyStates()
         {
-            jumpKeyDown = false;
             moveForwardKeyDown = false;
             moveBackwardKeyDown = false;
             moveLeftKeyDown = false;
@@ -191,20 +175,10 @@ namespace InfiniTK.Engine
             ToggleKey(key, false);
         }
 
-        private void ToggleKey(Key key, bool keyDown)
+        protected void ToggleKey(Key key, bool keyDown)
         {
             switch (key)
             {
-                case Key.Space:
-                    if (!keyDown) jumpKeyDown = false;
-                    else if (!jumpKeyDown)
-                    {
-                        jumpKeyDown = true;
-                        if (JumpState == Jump.JumpState.NotJumping)
-                            JumpState = Jump.JumpState.InitiateJump;
-                    }
-                    break;
-
                 case Key.Plus:
                     moveUpKeyDown = keyDown;
                     if (keyDown) moveUpOverDown = true;

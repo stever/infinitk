@@ -29,7 +29,12 @@ void main()
 ";
         */
 
-        protected readonly SceneViewerControls Controls = new SceneViewerControls();
+        private readonly SceneViewerControls controls;
+
+        public SceneViewer(SceneViewerControls controls)
+        {
+            this.controls = controls;
+        }
 
         private Point restoreMousePosition;
 
@@ -95,7 +100,7 @@ void main()
 
         public void EnableMouseControl()
         {
-            if (Controls.MouseControlEnabled)
+            if (controls.MouseControlEnabled)
                 DisableMouseControl();
 
             restoreMousePosition = Cursor.Position;
@@ -103,17 +108,17 @@ void main()
 
             Mouse.SnapshotCurrentMouseState();
 
-            Controls.MouseControlEnabled = true;
+            controls.MouseControlEnabled = true;
         }
 
         public void DisableMouseControl()
         {
-            if (!Controls.MouseControlEnabled) return;
+            if (!controls.MouseControlEnabled) return;
 
             Cursor.Position = restoreMousePosition;
             Cursor.Show();
 
-            Controls.MouseControlEnabled = false;
+            controls.MouseControlEnabled = false;
         }
     }
 }

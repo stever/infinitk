@@ -20,13 +20,15 @@ namespace InfiniTK.GameEngine
             MoveToStartPosition();
         }
 
+        public GameControls Controls { get; set; }
+
         public void MoveToStartPosition()
         {
             Pitch = 0;
             Yaw = 0;
             Position = new Vector3d(0, 2, 0);
             currentAction = null;
-            Controls?.Reset();
+            Controls?.ResetKeyStates();
         }
 
         /// <summary>
@@ -76,8 +78,6 @@ namespace InfiniTK.GameEngine
             Yaw += mouseDelta.X * MouseLookSpeed;
             Pitch += mouseDelta.Y * -MouseLookSpeed;
         }
-
-        public SceneViewerControls Controls { get; set; }
 
         #region IRender implementation
 

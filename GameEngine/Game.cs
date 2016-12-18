@@ -15,6 +15,7 @@ namespace InfiniTK.GameEngine
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        private readonly GameControls controls;
         private readonly Player controllingPlayer = new Player();
         private readonly FrameTimer frameTimer = new FrameTimer();
         private readonly Terrain terrain = new Terrain("Terrain.png");
@@ -22,13 +23,21 @@ namespace InfiniTK.GameEngine
         private readonly HashSet<Player> players = new HashSet<Player>();
         private readonly HashSet<Block> blocks = new HashSet<Block>();
 
+        public Game(GameControls controls) : base(controls)
+        {
+            this.controls = controls;
+        }
+
+        public Game() : this(new GameControls())
+        { }
+
         /// <summary>
         /// This method is used to create the game world and entities within it.
         /// </summary>
         public void SetupGame()
         {
             // Player set-up.
-            controllingPlayer.Controls = Controls;
+            controllingPlayer.Controls = controls;
             players.Add(controllingPlayer);
 
             // Surface blocks.
@@ -136,23 +145,23 @@ namespace InfiniTK.GameEngine
 
         public void Reset()
         {
-            Controls.Reset();
+            controls.ResetKeyStates();
             controllingPlayer.MoveToStartPosition();
         }
 
         public void KeyDown(Key key)
         {
-            Controls.KeyDown(key);
+            controls.KeyDown(key);
         }
 
         public void KeyUp(Key key)
         {
-            Controls.KeyUp(key);
+            controls.KeyUp(key);
         }
 
         public void ResetKeyStates()
         {
-            Controls.ResetKeyStates();
+            controls.ResetKeyStates();
         }
     }
 }

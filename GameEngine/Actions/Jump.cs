@@ -1,6 +1,5 @@
 ﻿using System;
 using InfiniTK.Engine;
-using InfiniTK.Utility;
 using OpenTK;
 
 namespace InfiniTK.GameEngine.Actions
@@ -8,11 +7,11 @@ namespace InfiniTK.GameEngine.Actions
     public class Jump : IAction
     {
         private readonly IMove entity;
-        private readonly SceneViewerControls controls;
+        private readonly GameControls controls;
         private readonly double startingHeight;
         private double timeSinceStart;
 
-        public Jump(IMove entity, SceneViewerControls controls)
+        public Jump(IMove entity, GameControls controls)
         {
             this.entity = entity;
             this.controls = controls;

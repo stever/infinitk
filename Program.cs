@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using InfiniTK.GameEngine;
 using log4net;
 using OpenTK;
 using OpenTK.Input;
@@ -34,7 +35,7 @@ namespace InfiniTK
 
         private class Window : GameWindow
         {
-            private readonly GameEngine.Game game = new GameEngine.Game();
+            private readonly Game game = new Game();
 
             public Window(int width, int height) : base(width, height)
             {
