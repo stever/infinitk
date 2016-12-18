@@ -103,7 +103,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Cube.obj" />
+    <None Include="Artifacts\Cube.obj" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
     <None Include="PostBuild.bat" />
@@ -117,14 +117,14 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="README.md" />
-    <None Include="Sphere.obj" />
+    <None Include="Artifacts\Sphere.obj" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Starfield.png" />
-    <Content Include="Terrain.png" />
+    <Content Include="Artifacts\Starfield.png" />
+    <Content Include="Artifacts\Terrain.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
