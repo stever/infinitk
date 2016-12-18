@@ -4,7 +4,7 @@ using System.Reflection;
 using InfiniTK.Utility;
 using log4net;
 
-namespace InfiniTK.Artifacts
+namespace InfiniTK.GameEngine
 {
     public class Terrain
     {

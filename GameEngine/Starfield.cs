@@ -3,7 +3,7 @@ using InfiniTK.Utility;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace InfiniTK.Artifacts
+namespace InfiniTK.GameEngine
 {
     /// <summary>
     /// Stars in the sky using a starfield texture from 

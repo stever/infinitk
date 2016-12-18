@@ -1,5 +1,4 @@
 ﻿using System;
-using InfiniTK.Artifacts;
 using InfiniTK.Engine;
 using InfiniTK.GameEngine.Actions;
 using InfiniTK.Utility;

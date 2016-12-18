@@ -86,8 +86,8 @@
     <Compile Include="GameEngine\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Artifacts\Starfield.cs" />
-    <Compile Include="Artifacts\Terrain.cs" />
+    <Compile Include="GameEngine\Starfield.cs" />
+    <Compile Include="GameEngine\Terrain.cs" />
     <Compile Include="Utility\Mouse.cs" />
     <Compile Include="Utility\Texture.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
