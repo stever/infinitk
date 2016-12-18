@@ -1,14 +1,15 @@
-﻿using InfiniTK.Utility;
+﻿using System;
+using InfiniTK.Engine;
+using InfiniTK.Utility;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
 namespace InfiniTK.GameEngine
 {
-    public class Block : IRender
+    public class Block : SceneObject, IRender
     {
         private readonly MeshObject meshObject;
         private readonly Texture texture;
-        private Vector3d position;
 
         public Block(MeshObject obj, Texture texture)
         {
@@ -19,25 +20,25 @@ namespace InfiniTK.GameEngine
 
         public BoundingBox BoundingBox { get; private set; }
 
-        public Vector3d Position
+        public new Vector3d Position
         {
-            get { return position; }
+            get { return base.Position; }
             set
             {
-                position = value;
+                base.Position = value;
                 BoundingBox = BoundingBox.CreateFromSphere(value, 0.5f);
             }
         }
 
-        public void Load()
+        public override void Load()
         {
             texture.Load();
         }
 
-        public void Update(double timeSinceLastUpdate)
+        public override void Update(double timeSinceLastUpdate)
         { }
 
-        public void Render()
+        public override void Render()
         {
             GL.PushMatrix();
             GL.Translate(Position);

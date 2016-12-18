@@ -2,13 +2,17 @@
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace InfiniTK.GameEngine
+namespace InfiniTK.Engine
 {
-    /// <summary>
-    /// Move a bunch of positions at the same time.
-    /// </summary>
-    public class Navigator : IMove
+    public abstract class SceneObject
     {
+        public Vector3d Position { get; set; }
+
+        public abstract void Load();
+
+        public abstract void Update(double timeSinceLastUpdate);
+
+        public abstract void Render();
         private const float MaxPitch = 89.99f; // NOTE: Can't be >= 90.
         private const float MinPitch = -MaxPitch;
 
@@ -46,14 +50,6 @@ namespace InfiniTK.GameEngine
             while (yaw < 0.0f) yaw += 360.0f;
             return yaw;
         }
-
-        #region IPosition implementation
-
-        public Vector3d Position { get; set; }
-
-        #endregion
-
-        #region IRender implementation
 
         /// <summary>
         /// Apply the camera from the given position and orientation.
@@ -131,7 +127,5 @@ namespace InfiniTK.GameEngine
         {
             Pitch += degrees;
         }
-
-        #endregion
     }
 }

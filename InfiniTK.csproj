@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engine\SceneObject.cs" />
     <Compile Include="GameEngine\Block.cs" />
     <Compile Include="GameEngine\BlockCollision.cs" />
     <Compile Include="Utility\BoundingBox.cs" />
@@ -82,7 +83,6 @@
     <Compile Include="Utility\Meshomatic\MeshTri.cs" />
     <Compile Include="Utility\Meshomatic\MeshVector2.cs" />
     <Compile Include="Utility\Meshomatic\MeshVector3.cs" />
-    <Compile Include="GameEngine\Navigator.cs" />
     <Compile Include="GameEngine\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

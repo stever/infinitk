@@ -1,18 +1,18 @@
 ﻿using System;
 using InfiniTK.Artifacts;
+using InfiniTK.Engine;
 using InfiniTK.GameEngine.Actions;
 using InfiniTK.Utility;
 using OpenTK;
 
 namespace InfiniTK.GameEngine
 {
-    public class Player : IMove, ICollide
+    public class Player : SceneObject, IMove, ICollide
     {
         private const float MouseLookSpeed = 0.2f;
         private const float MovementSpeed = 0.01f;
         private const float TurnSpeed = 0.1f;
 
-        private readonly Navigator navigator = new Navigator();
         private readonly Starfield starfield = new Starfield();
         private IAction currentAction;
 
@@ -23,9 +23,9 @@ namespace InfiniTK.GameEngine
 
         public void MoveToStartPosition()
         {
-            navigator.Pitch = 0;
-            navigator.Yaw = 0;
-            navigator.Position = new Vector3d(0, 2, 0);
+            Pitch = 0;
+            Yaw = 0;
+            Position = new Vector3d(0, 2, 0);
             currentAction = null;
             Controls?.Reset();
         }
@@ -52,42 +52,42 @@ namespace InfiniTK.GameEngine
             }
 
             // Move up and down. TODO: Restrict this control to a creative game.
-            if (Controls.IsMovingUp) navigator.Move(new Vector3d(0, moveAmount, 0));
-            else if (Controls.IsMovingDown) navigator.Move(new Vector3d(0, -moveAmount, 0));
+            if (Controls.IsMovingUp) Move(new Vector3d(0, moveAmount, 0));
+            else if (Controls.IsMovingDown) Move(new Vector3d(0, -moveAmount, 0));
 
             // Move forward and backward.
-            if (Controls.IsMovingForward) navigator.MoveForward(moveAmount);
-            else if (Controls.IsMovingBackward) navigator.MoveForward(-moveAmount);
+            if (Controls.IsMovingForward) MoveForward(moveAmount);
+            else if (Controls.IsMovingBackward) MoveForward(-moveAmount);
 
             // Move left and right.
-            if (Controls.IsMovingLeft) navigator.MoveSideways(-moveAmount);
-            else if (Controls.IsMovingRight) navigator.MoveSideways(moveAmount);
+            if (Controls.IsMovingLeft) MoveSideways(-moveAmount);
+            else if (Controls.IsMovingRight) MoveSideways(moveAmount);
 
             // Turn left and right.
-            if (Controls.IsTurningLeft) navigator.Spin(-turnAmount);
-            else if (Controls.IsTurningRight) navigator.Spin(turnAmount);
+            if (Controls.IsTurningLeft) Spin(-turnAmount);
+            else if (Controls.IsTurningRight) Spin(turnAmount);
 
             // Look up and down.
-            if (Controls.IsTurningUp) navigator.Tilt(turnAmount);
-            else if (Controls.IsTurningDown) navigator.Tilt(-turnAmount);
+            if (Controls.IsTurningUp) Tilt(turnAmount);
+            else if (Controls.IsTurningDown) Tilt(-turnAmount);
 
             // Mouse control.
             if (!Controls.MouseControlEnabled) return;
             var mouseDelta = Mouse.GetMouseDelta();
-            navigator.Yaw += mouseDelta.X * MouseLookSpeed;
-            navigator.Pitch += mouseDelta.Y * -MouseLookSpeed;
+            Yaw += mouseDelta.X * MouseLookSpeed;
+            Pitch += mouseDelta.Y * -MouseLookSpeed;
         }
 
         public InputStates Controls { get; set; }
 
         #region IRender implementation
 
-        public void Load()
+        public override void Load()
         {
             starfield.Load();
         }
 
-        public void Update(double timeSinceLastUpdate)
+        public override void Update(double timeSinceLastUpdate)
         {
             HandleControls(timeSinceLastUpdate);
             if (currentAction == null) return;
@@ -102,9 +102,9 @@ namespace InfiniTK.GameEngine
             }
         }
 
-        public void Render()
+        public override void Render()
         {
-            starfield.Position = navigator.Position;
+            starfield.Position = Position;
             starfield.Render();
         }
 
@@ -117,7 +117,7 @@ namespace InfiniTK.GameEngine
             // TODO: Player is 2 blocks tall. Collisons have to take both blocks into account!
 
             /*
-            Vector3d playerPosition = navigator.Position;
+            Vector3d playerPosition = Position;
             double pX = playerPosition.X;
             double pY = playerPosition.Y;
             double pZ = playerPosition.Z;
@@ -141,8 +141,8 @@ namespace InfiniTK.GameEngine
             */
 
             /*
-            Vector3d legsPosition = Vector3d.Add(navigator.Position, -Vector3d.UnitY);
-            BoundingBox head = BoundingBox.CreateFromSphere(navigator.Position, 0.5f);
+            Vector3d legsPosition = Vector3d.Add(Position, -Vector3d.UnitY);
+            BoundingBox head = BoundingBox.CreateFromSphere(Position, 0.5f);
             BoundingBox legs = BoundingBox.CreateFromSphere(legsPosition, 0.5f);
             BoundingBox p = BoundingBox.CreateMerged(head, legs);
             Log.DebugFormat("Player bounding box = {0}", p);
@@ -150,7 +150,7 @@ namespace InfiniTK.GameEngine
             return p.Intersects(b);
             */
 
-            var p = BoundingBox.CreateFromSphere(navigator.Position, 0.5f);
+            var p = BoundingBox.CreateFromSphere(Position, 0.5f);
             var b = block.BoundingBox;
             return p.Intersects(b);
         }
@@ -187,7 +187,7 @@ namespace InfiniTK.GameEngine
         public void HandleCollision(Block block)
         {
             // The distance between the player and the block.
-            var playerPosition = navigator.Position;
+            var playerPosition = Position;
             var distance = Vector3d.Subtract(playerPosition, block.Position);
 
             // Determine the axis with the largest difference.
@@ -207,14 +207,14 @@ namespace InfiniTK.GameEngine
                 case 2: blocker = new Vector3d(1, 0, 1); break;
                 case 3: blocker = new Vector3d(1, 1, 0); break;
             }
-            navigator.Position = _lastPosition;            
+            Position = _lastPosition;            
             Vector3d move = Vector3d.Subtract(playerPosition, _lastPosition);
-            navigator.Move(Vector3d.Multiply(move, blocker));*/
+            Move(Vector3d.Multiply(move, blocker));*/
 
             // Push player flat back on blocking face.
-            x = navigator.Position.X;
-            y = navigator.Position.Y;
-            z = navigator.Position.Z;
+            x = Position.X;
+            y = Position.Y;
+            z = Position.Z;
             switch (furthest)
             {
                 case 1:
@@ -230,56 +230,12 @@ namespace InfiniTK.GameEngine
                     else z = block.Position.Z + 1;
                     break;
             }
-            navigator.Position = new Vector3d(x, y, z);
+            Position = new Vector3d(x, y, z);
         }
 
         public void HandleCollision(ICollide entity)
         {
             throw new NotImplementedException();
-        }
-
-        #endregion
-
-        #region IPosition implementation
-
-        public Vector3d Position
-        {
-            get { return navigator.Position; }
-            set { navigator.Position = value; }
-        }
-
-        #endregion
-
-        #region IMove implementation
-
-        public void ApplyCamera()
-        {
-            navigator.ApplyCamera();
-        }
-
-        public void MoveForward(double amount)
-        {
-            navigator.MoveForward(amount);
-        }
-
-        public void MoveSideways(double amount)
-        {
-            navigator.MoveSideways(amount);
-        }
-
-        public void Move(Vector3d amount)
-        {
-            navigator.Move(amount);
-        }
-
-        public void Spin(float degrees)
-        {
-            navigator.Spin(degrees);
-        }
-
-        public void Tilt(float degrees)
-        {
-            navigator.Tilt(degrees);
         }
 
         #endregion

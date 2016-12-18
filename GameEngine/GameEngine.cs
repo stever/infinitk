@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using InfiniTK.Artifacts;
-using InfiniTK.GameEngine;
 using InfiniTK.Utility;
 using log4net;
 using OpenTK;
@@ -127,7 +126,7 @@ void main()
             colliders.Add(player);
 
             // Surface blocks.
-            const int n = 200;
+            const int n = 20;
             for (var z = -n / 2; z < n / 2; z++)
             {
                 for (var x = -n / 2; x < n / 2; x++)
