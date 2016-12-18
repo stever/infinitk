@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using InfiniTK.Engine;
 using InfiniTK.GameEngine.Actions;
 using InfiniTK.Utility;
@@ -77,7 +77,7 @@ namespace InfiniTK.GameEngine
             Pitch += mouseDelta.Y * -MouseLookSpeed;
         }
 
-        public InputStates Controls { get; set; }
+        public SceneViewerControls Controls { get; set; }
 
         #region IRender implementation
 

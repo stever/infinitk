@@ -8,11 +8,11 @@ namespace InfiniTK.GameEngine.Actions
     public class Jump : IAction
     {
         private readonly IMove entity;
-        private readonly InputStates controls;
+        private readonly SceneViewerControls controls;
         private readonly double startingHeight;
         private double timeSinceStart;
 
-        public Jump(IMove entity, InputStates controls)
+        public Jump(IMove entity, SceneViewerControls controls)
         {
             this.entity = entity;
             this.controls = controls;

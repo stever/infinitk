@@ -3,9 +3,9 @@ using InfiniTK.GameEngine.Actions;
 using log4net;
 using OpenTK.Input;
 
-namespace InfiniTK.Utility
+namespace InfiniTK.Engine
 {
-    public class InputStates
+    public class SceneViewerControls
     {
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

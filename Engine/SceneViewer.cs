@@ -29,7 +29,7 @@ void main()
 ";
         */
 
-        protected readonly InputStates Controls = new InputStates();
+        protected readonly SceneViewerControls Controls = new SceneViewerControls();
 
         private Point restoreMousePosition;
 
