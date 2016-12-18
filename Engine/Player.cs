@@ -7,13 +7,9 @@ namespace InfiniTK.Engine
 {
     public class Player : IMove, ICollide
     {
-        #region Constants
-
         private const float MouseLookSpeed = 0.2f;
         private const float MovementSpeed = 0.01f;
         private const float TurnSpeed = 0.1f;
-        
-        #endregion
 
         private readonly Navigator navigator = new Navigator();
         private readonly Starfield starfield = new Starfield();
@@ -76,7 +72,7 @@ namespace InfiniTK.Engine
 
             // Mouse control.
             if (!Controls.MouseControlEnabled) return;
-            var mouseDelta = Utility.Mouse.GetMouseDelta();
+            var mouseDelta = Mouse.GetMouseDelta();
             navigator.Yaw += mouseDelta.X * MouseLookSpeed;
             navigator.Pitch += mouseDelta.Y * -MouseLookSpeed;
         }

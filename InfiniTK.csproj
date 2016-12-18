@@ -68,12 +68,12 @@
     <Compile Include="Engine\ColliderCollision.cs" />
     <Compile Include="Utility\FrameTimer.cs" />
     <Compile Include="Engine\GameEngine.cs" />
-    <Compile Include="Engine\IAction.cs" />
-    <Compile Include="Engine\ICollide.cs" />
-    <Compile Include="Engine\IMove.cs" />
+    <Compile Include="Engine\Interfaces\IAction.cs" />
+    <Compile Include="Engine\Interfaces\ICollide.cs" />
+    <Compile Include="Engine\Interfaces\IMove.cs" />
     <Compile Include="Engine\InputStates.cs" />
-    <Compile Include="Engine\IPosition.cs" />
-    <Compile Include="Engine\IRender.cs" />
+    <Compile Include="Engine\Interfaces\IPosition.cs" />
+    <Compile Include="Engine\Interfaces\IRender.cs" />
     <Compile Include="Engine\Jump.cs" />
     <Compile Include="Engine\JumpState.cs" />
     <Compile Include="Utility\Meshomatic\MeshData.cs" />

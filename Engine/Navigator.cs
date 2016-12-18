@@ -9,17 +9,22 @@ namespace InfiniTK.Engine
     /// </summary>
     public class Navigator : IMove
     {
-        #region Pitch property
-
         private const float MaxPitch = 89.99f; // NOTE: Can't be >= 90.
         private const float MinPitch = -MaxPitch;
 
         private float pitch;
+        private float yaw;
 
         public float Pitch
         {
             get { return pitch; }
             set { pitch = GetLimitedPitch(value); }
+        }
+
+        public float Yaw
+        {
+            get { return yaw; }
+            set { yaw = GetNormalYaw(value); }
         }
 
         /// <summary>
@@ -32,18 +37,6 @@ namespace InfiniTK.Engine
             return pitch;
         }
 
-        #endregion
-
-        #region Yaw property
-
-        private float yaw;
-
-        public float Yaw
-        {
-            get { return yaw; }
-            set { yaw = GetNormalYaw(value); }
-        }
-
         /// <summary>
         /// This method provides a normal yaw value between 0 and 360 degrees.
         /// </summary>
@@ -54,11 +47,8 @@ namespace InfiniTK.Engine
             return yaw;
         }
 
-        #endregion
-
         #region IPosition implementation
 
-        // TODO: Check if property stil has a significant performance hit.
         public Vector3d Position { get; set; }
 
         #endregion
