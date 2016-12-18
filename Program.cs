@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using InfiniTK.GameEngine;
 using log4net;
 using OpenTK;
 using OpenTK.Input;
