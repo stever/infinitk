@@ -37,8 +37,6 @@ void main()
 ";
         */
 
-        #region Gameplay variables
-
         private readonly Player player = new Player();
         private readonly InputStates controls = new InputStates();
         private readonly FrameTimer frameTimer = new FrameTimer();
@@ -48,10 +46,6 @@ void main()
 
         private readonly HashSet<Block> blocks = new HashSet<Block>();
         private readonly HashSet<ICollide> colliders = new HashSet<ICollide>();
-
-        #endregion
-
-        #region Initialisation methods
 
         /// <summary>
         /// This method is called during form Load to initialise GL.
@@ -107,8 +101,7 @@ void main()
             var aspectRatio = (float) width / height;
             const float near = 0.1f;
             const float far = 64000f;
-            var perspective
-                = Matrix4.CreatePerspectiveFieldOfView(fov, aspectRatio, near, far);
+            var perspective = Matrix4.CreatePerspectiveFieldOfView(fov, aspectRatio, near, far);
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadMatrix(ref perspective);
             GL.Viewport(0, 0, width, height);
@@ -166,8 +159,6 @@ void main()
                 blocks.Add(block);
             }
         }
-
-        #endregion
 
         public bool LimitFrameRate
         {
