@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using InfiniTK.Meshomatic;
+using InfiniTK.Utility.Meshomatic;
 using log4net;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;

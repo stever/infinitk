@@ -26,36 +26,22 @@ authors and should not be interpreted as representing official policies, either 
 or implied, of Simon Heath.
 */
 
-namespace InfiniTK.Meshomatic
+namespace InfiniTK.Utility.Meshomatic
 {
-    public class MeshTri
+    public struct MeshVector2
     {
-        public MeshPoint P1;
-        public MeshPoint P2;
-        public MeshPoint P3;
+        public double X;
+        public double Y;
 
-        public MeshTri()
+        public MeshVector2(double x, double y)
         {
-            P1 = new MeshPoint();
-            P2 = new MeshPoint();
-            P3 = new MeshPoint();
-        }
-
-        public MeshTri(MeshPoint a, MeshPoint b, MeshPoint c)
-        {
-            P1 = a;
-            P2 = b;
-            P3 = c;
-        }
-
-        public MeshPoint[] Points()
-        {
-            return new MeshPoint[3] { P1, P2, P3 };
+            X = x;
+            Y = y;
         }
 
         public override string ToString()
         {
-            return $"MeshTri: {P1}, {P2}, {P3}";
+            return $"<{X},{Y}>";
         }
     }
 }

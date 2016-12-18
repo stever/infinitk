@@ -32,7 +32,7 @@ using System;
 using System.Collections.Generic;
 using OpenTK;
 
-namespace InfiniTK.MonoXna
+namespace InfiniTK.Utility
 {
     public struct BoundingBox : IEquatable<BoundingBox>
     {
@@ -44,6 +44,13 @@ namespace InfiniTK.MonoXna
         {
             Min = min;
             Max = max;
+        }
+
+        public enum ContainmentType
+        {
+            Disjoint,
+            Contains,
+            Intersects
         }
 
         public ContainmentType Contains(BoundingBox box)

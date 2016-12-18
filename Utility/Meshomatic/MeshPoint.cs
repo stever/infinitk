@@ -26,7 +26,7 @@ authors and should not be interpreted as representing official policies, either 
 or implied, of Simon Heath.
 */
 
-namespace InfiniTK.Meshomatic
+namespace InfiniTK.Utility.Meshomatic
 {
     public struct MeshPoint
     {

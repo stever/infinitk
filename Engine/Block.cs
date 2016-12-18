@@ -1,5 +1,4 @@
-﻿using InfiniTK.MonoXna;
-using InfiniTK.Utility;
+﻿using InfiniTK.Utility;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 

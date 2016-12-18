@@ -31,7 +31,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
-namespace InfiniTK.Meshomatic
+namespace InfiniTK.Utility.Meshomatic
 {
     public class MeshObjLoader
     {

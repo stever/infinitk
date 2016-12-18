@@ -64,9 +64,8 @@
   <ItemGroup>
     <Compile Include="Engine\Block.cs" />
     <Compile Include="Engine\BlockCollision.cs" />
-    <Compile Include="MonoXna\BoundingBox.cs" />
+    <Compile Include="Utility\BoundingBox.cs" />
     <Compile Include="Engine\ColliderCollision.cs" />
-    <Compile Include="MonoXna\ContainmentType.cs" />
     <Compile Include="Utility\FrameTimer.cs" />
     <Compile Include="Engine\GameEngine.cs" />
     <Compile Include="Engine\IAction.cs" />
@@ -77,13 +76,13 @@
     <Compile Include="Engine\IRender.cs" />
     <Compile Include="Engine\Jump.cs" />
     <Compile Include="Engine\JumpState.cs" />
-    <Compile Include="Meshomatic\MeshData.cs" />
+    <Compile Include="Utility\Meshomatic\MeshData.cs" />
     <Compile Include="Utility\MeshObject.cs" />
-    <Compile Include="Meshomatic\MeshObjLoader.cs" />
-    <Compile Include="Meshomatic\MeshPoint.cs" />
-    <Compile Include="Meshomatic\MeshTri.cs" />
-    <Compile Include="Meshomatic\MeshVector2.cs" />
-    <Compile Include="Meshomatic\MeshVector3.cs" />
+    <Compile Include="Utility\Meshomatic\MeshObjLoader.cs" />
+    <Compile Include="Utility\Meshomatic\MeshPoint.cs" />
+    <Compile Include="Utility\Meshomatic\MeshTri.cs" />
+    <Compile Include="Utility\Meshomatic\MeshVector2.cs" />
+    <Compile Include="Utility\Meshomatic\MeshVector3.cs" />
     <Compile Include="Engine\Navigator.cs" />
     <Compile Include="Engine\Player.cs" />
     <Compile Include="Program.cs" />

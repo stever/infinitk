@@ -26,22 +26,24 @@ authors and should not be interpreted as representing official policies, either 
 or implied, of Simon Heath.
 */
 
-namespace InfiniTK.Meshomatic
+namespace InfiniTK.Utility.Meshomatic
 {
-    public struct MeshVector2
+    public struct MeshVector3
     {
         public double X;
         public double Y;
+        public double Z;
 
-        public MeshVector2(double x, double y)
+        public MeshVector3(double x, double y, double z)
         {
             X = x;
             Y = y;
+            Z = z;
         }
 
         public override string ToString()
         {
-            return $"<{X},{Y}>";
+            return $"<{X},{Y},{Z}>";
         }
     }
 }

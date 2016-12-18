@@ -1,6 +1,6 @@
 ﻿using System;
 using InfiniTK.Artifacts;
-using InfiniTK.MonoXna;
+using InfiniTK.Utility;
 using OpenTK;
 
 namespace InfiniTK.Engine

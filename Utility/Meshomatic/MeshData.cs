@@ -31,7 +31,7 @@ using System.Collections.Generic;
 using System.Text;
 using OpenTK;
 
-namespace InfiniTK.Meshomatic
+namespace InfiniTK.Utility.Meshomatic
 {
     /// <summary>
     /// A class containing all the necessary data for a mesh: Points, normal 
