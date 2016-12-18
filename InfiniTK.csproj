@@ -72,7 +72,6 @@
     <Compile Include="IAction.cs" />
     <Compile Include="ICollide.cs" />
     <Compile Include="IMove.cs" />
-    <Compile Include="InfiniGameWindow.cs" />
     <Compile Include="InputStates.cs" />
     <Compile Include="IPosition.cs" />
     <Compile Include="IRender.cs" />
