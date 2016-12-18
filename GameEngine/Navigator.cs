@@ -5,7 +5,7 @@ using OpenTK.Graphics.OpenGL;
 namespace InfiniTK.GameEngine
 {
     /// <summary>
-    /// Move a bunch of postions at the same time.
+    /// Move a bunch of positions at the same time.
     /// </summary>
     public class Navigator : IMove
     {
