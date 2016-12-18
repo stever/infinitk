@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
-using InfiniTK.Meshomatic;
 using log4net;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;

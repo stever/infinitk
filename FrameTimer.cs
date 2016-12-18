@@ -14,7 +14,7 @@ namespace InfiniTK
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private const int FramesPerSecond = 60; // LCD frame rate locked to 60 FPS. See also https://en.wikipedia.org/wiki/Frame_rate.
+        private const int FramesPerSecond = 60;
         private const float FrameDelayIncrement = 0.1f;
         private const int FpsHistorySize = FramesPerSecond;
 

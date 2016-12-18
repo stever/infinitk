@@ -7,9 +7,11 @@ namespace InfiniTK
     public class Player : IMove, ICollide
     {
         #region Constants
+
         private const float MouseLookSpeed = 0.2f;
         private const float MovementSpeed = 0.01f;
         private const float TurnSpeed = 0.1f;
+        
         #endregion
 
         private readonly Navigator navigator = new Navigator();

@@ -1,5 +1,4 @@
-﻿using InfiniTK.Meshomatic;
-using InfiniTK.MonoXna;
+﻿using InfiniTK.MonoXna;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 

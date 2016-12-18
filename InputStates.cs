@@ -20,6 +20,7 @@ namespace InfiniTK
         #endregion
 
         #region Movement state properties
+
         public bool IsMovingForward
         {
             get
@@ -29,6 +30,7 @@ namespace InfiniTK
                 return false;
             }
         }
+
         public bool IsMovingBackward
         {
             get
@@ -38,6 +40,7 @@ namespace InfiniTK
                 return false;
             }
         }
+
         public bool IsMovingLeft
         {
             get
@@ -47,6 +50,7 @@ namespace InfiniTK
                 return false;
             }
         }
+
         public bool IsMovingRight
         {
             get
@@ -56,6 +60,7 @@ namespace InfiniTK
                 return false;
             }
         }
+
         public bool IsMovingUp
         {
             get
@@ -65,6 +70,7 @@ namespace InfiniTK
                 return false;
             }
         }
+
         public bool IsMovingDown
         {
             get
@@ -74,6 +80,7 @@ namespace InfiniTK
                 return false;
             }
         }
+
         public bool IsTurningLeft
         {
             get
@@ -83,6 +90,7 @@ namespace InfiniTK
                 return false;
             }
         }
+
         public bool IsTurningRight
         {
             get
@@ -92,6 +100,7 @@ namespace InfiniTK
                 return false;
             }
         }
+
         public bool IsTurningUp
         {
             get
@@ -101,6 +110,7 @@ namespace InfiniTK
                 return false;
             }
         }
+
         public bool IsTurningDown
         {
             get
@@ -110,6 +120,7 @@ namespace InfiniTK
                 return false;
             }
         }
+
         #endregion
 
         #region Keyboard state variables
@@ -197,18 +208,22 @@ namespace InfiniTK
                             JumpState = JumpState.InitiateJump;
                     }
                     break;
+
                 case Key.Plus:
                     moveUpKeyDown = keyDown;
                     if (keyDown) moveUpOverDown = true;
                     break;
+
                 case Key.Minus:
                     moveDownKeyDown = keyDown;
                     if (keyDown) moveUpOverDown = false;
                     break;
+
                 case Key.W:
                     moveForwardKeyDown = keyDown;
                     if (keyDown) moveForwardOverBackward = true;
                     break;
+
                 case Key.S:
                     moveBackwardKeyDown = keyDown;
                     if (keyDown) moveForwardOverBackward = false;
@@ -217,10 +232,12 @@ namespace InfiniTK
                     moveLeftKeyDown = keyDown;
                     if (keyDown) moveLeftOverRight = true;
                     break;
+
                 case Key.D:
                     moveRightKeyDown = keyDown;
                     if (keyDown) moveLeftOverRight = false;
                     break;
+
                     /*
                 case Key.Up:
                     if (!keyDown) turnUpKeyDown = false;
@@ -230,6 +247,7 @@ namespace InfiniTK
                         turnUpOverDown = true;
                     }
                     break;
+
                 case Key.Down:
                     if (!keyDown) turnDownKeyDown = false;
                     if (e.Control && keyDown)
@@ -238,6 +256,7 @@ namespace InfiniTK
                         turnUpOverDown = false;
                     }
                     break;
+
                 case Key.Left:
                     if (!keyDown) turnLeftKeyDown = false;
                     if (e.Control && keyDown)
@@ -246,6 +265,7 @@ namespace InfiniTK
                         turnLeftOverRight = true;
                     }
                     break;
+
                 case Key.Right:
                     if (!keyDown) turnRightKeyDown = false;
                     if (e.Control && keyDown)
