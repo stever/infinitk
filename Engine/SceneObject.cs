@@ -4,7 +4,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace InfiniTK.Engine
 {
-    public abstract class SceneObject
+    public abstract class SceneObject : IRender
     {
         public Vector3d Position { get; set; }
 

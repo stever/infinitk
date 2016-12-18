@@ -1,12 +1,11 @@
-﻿using System;
-using InfiniTK.Engine;
+﻿using InfiniTK.Engine;
 using InfiniTK.Utility;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
 namespace InfiniTK.GameEngine
 {
-    public class Block : SceneObject, IRender
+    public class Block : SceneObject
     {
         private readonly MeshObject meshObject;
         private readonly Texture texture;
