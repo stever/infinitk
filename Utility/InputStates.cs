@@ -233,43 +233,6 @@ namespace InfiniTK.Utility
                     moveRightKeyDown = keyDown;
                     if (keyDown) moveLeftOverRight = false;
                     break;
-
-                    /*
-                case Key.Up:
-                    if (!keyDown) turnUpKeyDown = false;
-                    if (e.Control && keyDown)
-                    {
-                        turnUpKeyDown = true;
-                        turnUpOverDown = true;
-                    }
-                    break;
-
-                case Key.Down:
-                    if (!keyDown) turnDownKeyDown = false;
-                    if (e.Control && keyDown)
-                    {
-                        turnDownKeyDown = true;
-                        turnUpOverDown = false;
-                    }
-                    break;
-
-                case Key.Left:
-                    if (!keyDown) turnLeftKeyDown = false;
-                    if (e.Control && keyDown)
-                    {
-                        turnLeftKeyDown = true;
-                        turnLeftOverRight = true;
-                    }
-                    break;
-
-                case Key.Right:
-                    if (!keyDown) turnRightKeyDown = false;
-                    if (e.Control && keyDown)
-                    {
-                        turnRightKeyDown = true;
-                        turnLeftOverRight = false;
-                    }
-                    break;*/
             }
         }
 
