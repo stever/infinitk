@@ -34,7 +34,7 @@ namespace InfiniTK
 
         private class Window : GameWindow
         {
-            private readonly GameEngine.GameEngine gameEngine = new GameEngine.GameEngine();
+            private readonly GameEngine.Game game = new GameEngine.Game();
 
             public Window(int width, int height) : base(width, height)
             {
@@ -52,33 +52,33 @@ namespace InfiniTK
                 Mouse.ButtonUp += MouseButtonUpHandler;
 
                 // World
-                gameEngine.SetupGame();
+                game.SetupGame();
             }
 
             protected override void OnLoad(EventArgs e)
             {
                 base.OnLoad(e);
-                gameEngine.SetupGL();
-                gameEngine.SetupViewport(Width, Height);
-                gameEngine.Load();
+                game.SetupGL();
+                game.SetupViewport(Width, Height);
+                game.Load();
             }
 
             protected override void OnResize(EventArgs e)
             {
                 base.OnResize(e);
-                gameEngine.SetupViewport(Width, Height);
+                game.SetupViewport(Width, Height);
             }
 
             protected override void OnRenderFrame(FrameEventArgs e)
             {
                 base.OnRenderFrame(e);
-                gameEngine.Paint();
+                game.Paint();
                 SwapBuffers();
             }
 
             protected override void OnUpdateFrame(FrameEventArgs e)
             {
-                gameEngine.Update();
+                game.Update();
             }
 
             #region Mouse
@@ -86,13 +86,13 @@ namespace InfiniTK
             private void MouseButtonDownHandler(object sender, MouseButtonEventArgs e)
             {
                 if (e.Button == MouseButton.Left)
-                    gameEngine.EnableMouseControl();
+                    game.EnableMouseControl();
             }
 
             private void MouseButtonUpHandler(object sender, MouseButtonEventArgs e)
             {
                 if (e.Button == MouseButton.Left)
-                    gameEngine.DisableMouseControl();
+                    game.DisableMouseControl();
             }
 
             #endregion
@@ -101,13 +101,13 @@ namespace InfiniTK
 
             private void KeyDownHandler(object sender, KeyboardKeyEventArgs e)
             {
-                gameEngine.KeyDown(e.Key);
+                game.KeyDown(e.Key);
 
                 switch (e.Key)
                 {
                     case Key.Escape: Exit(); break;
 
-                    case Key.Number0: gameEngine.Reset(); break;
+                    case Key.Number0: game.Reset(); break;
 
                     case Key.Number1: WindowState = WindowState.Normal; break;
                     case Key.Number2: WindowState = WindowState.Maximized; break;
@@ -122,7 +122,7 @@ namespace InfiniTK
 
             private void KeyUpHandler(object sender, KeyboardKeyEventArgs e)
             {
-                gameEngine.KeyUp(e.Key);
+                game.KeyUp(e.Key);
             }
 
             #endregion

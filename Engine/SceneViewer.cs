@@ -5,7 +5,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace InfiniTK.Engine
 {
-    public class Viewer
+    public class SceneViewer
     {
         // NOTE: 60 - 100 used in Minecraft. 45 was used in the original example.
         private const float PerspectiveFovDegrees = 60;

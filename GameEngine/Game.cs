@@ -12,7 +12,7 @@ using OpenTK.Input;
 
 namespace InfiniTK.GameEngine
 {
-    public class GameEngine : Viewer
+    public class Game : SceneViewer
     {
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
