@@ -46,10 +46,8 @@ void main()
         private readonly MeshObject blockTemplate = new MeshObject();
         private Point restoreMousePosition;
 
-        // Collections. NOTE: Probably require some efficient way to remove items from these.
-        // NOTE: I've read that it would be better to use arrays here. Worth testing that theory.
-        private readonly List<Block> blocks = new List<Block>();
-        private readonly List<ICollide> colliders = new List<ICollide>();
+        private readonly HashSet<Block> blocks = new HashSet<Block>();
+        private readonly HashSet<ICollide> colliders = new HashSet<ICollide>();
 
         #endregion
 
