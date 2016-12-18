@@ -10,7 +10,9 @@ namespace InfiniTK.Utility
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        // TODO: Move the JumpState to the Player class.
         public Jump.JumpState JumpState { get; set; }
+
         public bool MouseControlEnabled { get; set; }
 
         #region Movement state properties
