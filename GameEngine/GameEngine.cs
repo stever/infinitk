@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
@@ -42,10 +43,10 @@ void main()
         private readonly FrameTimer frameTimer = new FrameTimer();
         private readonly Terrain terrain = new Terrain("Terrain.png");
         private readonly MeshObject blockTemplate = new MeshObject();
-        private Point restoreMousePosition;
-
+        private readonly HashSet<Player> players = new HashSet<Player>();
         private readonly HashSet<Block> blocks = new HashSet<Block>();
-        private readonly HashSet<ICollide> colliders = new HashSet<ICollide>();
+
+        private Point restoreMousePosition;
 
         /// <summary>
         /// This method is called during form Load to initialise GL.
@@ -114,7 +115,7 @@ void main()
         {
             // Player set-up.
             player.Controls = controls;
-            colliders.Add(player);
+            players.Add(player);
 
             // Surface blocks.
             const int n = 20;
@@ -164,7 +165,7 @@ void main()
         {
             blockTemplate.LoadMeshData("Cube.obj");
             foreach (var entity in blocks) entity.Load();
-            foreach (var entity in colliders) entity.Load();
+            foreach (var entity in players) entity.Load();
             frameTimer?.Start();
         }
 
@@ -173,38 +174,26 @@ void main()
             // Compute time since last Idle start.
             var timeSinceLastIdle = frameTimer.ComputeTimeSinceLastFrameStart();
 
-            // Update blocks and colliders before checking for collisions.
+            // Update blocks and players before checking for collisions.
             foreach (var entity in blocks) entity.Update(timeSinceLastIdle);
-            foreach (var entity in colliders) entity.Update(timeSinceLastIdle);
+            foreach (var entity in players) entity.Update(timeSinceLastIdle);
 
             // Check for collisions.
-            var blockCollisions = new List<BlockCollision>();
-            var colliderCollisions = new List<ColliderCollision>();
-            foreach (var collider in colliders)
+            var collisions = new HashSet<Tuple<Player, Block>>();
+            foreach (var collider in players)
             {
-                // Colliders could collide with each other.
-                foreach (var other in colliders)
-                {
-                    if (other == collider) continue;
-                    if (!collider.Collides(other)) continue;
-                    if (Log.IsDebugEnabled) LogCollision(collider, other);
-                    colliderCollisions.Add(new ColliderCollision(collider, other));
-                }
-
-                // Compare colliders (which move) to blocks (which don't move).
+                // Compare players (which move) to blocks (which don't move).
                 foreach (var block in blocks)
                 {
                     if (!collider.Collides(block)) continue;
                     if (Log.IsDebugEnabled) LogCollision(collider, block);
-                    blockCollisions.Add(new BlockCollision(collider, block));
+                    collisions.Add(Tuple.Create(collider, block));
                 }
             }
 
-            // Colliders handle collisions.
-            foreach (var collision in blockCollisions)
-                collision.Collider.HandleCollision(collision.Block);
-            foreach (var collision in colliderCollisions)
-                collision.Collider.HandleCollision(collision.Other);
+            // Players handle collisions.
+            foreach (var collision in collisions)
+                collision.Item1.HandleCollision(collision.Item2);
 
             // Log the amount of time this Idle method takes.
             frameTimer.ComputeTimeSinceIdleStart();
@@ -231,7 +220,7 @@ void main()
             GL.LoadIdentity();
             player.ApplyCamera();
             foreach (var entity in blocks) entity.Render();
-            foreach (var entity in colliders) entity.Render();
+            foreach (var entity in players) entity.Render();
         }
 
         public void Reset()

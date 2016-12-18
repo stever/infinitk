@@ -64,13 +64,10 @@
   <ItemGroup>
     <Compile Include="Engine\SceneObject.cs" />
     <Compile Include="GameEngine\Block.cs" />
-    <Compile Include="GameEngine\BlockCollision.cs" />
     <Compile Include="Utility\BoundingBox.cs" />
-    <Compile Include="GameEngine\ColliderCollision.cs" />
     <Compile Include="Utility\FrameTimer.cs" />
     <Compile Include="GameEngine\GameEngine.cs" />
     <Compile Include="Engine\IAction.cs" />
-    <Compile Include="Engine\ICollide.cs" />
     <Compile Include="Engine\IMove.cs" />
     <Compile Include="Utility\InputStates.cs" />
     <Compile Include="Engine\IPosition.cs" />

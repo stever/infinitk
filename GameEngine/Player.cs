@@ -6,7 +6,7 @@ using OpenTK;
 
 namespace InfiniTK.GameEngine
 {
-    public class Player : SceneObject, ICollide
+    public class Player : SceneObject
     {
         private const float MouseLookSpeed = 0.2f;
         private const float MovementSpeed = 0.01f;
@@ -154,11 +154,6 @@ namespace InfiniTK.GameEngine
             return p.Intersects(b);
         }
 
-        public bool Collides(ICollide entity)
-        {
-            throw new NotImplementedException();
-        }
-
         /*
         /// <summary>
         /// This method is used to determine if two spheres collide.
@@ -230,11 +225,6 @@ namespace InfiniTK.GameEngine
                     break;
             }
             Position = new Vector3d(x, y, z);
-        }
-
-        public void HandleCollision(ICollide entity)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
