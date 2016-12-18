@@ -1,4 +1,4 @@
-﻿namespace InfiniTK.GameEngine
+﻿namespace InfiniTK.Engine
 {
     public interface IAction
     {

@@ -1,4 +1,6 @@
-﻿namespace InfiniTK.GameEngine
+﻿using InfiniTK.Engine;
+
+namespace InfiniTK.GameEngine
 {
     public class ColliderCollision
     {

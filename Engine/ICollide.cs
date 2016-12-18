@@ -1,4 +1,6 @@
-﻿namespace InfiniTK.GameEngine
+﻿using InfiniTK.GameEngine;
+
+namespace InfiniTK.Engine
 {
     public interface ICollide : IRender
     {

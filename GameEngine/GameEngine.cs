@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using InfiniTK.Artifacts;
+using InfiniTK.Engine;
 using InfiniTK.Utility;
 using log4net;
 using OpenTK;

@@ -69,12 +69,12 @@
     <Compile Include="GameEngine\ColliderCollision.cs" />
     <Compile Include="Utility\FrameTimer.cs" />
     <Compile Include="GameEngine\GameEngine.cs" />
-    <Compile Include="GameEngine\Interfaces\IAction.cs" />
-    <Compile Include="GameEngine\Interfaces\ICollide.cs" />
-    <Compile Include="GameEngine\Interfaces\IMove.cs" />
+    <Compile Include="Engine\IAction.cs" />
+    <Compile Include="Engine\ICollide.cs" />
+    <Compile Include="Engine\IMove.cs" />
     <Compile Include="Utility\InputStates.cs" />
-    <Compile Include="GameEngine\Interfaces\IPosition.cs" />
-    <Compile Include="GameEngine\Interfaces\IRender.cs" />
+    <Compile Include="Engine\IPosition.cs" />
+    <Compile Include="Engine\IRender.cs" />
     <Compile Include="GameEngine\Actions\Jump.cs" />
     <Compile Include="Utility\Meshomatic\MeshData.cs" />
     <Compile Include="Utility\MeshObject.cs" />
@@ -122,6 +122,7 @@
     <Content Include="Artifacts\Starfield.png" />
     <Content Include="Artifacts\Terrain.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>..\..\PostBuild.bat</PostBuildEvent>
