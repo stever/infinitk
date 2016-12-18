@@ -4,20 +4,27 @@ using OpenTK.Graphics.OpenGL;
 
 namespace InfiniTK.Engine
 {
-    public abstract class SceneObject : IRender
+    public abstract class SceneObject : IRender, IPosition, IMove
     {
-        public Vector3d Position { get; set; }
+        private const float MaxPitch = 89.99f; // NOTE: Can't be >= 90.
+        private const float MinPitch = -MaxPitch;
+
+        private float pitch;
+        private float yaw;
+
+        #region Abstract interface
 
         public abstract void Load();
 
         public abstract void Update(double timeSinceLastUpdate);
 
         public abstract void Render();
-        private const float MaxPitch = 89.99f; // NOTE: Can't be >= 90.
-        private const float MinPitch = -MaxPitch;
 
-        private float pitch;
-        private float yaw;
+        #endregion
+
+        #region Properties
+
+        public Vector3d Position { get; set; }
 
         public float Pitch
         {
@@ -31,25 +38,7 @@ namespace InfiniTK.Engine
             set { yaw = GetNormalYaw(value); }
         }
 
-        /// <summary>
-        /// This method limits the value of the pitch variable.
-        /// </summary>
-        private static float GetLimitedPitch(float pitch)
-        {
-            if (pitch > MaxPitch) pitch = MaxPitch;
-            else if (pitch < MinPitch) pitch = MinPitch;
-            return pitch;
-        }
-
-        /// <summary>
-        /// This method provides a normal yaw value between 0 and 360 degrees.
-        /// </summary>
-        private static float GetNormalYaw(float yaw)
-        {
-            while (yaw >= 360.0f) yaw -= 360.0f;
-            while (yaw < 0.0f) yaw += 360.0f;
-            return yaw;
-        }
+        #endregion
 
         /// <summary>
         /// Apply the camera from the given position and orientation.
@@ -71,6 +60,8 @@ namespace InfiniTK.Engine
             var camera = Matrix4d.LookAt(Position, viewTarget, Vector3d.UnitY);
             GL.LoadMatrix(ref camera);
         }
+
+        #region Movement
 
         /// <summary>
         /// This method moves the entity in the direction it is facing.
@@ -127,5 +118,27 @@ namespace InfiniTK.Engine
         {
             Pitch += degrees;
         }
+
+        /// <summary>
+        /// This method limits the value of the pitch variable.
+        /// </summary>
+        private static float GetLimitedPitch(float pitch)
+        {
+            if (pitch > MaxPitch) pitch = MaxPitch;
+            else if (pitch < MinPitch) pitch = MinPitch;
+            return pitch;
+        }
+
+        /// <summary>
+        /// This method provides a normal yaw value between 0 and 360 degrees.
+        /// </summary>
+        private static float GetNormalYaw(float yaw)
+        {
+            while (yaw >= 360.0f) yaw -= 360.0f;
+            while (yaw < 0.0f) yaw += 360.0f;
+            return yaw;
+        }
+
+        #endregion
     }
 }

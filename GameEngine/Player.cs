@@ -7,7 +7,7 @@ using OpenTK;
 
 namespace InfiniTK.GameEngine
 {
-    public class Player : SceneObject, IMove, ICollide
+    public class Player : SceneObject, ICollide
     {
         private const float MouseLookSpeed = 0.2f;
         private const float MovementSpeed = 0.01f;
