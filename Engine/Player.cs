@@ -76,7 +76,7 @@ namespace InfiniTK.Engine
 
             // Mouse control.
             if (!Controls.MouseControlEnabled) return;
-            var mouseDelta = Controls.GetMouseDelta();
+            var mouseDelta = Utility.Mouse.GetMouseDelta();
             navigator.Yaw += mouseDelta.X * MouseLookSpeed;
             navigator.Pitch += mouseDelta.Y * -MouseLookSpeed;
         }

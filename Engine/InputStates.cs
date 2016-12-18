@@ -10,14 +10,7 @@ namespace InfiniTK.Engine
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public JumpState JumpState { get; set; }
-
-        #region Mouse handling data
-
         public bool MouseControlEnabled { get; set; }
-
-        private MouseState previousMouseState;
-
-        #endregion
 
         #region Movement state properties
 
@@ -275,37 +268,6 @@ namespace InfiniTK.Engine
                     }
                     break;*/
             }
-        }
-
-        #endregion
-
-        #region Mouse handling methods
-
-        /// <summary>
-        /// This method saves the current mouse state so that deltas are compared
-        /// to this snapshot and not one from earlier.
-        /// </summary>
-        public void SnapshotCurrentMouseState()
-        {
-            previousMouseState = Mouse.GetState();
-        }
-
-        /// <summary>
-        /// This method returns the delta to show how much the mouse has moved
-        /// since the last time this method was called.
-        /// </summary>
-        /// <returns></returns>
-        public MouseDelta GetMouseDelta()
-        {
-            var mouse = Mouse.GetState();
-
-            var deltaX = mouse.X - previousMouseState.X;
-            var deltaY = mouse.Y - previousMouseState.Y;
-            var deltaZ = mouse.Wheel - previousMouseState.Wheel;
-
-            previousMouseState = mouse;
-
-            return new MouseDelta(deltaX, deltaY, deltaZ);
         }
 
         #endregion

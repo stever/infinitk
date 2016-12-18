@@ -5,7 +5,7 @@ using log4net;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace InfiniTK.Engine
+namespace InfiniTK.Utility
 {
     public class MeshObject
     {

@@ -78,19 +78,19 @@
     <Compile Include="Engine\Jump.cs" />
     <Compile Include="Engine\JumpState.cs" />
     <Compile Include="Meshomatic\MeshData.cs" />
-    <Compile Include="Engine\MeshObject.cs" />
+    <Compile Include="Utility\MeshObject.cs" />
     <Compile Include="Meshomatic\MeshObjLoader.cs" />
     <Compile Include="Meshomatic\MeshPoint.cs" />
     <Compile Include="Meshomatic\MeshTri.cs" />
     <Compile Include="Meshomatic\MeshVector2.cs" />
     <Compile Include="Meshomatic\MeshVector3.cs" />
-    <Compile Include="Engine\MouseDelta.cs" />
     <Compile Include="Engine\Navigator.cs" />
     <Compile Include="Engine\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Artifacts\Starfield.cs" />
     <Compile Include="Artifacts\Terrain.cs" />
+    <Compile Include="Utility\Mouse.cs" />
     <Compile Include="Utility\Texture.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

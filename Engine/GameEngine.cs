@@ -275,7 +275,8 @@ void main()
             restoreMousePosition = Cursor.Position;
             Cursor.Hide();
 
-            controls.SnapshotCurrentMouseState();
+            Utility.Mouse.SnapshotCurrentMouseState();
+
             controls.MouseControlEnabled = true;
         }
 
