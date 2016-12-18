@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
-using InfiniTK.Engine.Actions;
+using InfiniTK.GameEngine.Actions;
 using log4net;
 using OpenTK.Input;
 
-namespace InfiniTK.Engine
+namespace InfiniTK.Utility
 {
     public class InputStates
     {

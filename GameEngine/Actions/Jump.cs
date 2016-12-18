@@ -1,7 +1,8 @@
 ﻿using System;
+using InfiniTK.Utility;
 using OpenTK;
 
-namespace InfiniTK.Engine.Actions
+namespace InfiniTK.GameEngine.Actions
 {
     public class Jump : IAction
     {

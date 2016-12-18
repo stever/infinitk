@@ -1,10 +1,10 @@
 ﻿using System;
 using InfiniTK.Artifacts;
-using InfiniTK.Engine.Actions;
+using InfiniTK.GameEngine.Actions;
 using InfiniTK.Utility;
 using OpenTK;
 
-namespace InfiniTK.Engine
+namespace InfiniTK.GameEngine
 {
     public class Player : IMove, ICollide
     {

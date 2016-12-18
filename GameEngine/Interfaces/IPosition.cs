@@ -1,6 +1,6 @@
 ﻿using OpenTK;
 
-namespace InfiniTK.Engine
+namespace InfiniTK.GameEngine
 {
     public interface IPosition
     {

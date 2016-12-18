@@ -1,4 +1,4 @@
-﻿namespace InfiniTK.Engine
+﻿namespace InfiniTK.GameEngine
 {
     public class BlockCollision
     {

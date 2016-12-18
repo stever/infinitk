@@ -1,4 +1,4 @@
-﻿using InfiniTK.Engine;
+﻿using InfiniTK.GameEngine;
 using InfiniTK.Utility;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;

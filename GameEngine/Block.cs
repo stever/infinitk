@@ -2,7 +2,7 @@
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace InfiniTK.Engine
+namespace InfiniTK.GameEngine
 {
     public class Block : IRender
     {

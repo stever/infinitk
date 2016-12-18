@@ -3,13 +3,14 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using InfiniTK.Artifacts;
+using InfiniTK.GameEngine;
 using InfiniTK.Utility;
 using log4net;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
-namespace InfiniTK.Engine
+namespace InfiniTK.GameEngine
 {
     public class GameEngine
     {
@@ -70,8 +71,8 @@ void main()
             GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
             // TODO: Determine purpose of the following.
-            //GL.Disable(EnableCap.CullFace);
-            //GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
+            GL.Disable(EnableCap.CullFace);
+            GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
 
             // Required for VBO drawing.
             GL.EnableClientState(ArrayCap.VertexArray);
@@ -126,7 +127,7 @@ void main()
             colliders.Add(player);
 
             // Surface blocks.
-            const int n = 20;
+            const int n = 200;
             for (var z = -n / 2; z < n / 2; z++)
             {
                 for (var x = -n / 2; x < n / 2; x++)
