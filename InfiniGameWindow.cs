@@ -8,9 +8,10 @@ namespace InfiniTK
 {
     public class InfiniGameWindow : GameWindow
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.
+            GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly GameEngine _gameEngine = new GameEngine();
+        private readonly GameEngine gameEngine = new GameEngine();
 
         public InfiniGameWindow() : base(640, 480)
         {
@@ -25,57 +26,57 @@ namespace InfiniTK
             Mouse.ButtonDown += MouseButtonDownHandler;
             Mouse.ButtonUp += MouseButtonUpHandler;
 
-            _gameEngine.LimitFrameRate = false;
-            _gameEngine.SetupGame();
+            gameEngine.LimitFrameRate = false;
+            gameEngine.SetupGame();
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            _gameEngine.SetupGL();
-            _gameEngine.SetupViewport(Width, Height);
-            _gameEngine.Load();
+            gameEngine.SetupGL();
+            gameEngine.SetupViewport(Width, Height);
+            gameEngine.Load();
         }
 
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            _gameEngine.SetupViewport(Width, Height);
+            gameEngine.SetupViewport(Width, Height);
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             base.OnRenderFrame(e);
-            _gameEngine.Paint();
+            gameEngine.Paint();
             SwapBuffers();
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            _gameEngine.Update();
+            gameEngine.Update();
         }
 
         private void MouseButtonDownHandler(object sender, MouseButtonEventArgs e)
         {
             if (e.Button == MouseButton.Left)
-                _gameEngine.EnableMouseControl();
+                gameEngine.EnableMouseControl();
         }
 
         private void MouseButtonUpHandler(object sender, MouseButtonEventArgs e)
         {
             if (e.Button == MouseButton.Left)
-                _gameEngine.DisableMouseControl();
+                gameEngine.DisableMouseControl();
         }
 
         private void KeyDownHandler(object sender, KeyboardKeyEventArgs e)
         {
-            _gameEngine.KeyDown(e.Key);
+            gameEngine.KeyDown(e.Key);
 
             switch (e.Key)
             {
                 case Key.Escape: Exit(); break;
 
-                case Key.Number0: _gameEngine.Reset(); break;
+                case Key.Number0: gameEngine.Reset(); break;
 
                 case Key.Number1: WindowState = WindowState.Normal; break;
                 case Key.Number2: WindowState = WindowState.Maximized; break;
@@ -90,7 +91,7 @@ namespace InfiniTK
 
         private void KeyUpHandler(object sender, KeyboardKeyEventArgs e)
         {
-            _gameEngine.KeyUp(e.Key);
+            gameEngine.KeyUp(e.Key);
         }
     }
 }

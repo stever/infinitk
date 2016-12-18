@@ -25,7 +25,7 @@ SOFTWARE.
 */
 #endregion License
 
-namespace InfiniTK
+namespace InfiniTK.MonoXna
 {
     public enum ContainmentType
     {
@@ -34,4 +34,3 @@ namespace InfiniTK
         Intersects
     }
 }
-

@@ -64,9 +64,9 @@
   <ItemGroup>
     <Compile Include="Block.cs" />
     <Compile Include="BlockCollision.cs" />
-    <Compile Include="BoundingBox.cs" />
+    <Compile Include="MonoXna\BoundingBox.cs" />
     <Compile Include="ColliderCollision.cs" />
-    <Compile Include="ContainmentType.cs" />
+    <Compile Include="MonoXna\ContainmentType.cs" />
     <Compile Include="FrameTimer.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="IAction.cs" />
@@ -78,13 +78,13 @@
     <Compile Include="IRender.cs" />
     <Compile Include="Jump.cs" />
     <Compile Include="JumpState.cs" />
-    <Compile Include="MeshData.cs" />
+    <Compile Include="Meshomatic\MeshData.cs" />
     <Compile Include="MeshObject.cs" />
-    <Compile Include="MeshObjLoader.cs" />
-    <Compile Include="MeshPoint.cs" />
-    <Compile Include="MeshTri.cs" />
-    <Compile Include="MeshVector2.cs" />
-    <Compile Include="MeshVector3.cs" />
+    <Compile Include="Meshomatic\MeshObjLoader.cs" />
+    <Compile Include="Meshomatic\MeshPoint.cs" />
+    <Compile Include="Meshomatic\MeshTri.cs" />
+    <Compile Include="Meshomatic\MeshVector2.cs" />
+    <Compile Include="Meshomatic\MeshVector3.cs" />
     <Compile Include="MouseDelta.cs" />
     <Compile Include="Navigator.cs" />
     <Compile Include="Player.cs" />
@@ -104,7 +104,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Artifacts\Cube.obj" />
-    <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
     <None Include="PostBuild.bat" />
     <None Include="Properties\Settings.settings">

@@ -31,7 +31,7 @@ using System.Collections.Generic;
 using System.Text;
 using OpenTK;
 
-namespace InfiniTK
+namespace InfiniTK.Meshomatic
 {
     /// <summary>
     /// A class containing all the necessary data for a mesh: Points, normal 
@@ -48,10 +48,10 @@ namespace InfiniTK
     /// </summary>
     public class MeshData
     {
-        public MeshVector3[] Vertices;
-        public MeshVector2[] TexCoords;
-        public MeshVector3[] Normals;
-        public MeshTri[] Tris;
+        public MeshVector3[] Vertices { get; }
+        public MeshVector2[] TexCoords { get; }
+        public MeshVector3[] Normals { get; }
+        public MeshTri[] Tris { get; }
 
         /// <summary>
         /// Creates a new MeshData object.
@@ -72,8 +72,8 @@ namespace InfiniTK
         /// </summary>
         public double[] VertexArray()
         {
-            double[] verts = new double[Vertices.Length * 3];
-            for (int i = 0; i < Vertices.Length; i++)
+            var verts = new double[Vertices.Length * 3];
+            for (var i = 0; i < Vertices.Length; i++)
             {
                 verts[i * 3] = Vertices[i].X;
                 verts[i * 3 + 1] = Vertices[i].Y;
@@ -88,8 +88,8 @@ namespace InfiniTK
         /// </summary>
         public double[] NormalArray()
         {
-            double[] norms = new double[Normals.Length * 3];
-            for (int i = 0; i < Normals.Length; i++)
+            var norms = new double[Normals.Length * 3];
+            for (var i = 0; i < Normals.Length; i++)
             {
                 norms[i * 3] = Normals[i].X;
                 norms[i * 3 + 1] = Normals[i].Y;
@@ -104,8 +104,8 @@ namespace InfiniTK
         /// </summary>
         public double[] TexcoordArray()
         {
-            double[] tcs = new double[TexCoords.Length * 2];
-            for (int i = 0; i < TexCoords.Length; i++)
+            var tcs = new double[TexCoords.Length * 2];
+            for (var i = 0; i < TexCoords.Length; i++)
             {
                 tcs[i * 3] = TexCoords[i].X;
                 tcs[i * 3 + 1] = TexCoords[i].Y;
@@ -139,8 +139,8 @@ namespace InfiniTK
         /// </summary>
         protected MeshPoint[] Points()
         {
-            List<MeshPoint> points = new List<MeshPoint>();
-            foreach (MeshTri t in Tris)
+            var points = new List<MeshPoint>();
+            foreach (var t in Tris)
             {
                 points.Add(t.P1);
                 points.Add(t.P2);
@@ -159,7 +159,7 @@ namespace InfiniTK
         /// </remarks>
         public void OpenGLArrays(out float[] verts, out float[] norms, out float[] texcoords, out uint[] indices)
         {
-            MeshPoint[] points = Points();
+            var points = Points();
 
             verts = new float[points.Length * 3];
             norms = new float[points.Length * 3];
@@ -169,7 +169,7 @@ namespace InfiniTK
 
             for (uint i = 0; i < points.Length; i++)
             {
-                MeshPoint p = points[i];
+                var p = points[i];
 
                 verts[i * 3] = (float) Vertices[p.Vertex].X;
                 verts[i * 3 + 1] = (float) Vertices[p.Vertex].Y;
@@ -188,22 +188,22 @@ namespace InfiniTK
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
             sb.AppendLine("Vertices:");
-            foreach (MeshVector3 v in Vertices)
+            foreach (var v in Vertices)
                 sb.AppendLine(v.ToString());
 
             sb.AppendLine("Normals:");
-            foreach (MeshVector3 n in Normals)
+            foreach (var n in Normals)
                 sb.AppendLine(n.ToString());
 
             sb.AppendLine("TexCoords:");
-            foreach (MeshVector2 t in TexCoords)
+            foreach (var t in TexCoords)
                 sb.AppendLine(t.ToString());
 
             sb.AppendLine("Tris:");
-            foreach (MeshTri t in Tris)
+            foreach (var t in Tris)
                 sb.AppendLine(t.ToString());
 
             return sb.ToString();
@@ -225,7 +225,7 @@ namespace InfiniTK
             double maxZ = 0;
             double minZ = 0;
 
-            foreach (MeshVector3 vert in Vertices)
+            foreach (var vert in Vertices)
             {
                 if (vert.X > maxX) maxX = vert.X;
                 if (vert.X < minX) minX = vert.X;
@@ -251,24 +251,24 @@ namespace InfiniTK
         /// </summary>
         public void Verify()
         {
-            foreach (MeshTri t in Tris)
+            foreach (var t in Tris)
             {
-                foreach (MeshPoint p in t.Points())
+                foreach (var p in t.Points())
                 {
                     if (p.Vertex >= Vertices.Length)
                     {
-                        string message = String.Format("Vertex {0} >= length of vertices {1}", p.Vertex, Vertices.Length);
-                        throw new IndexOutOfRangeException(message);
+                        throw new IndexOutOfRangeException(
+                            $"Vertex {p.Vertex} >= length of vertices {Vertices.Length}");
                     }
                     if (p.Normal >= Normals.Length)
                     {
-                        string message = String.Format("Normal {0} >= number of normals {1}", p.Normal, Normals.Length);
-                        throw new IndexOutOfRangeException(message);
+                        throw new IndexOutOfRangeException(
+                            $"Normal {p.Normal} >= number of normals {Normals.Length}");
                     }
                     if (p.TexCoord > TexCoords.Length)
                     {
-                        string message = String.Format("TexCoord {0} > number of texcoords {1}", p.TexCoord, TexCoords.Length);
-                        throw new IndexOutOfRangeException(message);
+                        throw new IndexOutOfRangeException(
+                            $"TexCoord {p.TexCoord} > number of texcoords {TexCoords.Length}");
                     }
                 }
             }

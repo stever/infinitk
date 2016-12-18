@@ -2,8 +2,8 @@
 {
     public class BlockCollision
     {
-        public ICollide Collider { get; private set; }
-        public Block Block { get; private set; }
+        public ICollide Collider { get; }
+        public Block Block { get; }
 
         public BlockCollision(ICollide collider, Block block)
         {

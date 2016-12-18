@@ -2,8 +2,8 @@
 {
     public class ColliderCollision
     {
-        public ICollide Collider { get; private set; }
-        public ICollide Other { get; private set; }
+        public ICollide Collider { get; }
+        public ICollide Other { get; }
 
         public ColliderCollision(ICollide collider, ICollide other)
         {

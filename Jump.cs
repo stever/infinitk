@@ -5,16 +5,16 @@ namespace InfiniTK
 {
     public class Jump : IAction
     {
-        private readonly IMove _entity;
-        private readonly InputStates _controls;
-        private readonly double _startingHeight;
-        private double _timeSinceStart;
+        private readonly IMove entity;
+        private readonly InputStates controls;
+        private readonly double startingHeight;
+        private double timeSinceStart;
 
         public Jump(IMove entity, InputStates controls)
         {
-            _entity = entity;
-            _controls = controls;
-            _startingHeight = _entity.Position.Y;
+            this.entity = entity;
+            this.controls = controls;
+            startingHeight = this.entity.Position.Y;
         }
 
         #region IAction implementation
@@ -23,18 +23,18 @@ namespace InfiniTK
         {
             if (Completed) return;
 
-            _timeSinceStart += timeSinceLastUpdate;
+            timeSinceStart += timeSinceLastUpdate;
 
             // Jump initially follows a curve, from upward to downward.
             double moveAmount; // Falling motion does not slow down, then using constant speed.
-            if (_timeSinceStart < Math.PI * 100) moveAmount = Math.Sin(_timeSinceStart / 100) * 0.125;
-            else moveAmount = (-(_timeSinceStart / 100) + Math.PI) * 0.125 / 2;
-            _entity.Move(new Vector3d(0, moveAmount, 0));
+            if (timeSinceStart < Math.PI * 100) moveAmount = Math.Sin(timeSinceStart / 100) * 0.125;
+            else moveAmount = (-(timeSinceStart / 100) + Math.PI) * 0.125 / 2;
+            entity.Move(new Vector3d(0, moveAmount, 0));
 
             // If after falling at constant speed we reach starting height, stop and
             // end the jump action at the same height we started with.
-            if (_entity.Position.Y > _startingHeight) return;
-            _entity.Move(new Vector3d(0, _startingHeight - _entity.Position.Y, 0));
+            if (entity.Position.Y > startingHeight) return;
+            entity.Move(new Vector3d(0, startingHeight - entity.Position.Y, 0));
             Completed = true;
 
             /* TODO: Use real gravity/acceleration calculation in downward motion.
@@ -50,7 +50,7 @@ namespace InfiniTK
 
         public void Finalise()
         {
-            _controls.JumpState = JumpState.NotJumping;
+            controls.JumpState = JumpState.NotJumping;
         }
 
         #endregion

@@ -11,15 +11,15 @@ namespace InfiniTK
     {
         #region Pitch property
 
-        private const float MAX_PITCH = 89.99f; // NOTE: Can't be >= 90.
-        private const float MIN_PITCH = -MAX_PITCH;
+        private const float MaxPitch = 89.99f; // NOTE: Can't be >= 90.
+        private const float MinPitch = -MaxPitch;
 
-        private float _pitch;
+        private float pitch;
 
         public float Pitch
         {
-            get { return _pitch; }
-            set { _pitch = GetLimitedPitch(value); }
+            get { return pitch; }
+            set { pitch = GetLimitedPitch(value); }
         }
 
         /// <summary>
@@ -27,8 +27,8 @@ namespace InfiniTK
         /// </summary>
         private static float GetLimitedPitch(float pitch)
         {
-            if (pitch > MAX_PITCH) pitch = MAX_PITCH;
-            else if (pitch < MIN_PITCH) pitch = MIN_PITCH;
+            if (pitch > MaxPitch) pitch = MaxPitch;
+            else if (pitch < MinPitch) pitch = MinPitch;
             return pitch;
         }
 
@@ -36,12 +36,12 @@ namespace InfiniTK
 
         #region Yaw property
 
-        private float _yaw;
+        private float yaw;
 
         public float Yaw
         {
-            get { return _yaw; }
-            set { _yaw = GetNormalYaw(value); }
+            get { return yaw; }
+            set { yaw = GetNormalYaw(value); }
         }
 
         /// <summary>
@@ -70,17 +70,19 @@ namespace InfiniTK
         /// </summary>
         public void ApplyCamera()
         {
-            double cosYaw = Math.Cos(MathHelper.DegreesToRadians(_yaw));
-            double sinYaw = Math.Sin(MathHelper.DegreesToRadians(_yaw));
-            double tanPitch = Math.Tan(MathHelper.DegreesToRadians(_pitch));
+            var cosYaw = Math.Cos(MathHelper.DegreesToRadians(yaw));
+            var sinYaw = Math.Sin(MathHelper.DegreesToRadians(yaw));
+            var tanPitch = Math.Tan(MathHelper.DegreesToRadians(pitch));
 
             // Calculate view target based on new position.
-            Vector3d viewTarget = new Vector3d();
-            viewTarget.X = Position.X + cosYaw;
-            viewTarget.Y = Position.Y + tanPitch;
-            viewTarget.Z = Position.Z + sinYaw;
+            var viewTarget = new Vector3d
+            {
+                X = Position.X + cosYaw,
+                Y = Position.Y + tanPitch,
+                Z = Position.Z + sinYaw
+            };
 
-            Matrix4d camera = Matrix4d.LookAt(Position, viewTarget, Vector3d.UnitY);
+            var camera = Matrix4d.LookAt(Position, viewTarget, Vector3d.UnitY);
             GL.LoadMatrix(ref camera);
         }
 
@@ -89,9 +91,9 @@ namespace InfiniTK
         /// </summary>
         public void MoveForward(double amount)
         {
-            Vector3d fwd = new Vector3d();
-            double cosYaw = Math.Cos(MathHelper.DegreesToRadians(Yaw));
-            double sinYaw = Math.Sin(MathHelper.DegreesToRadians(Yaw));
+            var fwd = new Vector3d();
+            var cosYaw = Math.Cos(MathHelper.DegreesToRadians(Yaw));
+            var sinYaw = Math.Sin(MathHelper.DegreesToRadians(Yaw));
             fwd.X += cosYaw * amount;
             fwd.Z += sinYaw * amount;
             Move(fwd);
@@ -102,10 +104,10 @@ namespace InfiniTK
         /// </summary>
         public void MoveSideways(double amount)
         {
-            Vector3d direction = new Vector3d();
-            float angle = Yaw + 90;
-            double cosYaw = Math.Cos(MathHelper.DegreesToRadians(GetNormalYaw(angle)));
-            double sinYaw = Math.Sin(MathHelper.DegreesToRadians(GetNormalYaw(angle)));
+            var direction = new Vector3d();
+            var angle = Yaw + 90;
+            var cosYaw = Math.Cos(MathHelper.DegreesToRadians(GetNormalYaw(angle)));
+            var sinYaw = Math.Sin(MathHelper.DegreesToRadians(GetNormalYaw(angle)));
             direction.X += cosYaw * amount;
             direction.Z += sinYaw * amount;
             Move(direction);

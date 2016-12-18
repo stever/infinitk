@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using InfiniTK.Meshomatic;
+using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
 namespace InfiniTK
@@ -9,9 +10,9 @@ namespace InfiniTK
     /// </summary>
     public class Starfield : IRender
     {
-        private readonly MeshObject _meshObject = new MeshObject();
-        private Vector3d _relativePosition;
-        private readonly Texture _texture = new Texture("Starfield.png");
+        private readonly MeshObject meshObject = new MeshObject();
+        private Vector3d relativePosition;
+        private readonly Texture texture = new Texture("Starfield.png");
 
         #region IPosition implementation
 
@@ -26,10 +27,10 @@ namespace InfiniTK
         /// </summary>
         public void Load()
         {
-            _meshObject.LoadMeshData("Sphere.obj");
-            _meshObject.Scale = 7.0f;
-            _relativePosition = -(_meshObject.Center * _meshObject.Scale) / 2;
-            _texture.Load();
+            meshObject.LoadMeshData("Sphere.obj");
+            meshObject.Scale = 7.0f;
+            relativePosition = -(meshObject.Center * meshObject.Scale) / 2;
+            texture.Load();
         }
 
         public void Update(double timeSinceLastUpdate)
@@ -40,11 +41,11 @@ namespace InfiniTK
         public void Render()
         {
             GL.PushMatrix();
-            GL.Translate(Vector3d.Add(Position, _relativePosition));
-            double scale = _meshObject.Scale;
+            GL.Translate(Vector3d.Add(Position, relativePosition));
+            var scale = meshObject.Scale;
             GL.Scale(scale, scale, scale);
-            GL.BindTexture(TextureTarget.Texture2D, _texture.ID);
-            _meshObject.DrawVectorBufferObject();
+            GL.BindTexture(TextureTarget.Texture2D, texture.Id);
+            meshObject.DrawVectorBufferObject();
             GL.PopMatrix();
         }
 

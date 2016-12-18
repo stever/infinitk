@@ -32,7 +32,7 @@ using System;
 using System.Collections.Generic;
 using OpenTK;
 
-namespace InfiniTK
+namespace InfiniTK.MonoXna
 {
     public struct BoundingBox : IEquatable<BoundingBox>
     {
@@ -83,12 +83,15 @@ namespace InfiniTK
 
             if (center.X - Min.X <= radius) dmin += (center.X - Min.X) * (center.X - Min.X);
             else if (Max.X - center.X <= radius) dmin += (center.X - Max.X) * (center.X - Max.X);
+
             if (center.Y - Min.Y <= radius) dmin += (center.Y - Min.Y) * (center.Y - Min.Y);
             else if (Max.Y - center.Y <= radius) dmin += (center.Y - Max.Y) * (center.Y - Max.Y);
+
             if (center.Z - Min.Z <= radius) dmin += (center.Z - Min.Z) * (center.Z - Min.Z);
             else if (Max.Z - center.Z <= radius) dmin += (center.Z - Max.Z) * (center.Z - Max.Z);
 
             if (dmin <= radius * radius) return ContainmentType.Intersects;
+
             return ContainmentType.Disjoint;
         }
 
@@ -111,12 +114,12 @@ namespace InfiniTK
                 result = ContainmentType.Disjoint;
             
             // or if point is on box because coordonate of point is lesser or equal.
-            else if (Math.Abs(point.X - Min.X) < Double.Epsilon
-                || Math.Abs(point.X - Max.X) < Double.Epsilon
-                || Math.Abs(point.Y - Min.Y) < Double.Epsilon
-                || Math.Abs(point.Y - Max.Y) < Double.Epsilon
-                || Math.Abs(point.Z - Min.Z) < Double.Epsilon
-                || Math.Abs(point.Z - Max.Z) < Double.Epsilon)
+            else if (Math.Abs(point.X - Min.X) < double.Epsilon
+                || Math.Abs(point.X - Max.X) < double.Epsilon
+                || Math.Abs(point.Y - Min.Y) < double.Epsilon
+                || Math.Abs(point.Y - Max.Y) < double.Epsilon
+                || Math.Abs(point.Z - Min.Z) < double.Epsilon
+                || Math.Abs(point.Z - Max.Z) < double.Epsilon)
                 result = ContainmentType.Intersects;
             
             else
@@ -128,16 +131,16 @@ namespace InfiniTK
             if (points == null)
                 throw new ArgumentNullException();
 
-            // TODO: Just check that Count > 0
-            bool empty = true;
-            Vector3d vector2 = new Vector3d(float.MaxValue);
-            Vector3d vector1 = new Vector3d(float.MinValue);
-            foreach (Vector3d Vector3d in points)
+            var empty = true;
+            var vector2 = new Vector3d(float.MaxValue);
+            var vector1 = new Vector3d(float.MinValue);
+            foreach (var vector3D in points)
             {
-                vector2 = Vector3d.Min(vector2, Vector3d);
-                vector1 = Vector3d.Max(vector1, Vector3d);
+                vector2 = Vector3d.Min(vector2, vector3D);
+                vector1 = Vector3d.Max(vector1, vector3D);
                 empty = false;
             }
+
             if (empty)
                 throw new ArgumentException();
 
@@ -146,7 +149,7 @@ namespace InfiniTK
 
         public static BoundingBox CreateFromSphere(Vector3d center, float radius)
         {
-            Vector3d vector1 = new Vector3d(radius, radius, radius);
+            var vector1 = new Vector3d(radius, radius, radius);
             return new BoundingBox(center - vector1, center + vector1);
         }
 
@@ -181,8 +184,8 @@ namespace InfiniTK
 
         public void GetCorners(Vector3d[] corners)
         {
-            if (corners == null) throw new ArgumentNullException("corners");
-            if (corners.Length < 8) throw new ArgumentOutOfRangeException("corners", "Not Enought Corners");
+            if (corners == null) throw new ArgumentNullException(nameof(corners));
+            if (corners.Length < 8) throw new ArgumentOutOfRangeException(nameof(corners), "Not Enought Corners");
 
             corners[0].X = Min.X;
             corners[0].Y = Max.Y;
@@ -233,12 +236,16 @@ namespace InfiniTK
                 return true;
 
             double dmin = 0;
+
             if (center.X - Min.X <= radius) dmin += (center.X - Min.X) * (center.X - Min.X);
             else if (Max.X - center.X <= radius) dmin += (center.X - Max.X) * (center.X - Max.X);
+
             if (center.Y - Min.Y <= radius) dmin += (center.Y - Min.Y) * (center.Y - Min.Y);
             else if (Max.Y - center.Y <= radius) dmin += (center.Y - Max.Y) * (center.Y - Max.Y);
+
             if (center.Z - Min.Z <= radius) dmin += (center.Z - Min.Z) * (center.Z - Min.Z);
             else if (Max.Z - center.Z <= radius) dmin += (center.Z - Max.Z) * (center.Z - Max.Z);
+
             return dmin <= radius * radius;
         }
 
@@ -254,7 +261,7 @@ namespace InfiniTK
 
         public override string ToString()
         {
-            return string.Format("{{Min:{0} Max:{1}}}", Min, Max);
+            return $"{{Min:{Min} Max:{Max}}}";
         }
     }
 }

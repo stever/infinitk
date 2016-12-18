@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using InfiniTK.Meshomatic;
 using log4net;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
@@ -8,9 +9,10 @@ namespace InfiniTK
 {
     public class MeshObject
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.
+            GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private MeshData _meshData;
+        private MeshData meshData;
 
         #region Box dimensions
         
@@ -44,11 +46,13 @@ namespace InfiniTK
         public double Scale { get; set; }
 
         #region VBO variables
-        private uint _objectDataBuffer;
-        private uint _objectIndexBuffer;
-        private int _textureCoordOffset;
-        private int _objectVerticesOffset;
-        private int _objectNormalsOffset;
+
+        private uint objectDataBuffer;
+        private uint objectIndexBuffer;
+        private int textureCoordOffset;
+        private int objectVerticesOffset;
+        private int objectNormalsOffset;
+        
         #endregion
         
         /// <summary>
@@ -57,9 +61,9 @@ namespace InfiniTK
         /// <param name="filename">OBJ filename.</param>
         public void LoadMeshData(string filename)
         {
-            _meshData = new MeshObjLoader().LoadFile(filename);
-            Log.Debug(_meshData);
-            LoadObjectBuffers(_meshData);
+            meshData = new MeshObjLoader().LoadFile(filename);
+            Log.Debug(meshData);
+            LoadObjectBuffers(meshData);
             DetermineBoxDimensions();
         }
 
@@ -67,7 +71,7 @@ namespace InfiniTK
         {
             double w, l, h;
             Vector3d center;
-            _meshData.Dimensions(out w, out l, out h, out center);
+            meshData.Dimensions(out w, out l, out h, out center);
             Log.DebugFormat("Box dimensions: {0} x {1} x {2}", w, l, h);
             Log.DebugFormat("Box center: {0}, {1}, {2}", center.X, center.Y, center.Z);
             BoxWidth = w;
@@ -76,29 +80,29 @@ namespace InfiniTK
             Center = center;
         }
 
-        private void LoadObjectBuffers(MeshData meshData)
+        private void LoadObjectBuffers(MeshData data)
         {
             float[] verts, norms, texcoords;
             uint[] indices;
-            meshData.OpenGLArrays(out verts, out norms, out texcoords, out indices);
-            GL.GenBuffers(1, out _objectDataBuffer);
-            GL.GenBuffers(1, out _objectIndexBuffer);
+            data.OpenGLArrays(out verts, out norms, out texcoords, out indices);
+            GL.GenBuffers(1, out objectDataBuffer);
+            GL.GenBuffers(1, out objectIndexBuffer);
 
             // Set up data for VBO.
             // We're going to use one VBO for all geometry, and stick it in 
             // in (VVVVNNNNCCCC) order.  Non interleaved.
-            int buffersize = (verts.Length + norms.Length + texcoords.Length);
-            float[] bufferdata = new float[buffersize];
-            _objectVerticesOffset = 0;
-            _objectNormalsOffset = verts.Length;
-            _textureCoordOffset = (verts.Length + norms.Length);
+            var buffersize = (verts.Length + norms.Length + texcoords.Length);
+            var bufferdata = new float[buffersize];
+            objectVerticesOffset = 0;
+            objectNormalsOffset = verts.Length;
+            textureCoordOffset = (verts.Length + norms.Length);
 
-            verts.CopyTo(bufferdata, _objectVerticesOffset);
-            norms.CopyTo(bufferdata, _objectNormalsOffset);
-            texcoords.CopyTo(bufferdata, _textureCoordOffset);
+            verts.CopyTo(bufferdata, objectVerticesOffset);
+            norms.CopyTo(bufferdata, objectNormalsOffset);
+            texcoords.CopyTo(bufferdata, textureCoordOffset);
 
-            bool v = false;
-            for (int i = _textureCoordOffset; i < bufferdata.Length; i++)
+            var v = false;
+            for (var i = textureCoordOffset; i < bufferdata.Length; i++)
             {
                 if (v)
                 {
@@ -112,11 +116,11 @@ namespace InfiniTK
             }
 
             // Load geometry data
-            GL.BindBuffer(BufferTarget.ArrayBuffer, _objectDataBuffer);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, objectDataBuffer);
             GL.BufferData(BufferTarget.ArrayBuffer, (IntPtr) (buffersize * sizeof(float)), bufferdata, BufferUsageHint.StaticDraw);
 
             // Load index data
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, _objectIndexBuffer);
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, objectIndexBuffer);
             GL.BufferData(BufferTarget.ElementArrayBuffer, (IntPtr) (indices.Length * sizeof(uint)), indices, BufferUsageHint.StaticDraw);
         }
 
@@ -129,20 +133,20 @@ namespace InfiniTK
             // NOTE: Loaded the texture before calling this method.
             //GL.ClientActiveTexture(TextureUnit.Texture0); // NOTE: This call doesn't seem to be required?
 
-            GL.BindBuffer(BufferTarget.ArrayBuffer, _objectDataBuffer);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, objectDataBuffer);
 
             // Normal buffer
-            GL.NormalPointer(NormalPointerType.Float, 0, (IntPtr) (_objectNormalsOffset * sizeof(float)));
+            GL.NormalPointer(NormalPointerType.Float, 0, (IntPtr) (objectNormalsOffset * sizeof(float)));
 
             // TexCoord buffer
-            GL.TexCoordPointer(2, TexCoordPointerType.Float, 0, (IntPtr) (_textureCoordOffset * sizeof(float)));
+            GL.TexCoordPointer(2, TexCoordPointerType.Float, 0, (IntPtr) (textureCoordOffset * sizeof(float)));
 
             // Vertex buffer
-            GL.VertexPointer(3, VertexPointerType.Float, 0, (IntPtr) (_objectVerticesOffset * sizeof(float)));
+            GL.VertexPointer(3, VertexPointerType.Float, 0, (IntPtr) (objectVerticesOffset * sizeof(float)));
 
             // Index array
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, _objectIndexBuffer);
-            GL.DrawElements(BeginMode.Triangles, _meshData.Tris.Length * 3, DrawElementsType.UnsignedInt, IntPtr.Zero);
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, objectIndexBuffer);
+            GL.DrawElements(BeginMode.Triangles, meshData.Tris.Length * 3, DrawElementsType.UnsignedInt, IntPtr.Zero);
 
             // Restore the state
             GL.PopClientAttrib();
@@ -155,13 +159,13 @@ namespace InfiniTK
         public void DrawWithImmediateMode()
         {
             GL.Begin(BeginMode.Triangles);
-            foreach (MeshTri t in _meshData.Tris)
+            foreach (MeshTri t in meshData.Tris)
             {
                 foreach (MeshPoint p in t.Points())
                 {
-                    MeshVector3 v = _meshData.Vertices[p.Vertex];
-                    MeshVector3 n = _meshData.Normals[p.Normal];
-                    MeshVector2 tc = _meshData.TexCoords[p.TexCoord];
+                    MeshVector3 v = meshData.Vertices[p.Vertex];
+                    MeshVector3 n = meshData.Normals[p.Normal];
+                    MeshVector2 tc = meshData.TexCoords[p.TexCoord];
                     GL.Normal3(n.X, n.Y, n.Z);
                     GL.TexCoord2(tc.X, 1 - tc.Y);
                     GL.Vertex3(v.X, v.Y, v.Z);

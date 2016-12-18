@@ -1,4 +1,5 @@
 ﻿using System;
+using InfiniTK.MonoXna;
 using OpenTK;
 
 namespace InfiniTK
@@ -6,14 +7,14 @@ namespace InfiniTK
     public class Player : IMove, ICollide
     {
         #region Constants
-        private const float MOUSE_LOOK_SPEED = 0.2f;
-        private const float MOVEMENT_SPEED = 0.01f;
-        private const float TURN_SPEED = 0.1f;
+        private const float MouseLookSpeed = 0.2f;
+        private const float MovementSpeed = 0.01f;
+        private const float TurnSpeed = 0.1f;
         #endregion
 
-        private readonly Navigator _navigator = new Navigator();
-        private readonly Starfield _starfield = new Starfield();
-        private IAction _currentAction;
+        private readonly Navigator navigator = new Navigator();
+        private readonly Starfield starfield = new Starfield();
+        private IAction currentAction;
 
         public Player()
         {
@@ -22,11 +23,11 @@ namespace InfiniTK
 
         public void MoveToStartPosition()
         {
-            _navigator.Pitch = 0;
-            _navigator.Yaw = 0;
-            _navigator.Position = new Vector3d(0, 2, 0);
-            _currentAction = null;
-            if (Controls != null) Controls.Reset();
+            navigator.Pitch = 0;
+            navigator.Yaw = 0;
+            navigator.Position = new Vector3d(0, 2, 0);
+            currentAction = null;
+            Controls?.Reset();
         }
 
         /// <summary>
@@ -37,44 +38,44 @@ namespace InfiniTK
             if (Controls == null) return;
 
             // Calculate move and turn amounts for the given time.
-            double moveAmount = MOVEMENT_SPEED * timeSinceLastIdle;
-            float turnAmount = (float) (TURN_SPEED * timeSinceLastIdle);
+            var moveAmount = MovementSpeed * timeSinceLastIdle;
+            var turnAmount = (float) (TurnSpeed * timeSinceLastIdle);
 
             // Action handling.
-            if (_currentAction == null)
+            if (currentAction == null)
             {
                 if (Controls.JumpState == JumpState.InitiateJump)
                 {
                     Controls.JumpState = JumpState.Jumping;
-                    _currentAction = new Jump(this, Controls);
+                    currentAction = new Jump(this, Controls);
                 }
             }
 
             // Move up and down. TODO: Restrict this control to a creative game.
-            if (Controls.IsMovingUp) _navigator.Move(new Vector3d(0, moveAmount, 0));
-            else if (Controls.IsMovingDown) _navigator.Move(new Vector3d(0, -moveAmount, 0));
+            if (Controls.IsMovingUp) navigator.Move(new Vector3d(0, moveAmount, 0));
+            else if (Controls.IsMovingDown) navigator.Move(new Vector3d(0, -moveAmount, 0));
 
             // Move forward and backward.
-            if (Controls.IsMovingForward) _navigator.MoveForward(moveAmount);
-            else if (Controls.IsMovingBackward) _navigator.MoveForward(-moveAmount);
+            if (Controls.IsMovingForward) navigator.MoveForward(moveAmount);
+            else if (Controls.IsMovingBackward) navigator.MoveForward(-moveAmount);
 
             // Move left and right.
-            if (Controls.IsMovingLeft) _navigator.MoveSideways(-moveAmount);
-            else if (Controls.IsMovingRight) _navigator.MoveSideways(moveAmount);
+            if (Controls.IsMovingLeft) navigator.MoveSideways(-moveAmount);
+            else if (Controls.IsMovingRight) navigator.MoveSideways(moveAmount);
 
             // Turn left and right.
-            if (Controls.IsTurningLeft) _navigator.Spin(-turnAmount);
-            else if (Controls.IsTurningRight) _navigator.Spin(turnAmount);
+            if (Controls.IsTurningLeft) navigator.Spin(-turnAmount);
+            else if (Controls.IsTurningRight) navigator.Spin(turnAmount);
 
             // Look up and down.
-            if (Controls.IsTurningUp) _navigator.Tilt(turnAmount);
-            else if (Controls.IsTurningDown) _navigator.Tilt(-turnAmount);
+            if (Controls.IsTurningUp) navigator.Tilt(turnAmount);
+            else if (Controls.IsTurningDown) navigator.Tilt(-turnAmount);
 
             // Mouse control.
             if (!Controls.MouseControlEnabled) return;
-            MouseDelta mouseDelta = Controls.GetMouseDelta();
-            _navigator.Yaw += mouseDelta.X * MOUSE_LOOK_SPEED;
-            _navigator.Pitch += mouseDelta.Y * -MOUSE_LOOK_SPEED;
+            var mouseDelta = Controls.GetMouseDelta();
+            navigator.Yaw += mouseDelta.X * MouseLookSpeed;
+            navigator.Pitch += mouseDelta.Y * -MouseLookSpeed;
         }
 
         public InputStates Controls { get; set; }
@@ -83,25 +84,28 @@ namespace InfiniTK
 
         public void Load()
         {
-            _starfield.Load();
+            starfield.Load();
         }
 
         public void Update(double timeSinceLastUpdate)
         {
             HandleControls(timeSinceLastUpdate);
-            if (_currentAction == null) return;
-            if (_currentAction.Completed)
+            if (currentAction == null) return;
+            if (currentAction.Completed)
             {
-                _currentAction.Finalise();
-                _currentAction = null;
+                currentAction.Finalise();
+                currentAction = null;
             }
-            else _currentAction.Update(timeSinceLastUpdate);
+            else
+            {
+                currentAction.Update(timeSinceLastUpdate);
+            }
         }
 
         public void Render()
         {
-            _starfield.Position = _navigator.Position;
-            _starfield.Render();
+            starfield.Position = navigator.Position;
+            starfield.Render();
         }
 
         #endregion
@@ -113,7 +117,7 @@ namespace InfiniTK
             // TODO: Player is 2 blocks tall. Collisons have to take both blocks into account!
 
             /*
-            Vector3d playerPosition = _navigator.Position;
+            Vector3d playerPosition = navigator.Position;
             double pX = playerPosition.X;
             double pY = playerPosition.Y;
             double pZ = playerPosition.Z;
@@ -137,8 +141,8 @@ namespace InfiniTK
             */
 
             /*
-            Vector3d legsPosition = Vector3d.Add(_navigator.Position, -Vector3d.UnitY);
-            BoundingBox head = BoundingBox.CreateFromSphere(_navigator.Position, 0.5f);
+            Vector3d legsPosition = Vector3d.Add(navigator.Position, -Vector3d.UnitY);
+            BoundingBox head = BoundingBox.CreateFromSphere(navigator.Position, 0.5f);
             BoundingBox legs = BoundingBox.CreateFromSphere(legsPosition, 0.5f);
             BoundingBox p = BoundingBox.CreateMerged(head, legs);
             Log.DebugFormat("Player bounding box = {0}", p);
@@ -146,8 +150,8 @@ namespace InfiniTK
             return p.Intersects(b);
             */
 
-            BoundingBox p = BoundingBox.CreateFromSphere(_navigator.Position, 0.5f);
-            BoundingBox b = block.BoundingBox;
+            var p = BoundingBox.CreateFromSphere(navigator.Position, 0.5f);
+            var b = block.BoundingBox;
             return p.Intersects(b);
         }
 
@@ -183,15 +187,15 @@ namespace InfiniTK
         public void HandleCollision(Block block)
         {
             // The distance between the player and the block.
-            Vector3d playerPosition = _navigator.Position;
-            Vector3d distance = Vector3d.Subtract(playerPosition, block.Position);
+            var playerPosition = navigator.Position;
+            var distance = Vector3d.Subtract(playerPosition, block.Position);
 
             // Determine the axis with the largest difference.
-            int furthest = 1; // 1=x, 2=y, 3=z
-            double x = Math.Abs(distance.X);
-            double y = Math.Abs(distance.Y);
-            double z = Math.Abs(distance.Z);
-            double highest = x;
+            var furthest = 1; // 1=x, 2=y, 3=z
+            var x = Math.Abs(distance.X);
+            var y = Math.Abs(distance.Y);
+            var z = Math.Abs(distance.Z);
+            var highest = x;
             if (y > highest) { highest = y; furthest = 2; }
             if (z > highest) { furthest = 3; }
 
@@ -203,14 +207,14 @@ namespace InfiniTK
                 case 2: blocker = new Vector3d(1, 0, 1); break;
                 case 3: blocker = new Vector3d(1, 1, 0); break;
             }
-            _navigator.Position = _lastPosition;            
+            navigator.Position = _lastPosition;            
             Vector3d move = Vector3d.Subtract(playerPosition, _lastPosition);
-            _navigator.Move(Vector3d.Multiply(move, blocker));*/
+            navigator.Move(Vector3d.Multiply(move, blocker));*/
 
             // Push player flat back on blocking face.
-            x = _navigator.Position.X;
-            y = _navigator.Position.Y;
-            z = _navigator.Position.Z;
+            x = navigator.Position.X;
+            y = navigator.Position.Y;
+            z = navigator.Position.Z;
             switch (furthest)
             {
                 case 1:
@@ -226,7 +230,7 @@ namespace InfiniTK
                     else z = block.Position.Z + 1;
                     break;
             }
-            _navigator.Position = new Vector3d(x, y, z);
+            navigator.Position = new Vector3d(x, y, z);
         }
 
         public void HandleCollision(ICollide entity)
@@ -240,8 +244,8 @@ namespace InfiniTK
 
         public Vector3d Position
         {
-            get { return _navigator.Position; }
-            set { _navigator.Position = value; }
+            get { return navigator.Position; }
+            set { navigator.Position = value; }
         }
 
         #endregion
@@ -250,32 +254,32 @@ namespace InfiniTK
 
         public void ApplyCamera()
         {
-            _navigator.ApplyCamera();
+            navigator.ApplyCamera();
         }
 
         public void MoveForward(double amount)
         {
-            _navigator.MoveForward(amount);
+            navigator.MoveForward(amount);
         }
 
         public void MoveSideways(double amount)
         {
-            _navigator.MoveSideways(amount);
+            navigator.MoveSideways(amount);
         }
 
         public void Move(Vector3d amount)
         {
-            _navigator.Move(amount);
+            navigator.Move(amount);
         }
 
         public void Spin(float degrees)
         {
-            _navigator.Spin(degrees);
+            navigator.Spin(degrees);
         }
 
         public void Tilt(float degrees)
         {
-            _navigator.Tilt(degrees);
+            navigator.Tilt(degrees);
         }
 
         #endregion

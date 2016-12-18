@@ -26,22 +26,24 @@ authors and should not be interpreted as representing official policies, either 
 or implied, of Simon Heath.
 */
 
-namespace InfiniTK
+namespace InfiniTK.Meshomatic
 {
-    public struct MeshVector2
+    public struct MeshPoint
     {
-        public double X;
-        public double Y;
+        public int Vertex;
+        public int Normal;
+        public int TexCoord;
 
-        public MeshVector2(double x, double y)
+        public MeshPoint(int v, int n, int t)
         {
-            X = x;
-            Y = y;
+            Vertex = v;
+            Normal = n;
+            TexCoord = t;
         }
 
         public override string ToString()
         {
-            return string.Format("<{0},{1}>", X, Y);
+            return $"Point: {Vertex},{Normal},{TexCoord}";
         }
     }
 }

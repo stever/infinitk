@@ -9,18 +9,19 @@ namespace InfiniTK
 {
     public class Texture
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.
+            GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly Bitmap _bitmap;
+        private readonly Bitmap textureBitmap;
         private bool isLoaded;
 
         public bool GenerateMipmaps { get; set; }
-        public uint ID { get; private set; }
+        public uint Id { get; private set; }
 
         public Texture(Bitmap bitmap)
         {
-            _bitmap = bitmap;
-            if (!IsPowerOf2(_bitmap))
+            textureBitmap = bitmap;
+            if (!IsPowerOf2(textureBitmap))
                 throw new FormatException("Texture sizes must be powers of 2!");
         }
 
@@ -29,7 +30,7 @@ namespace InfiniTK
 			Log.DebugFormat("Loading texture filename \"{0}\"", filename);
 			try
 			{
-				_bitmap = new Bitmap(filename);
+				textureBitmap = new Bitmap(filename);
 			}
 			catch (Exception ex)
 			{
@@ -40,7 +41,7 @@ namespace InfiniTK
         public void Load()
         {
             if (isLoaded) return;
-            ID = LoadTexture(_bitmap);
+            Id = LoadTexture(textureBitmap);
             isLoaded = true;
         }
 
@@ -88,7 +89,7 @@ namespace InfiniTK
                     4);
             }
 
-            BitmapData data = bitmap.LockBits(
+            var data = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadOnly,
                 System.Drawing.Imaging.PixelFormat.Format32bppArgb);
@@ -192,16 +193,16 @@ namespace InfiniTK
             return texture;
         }
 
-        private static Bitmap ScaleByPercent(Bitmap bitmap, int Percent)
+        private static Bitmap ScaleByPercent(Bitmap bitmap, int percent)
         {
-            int srcWidth = bitmap.Width;
-            int srcHeight = bitmap.Height;
-            float scale = ((float) Percent / 100);
+            var srcWidth = bitmap.Width;
+            var srcHeight = bitmap.Height;
+            var scale = ((float) percent / 100);
             var destWidth = (int) (srcWidth * scale);
             var destHeight = (int) (srcHeight * scale);
             var dest = new Bitmap(destWidth, destHeight, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             dest.SetResolution(bitmap.HorizontalResolution, bitmap.VerticalResolution);
-            System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(dest);
+            var g = Graphics.FromImage(dest);
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             g.DrawImage(bitmap, new Rectangle(0, 0, destWidth, destHeight), new Rectangle(0, 0, srcWidth, srcHeight), GraphicsUnit.Pixel);
             return dest;
@@ -209,16 +210,16 @@ namespace InfiniTK
 
         private static bool IsPowerOf2(Image bitmap)
         {
-            int test = 1;
-            bool wOK = false, hOK = false;
-            for (int q = 0; q < 20; q++)
+            var test = 1;
+            bool wOk = false, hOk = false;
+            for (var q = 0; q < 20; q++)
             {
                 test *= 2;
-                if (test == bitmap.Width) wOK = true;
-                if (test == bitmap.Height) hOK = true;
-                if (wOK && hOK) break;
+                if (test == bitmap.Width) wOk = true;
+                if (test == bitmap.Height) hOk = true;
+                if (wOk && hOk) break;
             }
-            return wOK && hOK;
+            return wOk && hOk;
         }
     }
 }

@@ -31,19 +31,19 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
-namespace InfiniTK
+namespace InfiniTK.Meshomatic
 {
     public class MeshObjLoader
     {
         public MeshData LoadStream(Stream stream)
         {
-            StreamReader reader = new StreamReader(stream);
+            var reader = new StreamReader(stream);
 
-            List<MeshVector3> points = new List<MeshVector3>();
-            List<MeshVector3> normals = new List<MeshVector3>();
-            List<MeshVector2> texCoords = new List<MeshVector2>();
+            var points = new List<MeshVector3>();
+            var normals = new List<MeshVector3>();
+            var texCoords = new List<MeshVector2>();
 
-            List<MeshTri> tris = new List<MeshTri>();
+            var tris = new List<MeshTri>();
 
             string line;
             char[] splitChars = { ' ' };
@@ -52,7 +52,7 @@ namespace InfiniTK
                 line = line.Trim(splitChars);
                 line = line.Replace("  ", " ");
 
-                string[] parameters = line.Split(splitChars);
+                var parameters = line.Split(splitChars);
 
                 switch (parameters[0])
                 {
@@ -62,38 +62,38 @@ namespace InfiniTK
 
                     case "v":
                         // Vertex
-                        float x = float.Parse(parameters[1], CultureInfo.InvariantCulture.NumberFormat);
-                        float y = float.Parse(parameters[2], CultureInfo.InvariantCulture.NumberFormat);
-                        float z = float.Parse(parameters[3], CultureInfo.InvariantCulture.NumberFormat);
+                        var x = float.Parse(parameters[1], CultureInfo.InvariantCulture.NumberFormat);
+                        var y = float.Parse(parameters[2], CultureInfo.InvariantCulture.NumberFormat);
+                        var z = float.Parse(parameters[3], CultureInfo.InvariantCulture.NumberFormat);
                         points.Add(new MeshVector3(x, y, z));
                         break;
 
                     case "vt":
                         // TexCoord
-                        float u = float.Parse(parameters[1], CultureInfo.InvariantCulture.NumberFormat);
-                        float v = float.Parse(parameters[2], CultureInfo.InvariantCulture.NumberFormat);
+                        var u = float.Parse(parameters[1], CultureInfo.InvariantCulture.NumberFormat);
+                        var v = float.Parse(parameters[2], CultureInfo.InvariantCulture.NumberFormat);
                         texCoords.Add(new MeshVector2(u, v));
                         break;
 
                     case "vn":
                         // Normal
-                        float nx = float.Parse(parameters[1], CultureInfo.InvariantCulture.NumberFormat);
-                        float ny = float.Parse(parameters[2], CultureInfo.InvariantCulture.NumberFormat);
-                        float nz = float.Parse(parameters[3], CultureInfo.InvariantCulture.NumberFormat);
+                        var nx = float.Parse(parameters[1], CultureInfo.InvariantCulture.NumberFormat);
+                        var ny = float.Parse(parameters[2], CultureInfo.InvariantCulture.NumberFormat);
+                        var nz = float.Parse(parameters[3], CultureInfo.InvariantCulture.NumberFormat);
                         normals.Add(new MeshVector3(nx, ny, nz));
                         break;
 
                     case "f":
                         // Face
-                        tris.AddRange(parseFace(parameters));
+                        tris.AddRange(ParseFace(parameters));
                         break;
                 }
             }
 
-            MeshVector3[] p = points.ToArray();
-            MeshVector2[] tc = texCoords.ToArray();
-            MeshVector3[] n = normals.ToArray();
-            MeshTri[] f = tris.ToArray();
+            var p = points.ToArray();
+            var tc = texCoords.ToArray();
+            var n = normals.ToArray();
+            var f = tris.ToArray();
 
             // If there are no specified texcoords or normals, we add a dummy one.
             // That way the Points will have something to refer to.
@@ -113,17 +113,16 @@ namespace InfiniTK
 
         public MeshData LoadFile(string file)
         {
-            // TODO: Check if using() closes the file automatically.
-            using (FileStream s = File.Open(file, FileMode.Open))
+            using (var s = File.Open(file, FileMode.Open))
                 return LoadStream(s);
         }
 
-        private static MeshTri[] parseFace(string[] indices)
+        private static MeshTri[] ParseFace(string[] indices)
         {
-            MeshPoint[] p = new MeshPoint[indices.Length - 1];
+            var p = new MeshPoint[indices.Length - 1];
 
-            for (int i = 0; i < p.Length; i++)
-                p[i] = parsePoint(indices[i + 1]);
+            for (var i = 0; i < p.Length; i++)
+                p[i] = ParsePoint(indices[i + 1]);
 
             return Triangulate(p);
         }
@@ -136,15 +135,15 @@ namespace InfiniTK
         /// <returns></returns>
         private static MeshTri[] Triangulate(MeshPoint[] ps)
         {
-            List<MeshTri> ts = new List<MeshTri>();
+            var ts = new List<MeshTri>();
             if (ps.Length < 3)
                 throw new Exception("Invalid shape!  Must have >2 points");
 
-            MeshPoint lastButOne = ps[1];
-            MeshPoint lastButTwo = ps[0];
-            for (int i = 2; i < ps.Length; i++)
+            var lastButOne = ps[1];
+            var lastButTwo = ps[0];
+            for (var i = 2; i < ps.Length; i++)
             {
-                MeshTri t = new MeshTri(lastButTwo, lastButOne, ps[i]);
+                var t = new MeshTri(lastButTwo, lastButOne, ps[i]);
                 lastButOne = ps[i];
                 lastButTwo = ps[i - 1];
                 ts.Add(t);
@@ -153,14 +152,14 @@ namespace InfiniTK
             return ts.ToArray();
         }
 
-        private static MeshPoint parsePoint(string s)
+        private static MeshPoint ParsePoint(string s)
         {
             char[] splitChars = { '/' };
-            string[] parameters = s.Split(splitChars);
+            var parameters = s.Split(splitChars);
 
-            int vert = int.Parse(parameters[0]) - 1;
-            int tex = 0;
-            int norm = 0;
+            var vert = int.Parse(parameters[0]) - 1;
+            var tex = 0;
+            var norm = 0;
 
             // Texcoords and normals are optional in .obj files.
             if (parameters[1] != "") tex = int.Parse(parameters[1]) - 1;

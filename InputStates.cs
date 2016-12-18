@@ -6,7 +6,8 @@ namespace InfiniTK
 {
     public class InputStates
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.
+            GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public JumpState JumpState { get; set; }
 
@@ -14,7 +15,7 @@ namespace InfiniTK
 
         public bool MouseControlEnabled { get; set; }
 
-        private MouseState _previousMouseState;
+        private MouseState previousMouseState;
 
         #endregion
 
@@ -23,8 +24,8 @@ namespace InfiniTK
         {
             get
             {
-                if (_moveForwardKeyDown) 
-                    return !_moveBackwardKeyDown || _moveForwardOverBackward;
+                if (moveForwardKeyDown) 
+                    return !moveBackwardKeyDown || moveForwardOverBackward;
                 return false;
             }
         }
@@ -32,8 +33,8 @@ namespace InfiniTK
         {
             get
             {
-                if (_moveBackwardKeyDown)
-                    return !_moveForwardKeyDown || !_moveForwardOverBackward;
+                if (moveBackwardKeyDown)
+                    return !moveForwardKeyDown || !moveForwardOverBackward;
                 return false;
             }
         }
@@ -41,8 +42,8 @@ namespace InfiniTK
         {
             get
             {
-                if (_moveLeftKeyDown)
-                    return !_moveRightKeyDown || _moveLeftOverRight;
+                if (moveLeftKeyDown)
+                    return !moveRightKeyDown || moveLeftOverRight;
                 return false;
             }
         }
@@ -50,8 +51,8 @@ namespace InfiniTK
         {
             get
             {
-                if (_moveRightKeyDown)
-                    return !_moveLeftKeyDown || !_moveLeftOverRight;
+                if (moveRightKeyDown)
+                    return !moveLeftKeyDown || !moveLeftOverRight;
                 return false;
             }
         }
@@ -59,8 +60,8 @@ namespace InfiniTK
         {
             get
             {
-                if (_moveUpKeyDown)
-                    return !_moveDownKeyDown || _moveUpOverDown;
+                if (moveUpKeyDown)
+                    return !moveDownKeyDown || moveUpOverDown;
                 return false;
             }
         }
@@ -68,8 +69,8 @@ namespace InfiniTK
         {
             get
             {
-                if (_moveDownKeyDown)
-                    return !_moveUpKeyDown || !_moveUpOverDown;
+                if (moveDownKeyDown)
+                    return !moveUpKeyDown || !moveUpOverDown;
                 return false;
             }
         }
@@ -77,8 +78,8 @@ namespace InfiniTK
         {
             get
             {
-                if (_turnLeftKeyDown)
-                    return !_turnRightKeyDown || _turnLeftOverRight;
+                if (turnLeftKeyDown)
+                    return !turnRightKeyDown || turnLeftOverRight;
                 return false;
             }
         }
@@ -86,8 +87,8 @@ namespace InfiniTK
         {
             get
             {
-                if (_turnRightKeyDown)
-                    return !_turnLeftKeyDown || !_turnLeftOverRight;
+                if (turnRightKeyDown)
+                    return !turnLeftKeyDown || !turnLeftOverRight;
                 return false;
             }
         }
@@ -95,8 +96,8 @@ namespace InfiniTK
         {
             get
             {
-                if (_turnUpKeyDown)
-                    return !_turnDownKeyDown || _turnUpOverDown;
+                if (turnUpKeyDown)
+                    return !turnDownKeyDown || turnUpOverDown;
                 return false;
             }
         }
@@ -104,8 +105,8 @@ namespace InfiniTK
         {
             get
             {
-                if (_turnDownKeyDown)
-                    return !_turnUpKeyDown || !_turnUpOverDown;
+                if (turnDownKeyDown)
+                    return !turnUpKeyDown || !turnUpOverDown;
                 return false;
             }
         }
@@ -113,32 +114,32 @@ namespace InfiniTK
 
         #region Keyboard state variables
 
-        private bool _jumpKeyDown;
+        private bool jumpKeyDown;
 
         // Forward and backward movement.
-        private bool _moveForwardKeyDown;
-        private bool _moveBackwardKeyDown;
-        private bool _moveForwardOverBackward = true;
+        private bool moveForwardKeyDown;
+        private bool moveBackwardKeyDown;
+        private bool moveForwardOverBackward = true;
 
         // Left and right movement.
-        private bool _moveLeftKeyDown;
-        private bool _moveRightKeyDown;
-        private bool _moveLeftOverRight = true;
+        private bool moveLeftKeyDown;
+        private bool moveRightKeyDown;
+        private bool moveLeftOverRight = true;
 
         // Up and down movement.
-        private bool _moveUpKeyDown;
-        private bool _moveDownKeyDown;
-        private bool _moveUpOverDown = true;
+        private bool moveUpKeyDown;
+        private bool moveDownKeyDown;
+        private bool moveUpOverDown = true;
 
         // Left and right spinning.
-        private bool _turnLeftKeyDown;
-        private bool _turnRightKeyDown;
-        private bool _turnLeftOverRight = true;
+        private bool turnLeftKeyDown;
+        private bool turnRightKeyDown;
+        private bool turnLeftOverRight = true;
 
         // Up and down tilting.
-        private bool _turnUpKeyDown;
-        private bool _turnDownKeyDown;
-        private bool _turnUpOverDown = true;
+        private bool turnUpKeyDown;
+        private bool turnDownKeyDown;
+        private bool turnUpOverDown = true;
 
         #endregion
 
@@ -158,28 +159,28 @@ namespace InfiniTK
         /// </summary>
         public void ResetKeyStates()
         {
-            _jumpKeyDown = false;
-            _moveForwardKeyDown = false;
-            _moveBackwardKeyDown = false;
-            _moveLeftKeyDown = false;
-            _moveRightKeyDown = false;
-            _moveUpKeyDown = false;
-            _moveDownKeyDown = false;
-            _turnLeftKeyDown = false;
-            _turnRightKeyDown = false;
-            _turnUpKeyDown = false;
-            _turnDownKeyDown = false;
+            jumpKeyDown = false;
+            moveForwardKeyDown = false;
+            moveBackwardKeyDown = false;
+            moveLeftKeyDown = false;
+            moveRightKeyDown = false;
+            moveUpKeyDown = false;
+            moveDownKeyDown = false;
+            turnLeftKeyDown = false;
+            turnRightKeyDown = false;
+            turnUpKeyDown = false;
+            turnDownKeyDown = false;
         }
 
         public void KeyDown(Key key)
         {
-            if (Log.IsDebugEnabled) Log.Debug("KeyDown: " + key);
+            Log.DebugFormat("KeyDown: {0}", key);
             ToggleKey(key, true);
         }
 
         public void KeyUp(Key key)
         {
-            if (Log.IsDebugEnabled) Log.Debug("KeyUp: " + key);
+            Log.DebugFormat("KeyUp: {0}", key);
             ToggleKey(key, false);
         }
 
@@ -188,69 +189,69 @@ namespace InfiniTK
             switch (key)
             {
                 case Key.Space:
-                    if (!keyDown) _jumpKeyDown = false;
-                    else if (!_jumpKeyDown)
+                    if (!keyDown) jumpKeyDown = false;
+                    else if (!jumpKeyDown)
                     {
-                        _jumpKeyDown = true;
+                        jumpKeyDown = true;
                         if (JumpState == JumpState.NotJumping)
                             JumpState = JumpState.InitiateJump;
                     }
                     break;
                 case Key.Plus:
-                    _moveUpKeyDown = keyDown;
-                    if (keyDown) _moveUpOverDown = true;
+                    moveUpKeyDown = keyDown;
+                    if (keyDown) moveUpOverDown = true;
                     break;
                 case Key.Minus:
-                    _moveDownKeyDown = keyDown;
-                    if (keyDown) _moveUpOverDown = false;
+                    moveDownKeyDown = keyDown;
+                    if (keyDown) moveUpOverDown = false;
                     break;
                 case Key.W:
-                    _moveForwardKeyDown = keyDown;
-                    if (keyDown) _moveForwardOverBackward = true;
+                    moveForwardKeyDown = keyDown;
+                    if (keyDown) moveForwardOverBackward = true;
                     break;
                 case Key.S:
-                    _moveBackwardKeyDown = keyDown;
-                    if (keyDown) _moveForwardOverBackward = false;
+                    moveBackwardKeyDown = keyDown;
+                    if (keyDown) moveForwardOverBackward = false;
                     break;
                 case Key.A:
-                    _moveLeftKeyDown = keyDown;
-                    if (keyDown) _moveLeftOverRight = true;
+                    moveLeftKeyDown = keyDown;
+                    if (keyDown) moveLeftOverRight = true;
                     break;
                 case Key.D:
-                    _moveRightKeyDown = keyDown;
-                    if (keyDown) _moveLeftOverRight = false;
+                    moveRightKeyDown = keyDown;
+                    if (keyDown) moveLeftOverRight = false;
                     break;
                     /*
                 case Key.Up:
-                    if (!keyDown) _turnUpKeyDown = false;
+                    if (!keyDown) turnUpKeyDown = false;
                     if (e.Control && keyDown)
                     {
-                        _turnUpKeyDown = true;
-                        _turnUpOverDown = true;
+                        turnUpKeyDown = true;
+                        turnUpOverDown = true;
                     }
                     break;
                 case Key.Down:
-                    if (!keyDown) _turnDownKeyDown = false;
+                    if (!keyDown) turnDownKeyDown = false;
                     if (e.Control && keyDown)
                     {
-                        _turnDownKeyDown = true;
-                        _turnUpOverDown = false;
+                        turnDownKeyDown = true;
+                        turnUpOverDown = false;
                     }
                     break;
                 case Key.Left:
-                    if (!keyDown) _turnLeftKeyDown = false;
+                    if (!keyDown) turnLeftKeyDown = false;
                     if (e.Control && keyDown)
                     {
-                        _turnLeftKeyDown = true;
-                        _turnLeftOverRight = true;
+                        turnLeftKeyDown = true;
+                        turnLeftOverRight = true;
                     }
                     break;
                 case Key.Right:
-                    if (!keyDown) _turnRightKeyDown = false;
+                    if (!keyDown) turnRightKeyDown = false;
                     if (e.Control && keyDown)
                     {
-                        _turnRightKeyDown = true;
-                        _turnLeftOverRight = false;
+                        turnRightKeyDown = true;
+                        turnLeftOverRight = false;
                     }
                     break;*/
             }
@@ -266,7 +267,7 @@ namespace InfiniTK
         /// </summary>
         public void SnapshotCurrentMouseState()
         {
-            _previousMouseState = Mouse.GetState();
+            previousMouseState = Mouse.GetState();
         }
 
         /// <summary>
@@ -276,13 +277,13 @@ namespace InfiniTK
         /// <returns></returns>
         public MouseDelta GetMouseDelta()
         {
-            MouseState mouse = Mouse.GetState();
+            var mouse = Mouse.GetState();
 
-            int deltaX = mouse.X - _previousMouseState.X;
-            int deltaY = mouse.Y - _previousMouseState.Y;
-            int deltaZ = mouse.Wheel - _previousMouseState.Wheel;
+            var deltaX = mouse.X - previousMouseState.X;
+            var deltaY = mouse.Y - previousMouseState.Y;
+            var deltaZ = mouse.Wheel - previousMouseState.Wheel;
 
-            _previousMouseState = mouse;
+            previousMouseState = mouse;
 
             return new MouseDelta(deltaX, deltaY, deltaZ);
         }

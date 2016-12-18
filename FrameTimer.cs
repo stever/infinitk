@@ -11,34 +11,29 @@ namespace InfiniTK
     /// </summary>
     public class FrameTimer
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.
+            GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        #region Constants
-        private const int FRAMES_PER_SECOND = 60; // LCD frame rate locked to 60 FPS. See also https://en.wikipedia.org/wiki/Frame_rate.
-        private const float FRAME_DELAY_INCREMENT = 0.1f;
-        private const int FPS_HISTORY_SIZE = FRAMES_PER_SECOND;
-        #endregion
+        private const int FramesPerSecond = 60; // LCD frame rate locked to 60 FPS. See also https://en.wikipedia.org/wiki/Frame_rate.
+        private const float FrameDelayIncrement = 0.1f;
+        private const int FpsHistorySize = FramesPerSecond;
 
-        #region LimitFrameRate property
-
-        private bool _limitFrameRate = true;
+        private bool limitFrameRate = true;
 
         /// <summary>
         /// This property is used to enable/disable the frame rate limiter.
         /// </summary>
         public bool LimitFrameRate
         {
-            get { return _limitFrameRate; }
+            get { return limitFrameRate; }
             set
             {
-                _limitFrameRate = value;
-                if (_limitFrameRate) return;
-                if (_fpsHistory.Count > 0) _fpsHistory.Clear();
-                _frameDelay = 0;
+                limitFrameRate = value;
+                if (limitFrameRate) return;
+                if (fpsHistory.Count > 0) fpsHistory.Clear();
+                frameDelay = 0;
             }
         }
-
-        #endregion
 
         /// <summary>
         /// This property provides a constantly updated value.
@@ -49,40 +44,40 @@ namespace InfiniTK
         /// A new frame occurs every time the Idle method is called.
         /// This variable is used to measure frames-per-second.
         /// </summary>
-        private int _frameCounter;
+        private int frameCounter;
 
         /// <summary>
         /// Used to maintain a steady frame rate.
         /// </summary>
-        private double _frameDelay;
+        private double frameDelay;
 
         /// <summary>
         /// Recent history of FPS values to determine average.
         /// </summary>
-        private readonly Queue<double> _fpsHistory = new Queue<double>();
+        private readonly Queue<double> fpsHistory = new Queue<double>();
 
         /// <summary>
         /// This variable accumulates the number of milliseconds, and is used to determine
         /// when the frames-per-second reading is updated.
         /// </summary>
-        private double _frameCounterMillis;
+        private double frameCounterMillis;
 
         /// <summary>
         /// Used to measure the amount of time taken to render one frame..
         /// </summary>
-        private readonly Stopwatch _timeSinceFrameStart = new Stopwatch();
+        private readonly Stopwatch timeSinceFrameStart = new Stopwatch();
 
         /// <summary>
         /// Used to measure the amount of time since the last frame started, primarily to calculate FPS.
         /// </summary>
-        private readonly Stopwatch _timeSinceLastFrameStart = new Stopwatch();
+        private readonly Stopwatch timeSinceLastFrameStart = new Stopwatch();
 
         /// <summary>
         /// Starts a timer to record the length of time since last idle.
         /// </summary>
         public void Start()
         {
-            _timeSinceLastFrameStart.Start();
+            timeSinceLastFrameStart.Start();
         }
 
         /// <summary>
@@ -91,16 +86,16 @@ namespace InfiniTK
         public double ComputeTimeSinceLastFrameStart()
         {
             // Time since last Idle start.
-            _timeSinceLastFrameStart.Stop();
-            double timeSinceLastIdle = _timeSinceLastFrameStart.Elapsed.TotalMilliseconds;
-            _timeSinceLastFrameStart.Reset();
-            _timeSinceLastFrameStart.Start();
+            timeSinceLastFrameStart.Stop();
+            var timeSinceLastIdle = timeSinceLastFrameStart.Elapsed.TotalMilliseconds;
+            timeSinceLastFrameStart.Reset();
+            timeSinceLastFrameStart.Start();
 
             // Calculate frames-per-second.
             Update(timeSinceLastIdle);
             
             // Start timer to time how long Idle method takes.
-            _timeSinceFrameStart.Start();
+            timeSinceFrameStart.Start();
 
             // Time since last Idle is required for animation etc.
             return timeSinceLastIdle;
@@ -111,24 +106,21 @@ namespace InfiniTK
         /// </summary>
         public double ComputeTimeSinceIdleStart()
         {
-            _timeSinceFrameStart.Stop();
-            double timeSinceIdleStart = _timeSinceFrameStart.Elapsed.TotalMilliseconds;
+            timeSinceFrameStart.Stop();
+            var timeSinceIdleStart = timeSinceFrameStart.Elapsed.TotalMilliseconds;
 
             // Log the FPS periodically (once a second).
-            if (_frameCounterMillis >= 1000)
+            if (frameCounterMillis >= 1000)
             {
-                Log.InfoFormat("FPS: {0}; avg: {1}; delay: {2}ms; idle: {3}ms", 
-                    _frameCounter, 
-                    FPS.ToString("F3"),
-                    _frameDelay.ToString("F3"),
-                    timeSinceIdleStart.ToString("F3"));
+                Log.InfoFormat("FPS: {0}; avg: {1:F3}; delay: {2:F3}ms; idle: {3:F3}ms", 
+                    frameCounter, FPS, frameDelay, timeSinceIdleStart);
                 
-                _frameCounterMillis -= 1000;
-                _frameCounter = 0;
+                frameCounterMillis -= 1000;
+                frameCounter = 0;
             }
 
-            _frameCounter++;
-            _timeSinceFrameStart.Reset();
+            frameCounter++;
+            timeSinceFrameStart.Reset();
             return timeSinceIdleStart;
         }
 
@@ -139,46 +131,46 @@ namespace InfiniTK
         private void Update(double timeSinceLastIdle)
         {
             // Logging FPS every second. Accumulate time since last second elapsed.
-            _frameCounterMillis += timeSinceLastIdle;
+            frameCounterMillis += timeSinceLastIdle;
             
             // Use an average value for FPS, when history queue has filled.
-            if (_fpsHistory.Count != FPS_HISTORY_SIZE)
+            if (fpsHistory.Count != FpsHistorySize)
             {
                 // Add the latest FPS value to the queue.
                 FPS = 1000 / timeSinceLastIdle;
-                _fpsHistory.Enqueue(FPS);
+                fpsHistory.Enqueue(FPS);
             }
             else
             {
                 // Add latest FPS value to the queue and remove oldest.
-                _fpsHistory.Enqueue(1000 / timeSinceLastIdle);
-                _fpsHistory.Dequeue();
+                fpsHistory.Enqueue(1000 / timeSinceLastIdle);
+                fpsHistory.Dequeue();
 
                 // Calculate a weighted average for the FPS.
-                double weight = 1;
-                double sumWeight = 0;
-                double sumFPS = 0;
-                foreach (double fps in _fpsHistory)
+                var weight = 1.0;
+                var sumWeight = 0.0;
+                var sumFPS = 0.0;
+                foreach (var fps in fpsHistory)
                 {
                     sumFPS += fps * weight;
                     sumWeight += weight;
                     weight *= 2;
                 }
-                FPS = (sumFPS / FPS_HISTORY_SIZE) 
-                    / (sumWeight / FPS_HISTORY_SIZE);
+
+                FPS = (sumFPS / FpsHistorySize) / (sumWeight / FpsHistorySize);
             }
 
             // The rest of this method is to limit frame rate.
             if (!LimitFrameRate) return;
 
             // Calculate new value for frame delay.
-            if (FPS > FRAMES_PER_SECOND) _frameDelay += FRAME_DELAY_INCREMENT;
-            else if (FPS < FRAMES_PER_SECOND) _frameDelay -= (FRAME_DELAY_INCREMENT * 2);
-            if (_frameDelay < 0) _frameDelay = 0;
+            if (FPS > FramesPerSecond) frameDelay += FrameDelayIncrement;
+            else if (FPS < FramesPerSecond) frameDelay -= FrameDelayIncrement * 2;
+            if (frameDelay < 0) frameDelay = 0;
 
             // Only start to delay when we have enough history for an average.
-            if (_frameDelay > 0 && _fpsHistory.Count == FPS_HISTORY_SIZE)
-                Thread.Sleep((int) _frameDelay);
+            if (frameDelay > 0 && fpsHistory.Count == FpsHistorySize)
+                Thread.Sleep((int) frameDelay);
         }
     }
 }
