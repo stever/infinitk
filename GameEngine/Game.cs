@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Reflection;
-using System.Windows.Forms;
 using InfiniTK.Engine;
 using InfiniTK.Utility;
 using log4net;
@@ -23,8 +21,6 @@ namespace InfiniTK.GameEngine
         private readonly MeshObject blockTemplate = new MeshObject();
         private readonly HashSet<Player> players = new HashSet<Player>();
         private readonly HashSet<Block> blocks = new HashSet<Block>();
-
-        private Point restoreMousePosition;
 
         /// <summary>
         /// This method is used to create the game world and entities within it.
@@ -152,29 +148,6 @@ namespace InfiniTK.GameEngine
         public void KeyUp(Key key)
         {
             Controls.KeyUp(key);
-        }
-
-        public void EnableMouseControl()
-        {
-            if (Controls.MouseControlEnabled) 
-                DisableMouseControl();
-
-            restoreMousePosition = Cursor.Position;
-            Cursor.Hide();
-
-            Utility.Mouse.SnapshotCurrentMouseState();
-
-            Controls.MouseControlEnabled = true;
-        }
-
-        public void DisableMouseControl()
-        {
-            if (!Controls.MouseControlEnabled) return;
-
-            Cursor.Position = restoreMousePosition;
-            Cursor.Show();
-
-            Controls.MouseControlEnabled = false;
         }
 
         public void ResetKeyStates()

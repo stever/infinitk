@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
 using InfiniTK.Utility;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
@@ -29,6 +30,8 @@ void main()
         */
 
         protected readonly InputStates Controls = new InputStates();
+
+        private Point restoreMousePosition;
 
         /// <summary>
         /// This method is called during form Load to initialise GL.
@@ -88,6 +91,29 @@ void main()
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadMatrix(ref perspective);
             GL.Viewport(0, 0, width, height);
+        }
+
+        public void EnableMouseControl()
+        {
+            if (Controls.MouseControlEnabled)
+                DisableMouseControl();
+
+            restoreMousePosition = Cursor.Position;
+            Cursor.Hide();
+
+            Mouse.SnapshotCurrentMouseState();
+
+            Controls.MouseControlEnabled = true;
+        }
+
+        public void DisableMouseControl()
+        {
+            if (!Controls.MouseControlEnabled) return;
+
+            Cursor.Position = restoreMousePosition;
+            Cursor.Show();
+
+            Controls.MouseControlEnabled = false;
         }
     }
 }
