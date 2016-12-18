@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using InfiniTK.Engine.Actions;
 using log4net;
 using OpenTK.Input;
 
@@ -9,7 +10,7 @@ namespace InfiniTK.Engine
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public JumpState JumpState { get; set; }
+        public Jump.JumpState JumpState { get; set; }
         public bool MouseControlEnabled { get; set; }
 
         #region Movement state properties
@@ -153,7 +154,7 @@ namespace InfiniTK.Engine
         public void Reset()
         {
             ResetKeyStates();
-            JumpState = JumpState.NotJumping;
+            JumpState = Jump.JumpState.NotJumping;
         }
 
         #region Keyboard handling methods
@@ -197,8 +198,8 @@ namespace InfiniTK.Engine
                     else if (!jumpKeyDown)
                     {
                         jumpKeyDown = true;
-                        if (JumpState == JumpState.NotJumping)
-                            JumpState = JumpState.InitiateJump;
+                        if (JumpState == Jump.JumpState.NotJumping)
+                            JumpState = Jump.JumpState.InitiateJump;
                     }
                     break;
 

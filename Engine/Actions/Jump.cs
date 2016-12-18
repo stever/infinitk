@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenTK;
 
-namespace InfiniTK.Engine
+namespace InfiniTK.Engine.Actions
 {
     public class Jump : IAction
     {
@@ -15,6 +15,13 @@ namespace InfiniTK.Engine
             this.entity = entity;
             this.controls = controls;
             startingHeight = this.entity.Position.Y;
+        }
+
+        public enum JumpState
+        {
+            NotJumping,
+            InitiateJump,
+            Jumping
         }
 
         #region IAction implementation

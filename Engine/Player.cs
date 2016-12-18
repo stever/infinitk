@@ -1,5 +1,6 @@
 ﻿using System;
 using InfiniTK.Artifacts;
+using InfiniTK.Engine.Actions;
 using InfiniTK.Utility;
 using OpenTK;
 
@@ -43,9 +44,9 @@ namespace InfiniTK.Engine
             // Action handling.
             if (currentAction == null)
             {
-                if (Controls.JumpState == JumpState.InitiateJump)
+                if (Controls.JumpState == Jump.JumpState.InitiateJump)
                 {
-                    Controls.JumpState = JumpState.Jumping;
+                    Controls.JumpState = Jump.JumpState.Jumping;
                     currentAction = new Jump(this, Controls);
                 }
             }

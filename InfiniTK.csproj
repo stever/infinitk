@@ -74,7 +74,7 @@
     <Compile Include="Engine\InputStates.cs" />
     <Compile Include="Engine\Interfaces\IPosition.cs" />
     <Compile Include="Engine\Interfaces\IRender.cs" />
-    <Compile Include="Engine\Jump.cs" />
+    <Compile Include="Engine\Actions\Jump.cs" />
     <Compile Include="Engine\JumpState.cs" />
     <Compile Include="Utility\Meshomatic\MeshData.cs" />
     <Compile Include="Utility\MeshObject.cs" />
