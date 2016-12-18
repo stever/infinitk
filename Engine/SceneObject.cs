@@ -12,6 +12,27 @@ namespace InfiniTK.Engine
         private float pitch;
         private float yaw;
 
+        /// <summary>
+        /// Apply the camera from the given position and orientation.
+        /// </summary>
+        public void ApplyCamera()
+        {
+            var cosYaw = Math.Cos(MathHelper.DegreesToRadians(yaw));
+            var sinYaw = Math.Sin(MathHelper.DegreesToRadians(yaw));
+            var tanPitch = Math.Tan(MathHelper.DegreesToRadians(pitch));
+
+            // Calculate view target based on new position.
+            var viewTarget = new Vector3d
+            {
+                X = Position.X + cosYaw,
+                Y = Position.Y + tanPitch,
+                Z = Position.Z + sinYaw
+            };
+
+            var camera = Matrix4d.LookAt(Position, viewTarget, Vector3d.UnitY);
+            GL.LoadMatrix(ref camera);
+        }
+
         #region Abstract interface
 
         public abstract void Load();
@@ -39,27 +60,6 @@ namespace InfiniTK.Engine
         }
 
         #endregion
-
-        /// <summary>
-        /// Apply the camera from the given position and orientation.
-        /// </summary>
-        public void ApplyCamera()
-        {
-            var cosYaw = Math.Cos(MathHelper.DegreesToRadians(yaw));
-            var sinYaw = Math.Sin(MathHelper.DegreesToRadians(yaw));
-            var tanPitch = Math.Tan(MathHelper.DegreesToRadians(pitch));
-
-            // Calculate view target based on new position.
-            var viewTarget = new Vector3d
-            {
-                X = Position.X + cosYaw,
-                Y = Position.Y + tanPitch,
-                Z = Position.Z + sinYaw
-            };
-
-            var camera = Matrix4d.LookAt(Position, viewTarget, Vector3d.UnitY);
-            GL.LoadMatrix(ref camera);
-        }
 
         #region Movement
 
