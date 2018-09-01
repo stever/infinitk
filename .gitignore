@@ -1,11 +1,4 @@
-*.dotCover
-*.pdb
-*.suo
-*.user
-[Bb]in/
-[Dd]ebug/
-[Oo]bj/
-[Pp]ackages/
-[Rr]elease/
-Thumbs.db
-Desktop.ini
+.vs/
+bin/
+obj/
+packages/
