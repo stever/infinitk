@@ -79,6 +79,7 @@
     <Compile Include="GameEngine\Terrain.cs" />
     <Compile Include="Utility\Mouse.cs" />
     <Compile Include="Utility\Texture.cs" />
+    <Compile Include="Window.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
