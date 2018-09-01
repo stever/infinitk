@@ -1,6 +1,6 @@
 ﻿using OpenTK;
 
-namespace InfiniTK.Engine
+namespace MoonPad.Engine
 {
     public interface IMove : IPosition
     {

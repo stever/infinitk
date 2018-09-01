@@ -1,10 +1,10 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
-using InfiniTK.Utility;
+using MoonPad.Utility;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace InfiniTK.Engine
+namespace MoonPad.Engine
 {
     public class SceneViewer
     {

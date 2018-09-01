@@ -26,7 +26,7 @@ authors and should not be interpreted as representing official policies, either 
 or implied, of Simon Heath.
 */
 
-namespace InfiniTK.Utility.Meshomatic
+namespace MoonPad.Utility.Meshomatic
 {
     public struct MeshVector2
     {

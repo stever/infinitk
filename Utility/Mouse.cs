@@ -1,6 +1,6 @@
 ﻿using OpenTK.Input;
 
-namespace InfiniTK.Utility
+namespace MoonPad.Utility
 {
     public static class Mouse
     {

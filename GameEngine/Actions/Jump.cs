@@ -1,8 +1,8 @@
 ﻿using System;
-using InfiniTK.Engine;
+using MoonPad.Engine;
 using OpenTK;
 
-namespace InfiniTK.GameEngine.Actions
+namespace MoonPad.GameEngine.Actions
 {
     public class Jump : IAction
     {

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using InfiniTK.Engine;
-using InfiniTK.Utility;
+using MoonPad.Engine;
+using MoonPad.Utility;
 using log4net;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
-namespace InfiniTK.GameEngine
+namespace MoonPad.GameEngine
 {
     public class Game : SceneViewer
     {

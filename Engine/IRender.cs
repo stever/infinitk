@@ -1,4 +1,4 @@
-﻿namespace InfiniTK.Engine
+﻿namespace MoonPad.Engine
 {
     public interface IRender : IPosition
     {

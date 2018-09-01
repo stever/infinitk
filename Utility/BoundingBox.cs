@@ -32,7 +32,7 @@ using System;
 using System.Collections.Generic;
 using OpenTK;
 
-namespace InfiniTK.Utility
+namespace MoonPad.Utility
 {
     public struct BoundingBox : IEquatable<BoundingBox>
     {

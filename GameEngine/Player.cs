@@ -1,10 +1,10 @@
 using System;
-using InfiniTK.Engine;
-using InfiniTK.GameEngine.Actions;
-using InfiniTK.Utility;
+using MoonPad.Engine;
+using MoonPad.GameEngine.Actions;
+using MoonPad.Utility;
 using OpenTK;
 
-namespace InfiniTK.GameEngine
+namespace MoonPad.GameEngine
 {
     public class Player : SceneObject
     {

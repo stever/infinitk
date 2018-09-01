@@ -1,9 +1,9 @@
-﻿using InfiniTK.Engine;
-using InfiniTK.Utility;
+﻿using MoonPad.Engine;
+using MoonPad.Utility;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace InfiniTK.GameEngine
+namespace MoonPad.GameEngine
 {
     public class Block : SceneObject
     {

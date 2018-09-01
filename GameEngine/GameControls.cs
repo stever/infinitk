@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
-using InfiniTK.Engine;
-using InfiniTK.GameEngine.Actions;
+using MoonPad.Engine;
+using MoonPad.GameEngine.Actions;
 using log4net;
 using OpenTK.Input;
 
-namespace InfiniTK.GameEngine
+namespace MoonPad.GameEngine
 {
     public class GameControls : SceneViewerControls
     {

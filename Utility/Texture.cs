@@ -5,7 +5,7 @@ using System.Reflection;
 using log4net;
 using OpenTK.Graphics.OpenGL;
 
-namespace InfiniTK.Utility
+namespace MoonPad.Utility
 {
     public class Texture
     {

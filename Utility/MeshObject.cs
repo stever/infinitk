@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Reflection;
-using InfiniTK.Utility.Meshomatic;
+using MoonPad.Utility.Meshomatic;
 using log4net;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace InfiniTK.Utility
+namespace MoonPad.Utility
 {
     public class MeshObject
     {

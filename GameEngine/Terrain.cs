@@ -1,10 +1,10 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.Reflection;
-using InfiniTK.Utility;
+using MoonPad.Utility;
 using log4net;
 
-namespace InfiniTK.GameEngine
+namespace MoonPad.GameEngine
 {
     public class Terrain
     {

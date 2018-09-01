@@ -2,7 +2,7 @@
 using log4net;
 using OpenTK.Input;
 
-namespace InfiniTK.Engine
+namespace MoonPad.Engine
 {
     public class SceneViewerControls
     {
