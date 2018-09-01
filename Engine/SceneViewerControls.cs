@@ -17,7 +17,7 @@ namespace InfiniTK.Engine
         {
             get
             {
-                if (moveForwardKeyDown) 
+                if (moveForwardKeyDown)
                     return !moveBackwardKeyDown || moveForwardOverBackward;
                 return false;
             }

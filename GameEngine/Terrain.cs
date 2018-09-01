@@ -52,7 +52,7 @@ namespace InfiniTK.GameEngine
                     g.DrawImageUnscaled(block, 3 * BlockWidth, 7 * BlockHeight); // Bottom
 
                     if (col == 3 && row == 0)
-                    { 
+                    {
                         // Grass
                         var color = block.GetPixel(0, 0);
                         blockRectangle = new Rectangle(2 * BlockWidth, 0, BlockWidth, BlockHeight);
@@ -61,7 +61,7 @@ namespace InfiniTK.GameEngine
                         g.DrawImageUnscaled(block, 3 * BlockWidth, 7 * BlockHeight); // Bottom
                     }
                     else if (col == 4 && row == 1)
-                    { 
+                    {
                         // Tree
                         blockRectangle = new Rectangle(5 * BlockWidth, BlockHeight, BlockWidth, BlockHeight);
                         block = bitmap.Clone(blockRectangle, PixelFormat.Format32bppArgb);

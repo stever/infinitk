@@ -34,16 +34,16 @@ using OpenTK;
 namespace InfiniTK.Utility.Meshomatic
 {
     /// <summary>
-    /// A class containing all the necessary data for a mesh: Points, normal 
+    /// A class containing all the necessary data for a mesh: Points, normal
     /// vectors, UV coordinates, and indices into each.
-    /// 
-    /// Regardless of how the mesh file represents geometry, this is what we 
-    /// load it into, because this is most similar to how OpenGL represents 
+    ///
+    /// Regardless of how the mesh file represents geometry, this is what we
+    /// load it into, because this is most similar to how OpenGL represents
     /// geometry.
-    /// 
-    /// We store data as arrays of vertices, UV coordinates and normals, and 
-    /// then a list of Triangle structures. A Triangle is a struct which 
-    /// contains integer offsets into the vertex/normal/texcoord arrays to 
+    ///
+    /// We store data as arrays of vertices, UV coordinates and normals, and
+    /// then a list of Triangle structures. A Triangle is a struct which
+    /// contains integer offsets into the vertex/normal/texcoord arrays to
     /// define a face.
     /// </summary>
     public class MeshData
@@ -83,7 +83,7 @@ namespace InfiniTK.Utility.Meshomatic
         }
 
         /// <summary>
-        /// Returns an array containing the coordinates of the <value>Normals</value>, 
+        /// Returns an array containing the coordinates of the <value>Normals</value>,
         /// similar to VertexArray.
         /// </summary>
         public double[] NormalArray()
@@ -99,8 +99,8 @@ namespace InfiniTK.Utility.Meshomatic
         }
 
         /// <summary>
-        /// Returns an array containing the coordinates of the <value>TexCoords</value>, 
-        /// similar to VertexArray. 
+        /// Returns an array containing the coordinates of the <value>TexCoords</value>,
+        /// similar to VertexArray.
         /// </summary>
         public double[] TexcoordArray()
         {
@@ -245,8 +245,8 @@ namespace InfiniTK.Utility.Meshomatic
         }
 
         /// <summary>
-        /// Does some simple sanity checking to make sure that the offsets of 
-        /// the Triangles actually refer to real points. Throws an <exception 
+        /// Does some simple sanity checking to make sure that the offsets of
+        /// the Triangles actually refer to real points. Throws an <exception
         /// cref="IndexOutOfRangeException">IndexOutOfRangeException</exception> if not.
         /// </summary>
         public void Verify()

@@ -201,7 +201,7 @@ namespace InfiniTK.GameEngine
                 case 2: blocker = new Vector3d(1, 0, 1); break;
                 case 3: blocker = new Vector3d(1, 1, 0); break;
             }
-            Position = _lastPosition;            
+            Position = _lastPosition;
             Vector3d move = Vector3d.Subtract(playerPosition, _lastPosition);
             Move(Vector3d.Multiply(move, blocker));*/
 
@@ -215,11 +215,11 @@ namespace InfiniTK.GameEngine
                     if (distance.X < 0) x = block.Position.X - 1;
                     else x = block.Position.X + 1;
                     break;
-                case 2: 
+                case 2:
                     if (distance.Y < 0) y = block.Position.Y - 1;
                     else y = block.Position.Y + 1;
                     break;
-                case 3: 
+                case 3:
                     if (distance.Z < 0) z = block.Position.Z - 1;
                     else z = block.Position.Z + 1;
                     break;

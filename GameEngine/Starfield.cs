@@ -6,7 +6,7 @@ using OpenTK.Graphics.OpenGL;
 namespace InfiniTK.GameEngine
 {
     /// <summary>
-    /// Stars in the sky using a starfield texture from 
+    /// Stars in the sky using a starfield texture from
     /// http://paulbourke.net/miscellaneous/starfield/
     /// </summary>
     public class Starfield : IRender
@@ -18,7 +18,7 @@ namespace InfiniTK.GameEngine
         #region IPosition implementation
 
         public Vector3d Position { get; set; }
-        
+
         #endregion
 
         #region IRender implementation

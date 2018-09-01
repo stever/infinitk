@@ -93,7 +93,7 @@ namespace InfiniTK.Utility
 
             // Calculate frames-per-second.
             Update(timeSinceLastIdle);
-            
+
             // Start timer to time how long Idle method takes.
             timeSinceFrameStart.Start();
 
@@ -112,9 +112,9 @@ namespace InfiniTK.Utility
             // Log the FPS periodically (once a second).
             if (frameCounterMillis >= 1000)
             {
-                Log.InfoFormat("FPS: {0}; avg: {1:F3}; delay: {2:F3}ms; idle: {3:F3}ms", 
+                Log.InfoFormat("FPS: {0}; avg: {1:F3}; delay: {2:F3}ms; idle: {3:F3}ms",
                     frameCounter, FPS, frameDelay, timeSinceIdleStart);
-                
+
                 frameCounterMillis -= 1000;
                 frameCounter = 0;
             }
@@ -132,7 +132,7 @@ namespace InfiniTK.Utility
         {
             // Logging FPS every second. Accumulate time since last second elapsed.
             frameCounterMillis += timeSinceLastIdle;
-            
+
             // Use an average value for FPS, when history queue has filled.
             if (fpsHistory.Count != FpsHistorySize)
             {

@@ -15,22 +15,22 @@ namespace InfiniTK.Utility
         private MeshData meshData;
 
         #region Box dimensions
-        
+
         /// <summary>
         /// The width (x) of the object box.
         /// </summary>
         public double BoxWidth { get; private set; }
-        
+
         /// <summary>
         /// The height (y) of the object box.
         /// </summary>
         public double BoxHeight { get; private set; }
-        
+
         /// <summary>
         /// The depth (z) of the object box.
         /// </summary>
         public double BoxDepth { get; private set; }
-        
+
         #endregion
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace InfiniTK.Utility
 
         /// <summary>
         /// Scale is a useful property to store with the mesh object. This
-        /// property is not used directly in this class but is used to scale 
+        /// property is not used directly in this class but is used to scale
         /// the co-ordinates for the mesh when rendering a modelled object.
         /// </summary>
         public double Scale { get; set; }
@@ -52,9 +52,9 @@ namespace InfiniTK.Utility
         private int textureCoordOffset;
         private int objectVerticesOffset;
         private int objectNormalsOffset;
-        
+
         #endregion
-        
+
         /// <summary>
         /// Loads the mesh data from Wavefront OBJ file.
         /// </summary>
@@ -89,7 +89,7 @@ namespace InfiniTK.Utility
             GL.GenBuffers(1, out objectIndexBuffer);
 
             // Set up data for VBO.
-            // We're going to use one VBO for all geometry, and stick it in 
+            // We're going to use one VBO for all geometry, and stick it in
             // in (VVVVNNNNCCCC) order.  Non interleaved.
             var buffersize = (verts.Length + norms.Length + texcoords.Length);
             var bufferdata = new float[buffersize];

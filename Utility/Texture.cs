@@ -46,7 +46,7 @@ namespace InfiniTK.Utility
         }
 
         /// <remarks>
-        /// This loads the texture mirrored along one axis, but you can easily 
+        /// This loads the texture mirrored along one axis, but you can easily
         /// fix this by changing all your UVs' second coordinate from v to 1-v.
         /// </remarks>
         private uint LoadTexture(Bitmap bitmap)
@@ -116,7 +116,7 @@ namespace InfiniTK.Utility
 	                    new Rectangle(0, 0, bitmap.Width, bitmap.Height),
 	                    ImageLockMode.ReadOnly,
 	                    System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-	
+
 	                GL.TexImage2D(
 	                    TextureTarget.Texture2D,
 	                    1,
@@ -127,14 +127,14 @@ namespace InfiniTK.Utility
 	                    OpenTK.Graphics.OpenGL.PixelFormat.Bgra,
 	                    PixelType.UnsignedByte,
 	                    data.Scan0);
-	
+
 	                bitmap.UnlockBits(data);
 	                bitmap = ScaleByPercent(bitmap, 50);
 	                data = bitmap.LockBits(
 	                    new Rectangle(0, 0, bitmap.Width, bitmap.Height),
 	                    ImageLockMode.ReadOnly,
 	                    System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-	
+
 	                GL.TexImage2D(
 	                    TextureTarget.Texture2D,
 	                    2,
@@ -145,14 +145,14 @@ namespace InfiniTK.Utility
 	                    OpenTK.Graphics.OpenGL.PixelFormat.Bgra,
 	                    PixelType.UnsignedByte,
 	                    data.Scan0);
-	
+
 	                bitmap.UnlockBits(data);
 	                bitmap = ScaleByPercent(bitmap, 50);
 	                data = bitmap.LockBits(
 	                    new Rectangle(0, 0, bitmap.Width, bitmap.Height),
 	                    ImageLockMode.ReadOnly,
 	                    System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-	
+
 	                GL.TexImage2D(
 	                    TextureTarget.Texture2D,
 	                    3,
@@ -163,14 +163,14 @@ namespace InfiniTK.Utility
 	                    OpenTK.Graphics.OpenGL.PixelFormat.Bgra,
 	                    PixelType.UnsignedByte,
 	                    data.Scan0);
-	
+
 	                bitmap.UnlockBits(data);
 	                bitmap = ScaleByPercent(bitmap, 50);
 	                data = bitmap.LockBits(
 	                    new Rectangle(0, 0, bitmap.Width, bitmap.Height),
 	                    ImageLockMode.ReadOnly,
 	                    System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-	
+
 	                GL.TexImage2D(
 	                    TextureTarget.Texture2D,
 	                    4,
@@ -181,7 +181,7 @@ namespace InfiniTK.Utility
 	                    OpenTK.Graphics.OpenGL.PixelFormat.Bgra,
 	                    PixelType.UnsignedByte,
 	                    data.Scan0);
-	
+
 	                bitmap.UnlockBits(data);
 	            }
 			}

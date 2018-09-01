@@ -55,7 +55,7 @@ namespace InfiniTK.Utility
 
         public ContainmentType Contains(BoundingBox box)
         {
-            // Test if all corner is in the same side of a face by just 
+            // Test if all corner is in the same side of a face by just
             // checking min and max.
             if (box.Max.X < Min.X
                 || box.Min.X > Max.X
@@ -119,7 +119,7 @@ namespace InfiniTK.Utility
                 || point.Z < Min.Z
                 || point.Z > Max.Z)
                 result = ContainmentType.Disjoint;
-            
+
             // or if point is on box because coordonate of point is lesser or equal.
             else if (Math.Abs(point.X - Min.X) < double.Epsilon
                 || Math.Abs(point.X - Max.X) < double.Epsilon
@@ -128,7 +128,7 @@ namespace InfiniTK.Utility
                 || Math.Abs(point.Z - Min.Z) < double.Epsilon
                 || Math.Abs(point.Z - Max.Z) < double.Epsilon)
                 result = ContainmentType.Intersects;
-            
+
             else
                 result = ContainmentType.Contains;
         }
@@ -178,10 +178,10 @@ namespace InfiniTK.Utility
         public Vector3d[] GetCorners()
         {
             return new[] {
-                new Vector3d(Min.X, Max.Y, Max.Z), 
+                new Vector3d(Min.X, Max.Y, Max.Z),
                 new Vector3d(Max.X, Max.Y, Max.Z),
-                new Vector3d(Max.X, Min.Y, Max.Z), 
-                new Vector3d(Min.X, Min.Y, Max.Z), 
+                new Vector3d(Max.X, Min.Y, Max.Z),
+                new Vector3d(Min.X, Min.Y, Max.Z),
                 new Vector3d(Min.X, Max.Y, Min.Z),
                 new Vector3d(Max.X, Max.Y, Min.Z),
                 new Vector3d(Max.X, Min.Y, Min.Z),

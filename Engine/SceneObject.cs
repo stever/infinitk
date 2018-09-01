@@ -110,7 +110,7 @@ namespace InfiniTK.Engine
 
         /// <summary>
         /// Tilt doesn't affect the direction of movement. This provides the
-        /// ability to look up or down while moving, or be at an inclination 
+        /// ability to look up or down while moving, or be at an inclination
         /// when walking up or down a slope.
         /// </summary>
         /// <param name="degrees">The angle to tilt.</param>
