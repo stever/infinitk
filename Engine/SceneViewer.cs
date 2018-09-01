@@ -50,7 +50,7 @@ void main()
 
             // Alpha blending.
             GL.Enable(EnableCap.Blend);
-            GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             // TODO: Determine purpose of the following.
             GL.Disable(EnableCap.CullFace);

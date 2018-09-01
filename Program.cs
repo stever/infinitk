@@ -12,9 +12,6 @@ namespace InfiniTK
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         private static void Main()
         {
@@ -44,13 +41,12 @@ namespace InfiniTK
                 VSync = VSyncMode.On;
 
                 // Keyboard
-                Keyboard.KeyRepeat = true;
-                Keyboard.KeyDown += KeyDownHandler;
-                Keyboard.KeyUp += KeyUpHandler;
+                KeyDown += KeyDownHandler;
+                KeyUp += KeyUpHandler;
 
                 // Mouse
-                Mouse.ButtonDown += MouseButtonDownHandler;
-                Mouse.ButtonUp += MouseButtonUpHandler;
+                MouseDown += MouseButtonDownHandler;
+                MouseUp += MouseButtonUpHandler;
 
                 // World
                 game.SetupGame();
