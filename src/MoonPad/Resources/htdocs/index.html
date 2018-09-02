@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/1.21.0/js/jquery.terminal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/1.21.0/css/jquery.terminal.min.css" />
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="term_demo"></div>
+    <script>
+        jQuery(function ($, undefined) {
+            $('#term_demo').terminal(function (command) {
+                if (command !== '') {
+                    var result = window.eval(command);
+                    if (result != undefined) {
+                        this.echo(String(result));
+                    }
+                }
+            },
+                {
+                    greetings: 'Javascript Interpreter',
+                    name: 'js_demo',
+                    height: '100vh',
+                    width: '100vw',
+                    prompt: 'js> '
+                });
+        });
+    </script>
+</body>
+</html>

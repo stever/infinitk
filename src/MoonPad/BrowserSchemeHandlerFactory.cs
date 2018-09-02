@@ -28,7 +28,7 @@ namespace MoonPad
 
         private readonly IDictionary<string, object> resources = new Dictionary<string, object>
         {
-            //{"/index.html", Resources.htdocs_index_html},
+            {"/index.html", Resources.htdocs_index_html},
         };
 
         public BrowserSchemeHandlerFactory(FormWindow formWindow, string schemeName, string hostName, string defaultPage)

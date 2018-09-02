@@ -61,8 +61,8 @@ namespace MoonPad.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;SyntaxLanguage Key=&quot;Lua&quot; LanguageDefinitionVersion=&quot;4.0&quot; Secure=&quot;True&quot; 
-        ///				SyntaxLanguageTypeName=&quot;Ingen.RAVE.WindowsForms.LuaDynamicSyntaxLanguage, RAVE&quot; 
+        ///   Looks up a localized string similar to &lt;SyntaxLanguage Key=&quot;Lua&quot; LanguageDefinitionVersion=&quot;4.0&quot; Secure=&quot;True&quot;
+        ///				SyntaxLanguageTypeName=&quot;MoonPad.LuaDynamicSyntaxLanguage, MoonPad&quot;
         ///				xmlns=&quot;http://ActiproSoftware/SyntaxEditor/4.0/LanguageDefinition&quot;&gt;
         ///
         ///	&lt;!-- String Properties --&gt;
@@ -70,14 +70,23 @@ namespace MoonPad.Properties {
         ///		&lt;Property Key=&quot;Creator&quot; Value=&quot;Actipro Software LLC&quot; /&gt;
         ///		&lt;Property Key=&quot;Copyright&quot; Value=&quot;Copyright (c) 2001-2009 Actipro Software LLC.  All rights reserved.&quot; /&gt;
         ///	&lt;/Properties&gt;
-        ///	
-        ///	&lt;!-- Highlighting Styles --&gt;	
-        ///	&lt;Styles&gt;		
-        ///		 [rest of string was truncated]&quot;;.
+        ///
+        ///	&lt;!-- Highlighting Styles --&gt;
+        ///	&lt;Styles&gt;
+        ///		&lt;Style Key=&quot;Reserve [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ActiproSoftware_Lua {
             get {
                 return ResourceManager.GetString("ActiproSoftware_Lua", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string htdocs_index_html {
+            get {
+                return ResourceManager.GetString("htdocs_index_html", resourceCulture);
             }
         }
         

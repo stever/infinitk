@@ -522,5 +522,32 @@ namespace MoonPad
                 doc.Close();
             }
         }
+
+        private void developerToolsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var browser = FindBrowserInActiveControl(ActiveControl);
+                if (browser == null) return;
+                browser.ShowDevTools();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("EXCEPTION", ex);
+                ErrorHandler.HandleException(ex);
+            }
+        }
+
+        private static Browser FindBrowserInActiveControl(Control control)
+        {
+            while (control is ContainerControl container)
+            {
+                control = container.ActiveControl;
+                if (control is Browser browser)
+                    return browser;
+            }
+
+            return null;
+        }
     }
 }

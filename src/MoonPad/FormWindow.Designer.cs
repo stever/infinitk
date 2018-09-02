@@ -62,6 +62,7 @@
             this.closeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllDocumentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllButThisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.developerToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.formBorderPanel.SuspendLayout();
@@ -150,6 +151,7 @@
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openGLToolStripMenuItem,
+            this.developerToolsToolStripMenuItem,
             this.toolStripSeparator4,
             this.logToolStripMenuItem,
             this.luaScriptsToolStripMenuItem,
@@ -317,7 +319,7 @@
             this.logDockWindow.TabIndex = 1;
             this.logDockWindow.Text = "Log";
             // 
-            // replWindow
+            // luaReplWindow
             // 
             this.luaReplWindow.Guid = new System.Guid("ee4e7bd2-78a2-479b-8c50-507157160424");
             this.luaReplWindow.Location = new System.Drawing.Point(0, 27);
@@ -355,6 +357,13 @@
             this.closeAllButThisToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.closeAllButThisToolStripMenuItem.Text = "Close All But This";
             this.closeAllButThisToolStripMenuItem.Click += new System.EventHandler(this.closeAllButThisToolStripMenuItem_Click);
+            // 
+            // developerToolsToolStripMenuItem
+            // 
+            this.developerToolsToolStripMenuItem.Name = "developerToolsToolStripMenuItem";
+            this.developerToolsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.developerToolsToolStripMenuItem.Text = "Developer Tools";
+            this.developerToolsToolStripMenuItem.Click += new System.EventHandler(this.developerToolsToolStripMenuItem_Click);
             // 
             // FormWindow
             // 
@@ -419,5 +428,6 @@
         private System.Windows.Forms.ToolStripMenuItem closeAllButThisToolStripMenuItem;
         private TD.SandDock.DockableWindow luaReplWindow;
         private System.Windows.Forms.ToolStripMenuItem luaReplToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem developerToolsToolStripMenuItem;
     }
 }

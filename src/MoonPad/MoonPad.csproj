@@ -286,6 +286,7 @@
   <ItemGroup>
     <Content Include="Artifacts\Starfield.png" />
     <Content Include="Artifacts\Terrain.png" />
+    <None Include="Resources\htdocs\index.html" />
     <None Include="Resources\ActiproSoftware.Lua.xml" />
   </ItemGroup>
   <ItemGroup>
