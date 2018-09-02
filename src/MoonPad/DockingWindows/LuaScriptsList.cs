@@ -138,10 +138,16 @@ namespace MoonPad.DockingWindows
             {
                 DeselectItem();
 
-                var name = CommonDialogs.Prompt("Provide a unique name for the Lua Script:", "Add Lua Script", validate:IsNameAvailable);
+                var name = CommonDialogs.Prompt(
+                    "Provide a unique name for the Lua Script:",
+                    "Add Lua Script",
+                    validate: IsNameAvailable);
+
                 if (string.IsNullOrEmpty(name)) return;
 
-                // TODO: WorkbookContext.AddLuaScript(name);
+                Database.AddLuaScript(name);
+                LoadList();
+                SideMenuListBox.SelectName(name);
             }
             catch (Exception ex)
             {

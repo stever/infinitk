@@ -49,8 +49,18 @@ namespace MoonPad
         {
             using (var cmd = new SQLiteCommand("UPDATE LuaScripts SET Script=@Script WHERE Name=@Name", connection))
             {
-                cmd.Parameters.Add(new SQLiteParameter("@Script", script));
                 cmd.Parameters.Add(new SQLiteParameter("@Name", name));
+                cmd.Parameters.Add(new SQLiteParameter("@Script", script));
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void AddLuaScript(string name, string script = "")
+        {
+            using (var cmd = new SQLiteCommand("INSERT INTO LuaScripts (Name, Script) VALUES (@Name, @Script)", connection))
+            {
+                cmd.Parameters.Add(new SQLiteParameter("@Name", name));
+                cmd.Parameters.Add(new SQLiteParameter("@Script", script));
                 cmd.ExecuteNonQuery();
             }
         }
