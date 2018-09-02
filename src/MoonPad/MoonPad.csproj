@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\CefSharp.WinForms.65.0.1\build\CefSharp.WinForms.props" Condition="Exists('..\..\packages\CefSharp.WinForms.65.0.1\build\CefSharp.WinForms.props')" />
+  <Import Project="..\..\packages\CefSharp.Common.65.0.1\build\CefSharp.Common.props" Condition="Exists('..\..\packages\CefSharp.Common.65.0.1\build\CefSharp.Common.props')" />
+  <Import Project="..\..\packages\cef.redist.x86.3.3325.1758\build\cef.redist.x86.props" Condition="Exists('..\..\packages\cef.redist.x86.3.3325.1758\build\cef.redist.x86.props')" />
+  <Import Project="..\..\packages\cef.redist.x64.3.3325.1758\build\cef.redist.x64.props" Condition="Exists('..\..\packages\cef.redist.x64.3.3325.1758\build\cef.redist.x64.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -38,6 +42,26 @@
   <PropertyGroup>
     <StartupObject>MoonPad.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ActiproSoftware.Shared.Net20, Version=1.0.104.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9" />
     <Reference Include="ActiproSoftware.SyntaxEditor.Net20, Version=4.0.290.0, Culture=neutral, PublicKeyToken=21a821480e210563, processorArchitecture=MSIL" />
@@ -74,6 +98,12 @@
       <DependentUpon>ActionModal.cs</DependentUpon>
     </Compile>
     <Compile Include="Border.cs" />
+    <Compile Include="Browser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Browser.Designer.cs">
+      <DependentUpon>Browser.cs</DependentUpon>
+    </Compile>
     <Compile Include="CommonDialogs.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DialogCenteringService.cs" />
@@ -88,6 +118,12 @@
     </Compile>
     <Compile Include="DockingWindows\LogWindow.Designer.cs">
       <DependentUpon>LogWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DockingWindows\LuaReplWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DockingWindows\LuaReplWindow.Designer.cs">
+      <DependentUpon>LuaReplWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="DockingWindows\LuaScriptsList.cs">
       <SubType>UserControl</SubType>
@@ -117,6 +153,12 @@
     <Compile Include="ExtendedControls\SideMenuListBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="FindToolBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FindToolBar.Designer.cs">
+      <DependentUpon>FindToolBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,8 +167,12 @@
     </Compile>
     <Compile Include="GameEngine\Block.cs" />
     <Compile Include="GameEngine\GameControls.cs" />
+    <Compile Include="IClosable.cs" />
     <Compile Include="Invoker.cs" />
     <Compile Include="IProgress.cs" />
+    <Compile Include="KeyCodes.cs" />
+    <Compile Include="KeyEventArgsExtensionMethods.cs" />
+    <Compile Include="KeyPressModifier.cs" />
     <Compile Include="ListBoxLogger.cs" />
     <Compile Include="LogBoxLevel.cs" />
     <Compile Include="LuaDynamicSyntaxLanguage.cs" />
@@ -166,11 +212,17 @@
     <EmbeddedResource Include="ActionModal.resx">
       <DependentUpon>ActionModal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Browser.resx">
+      <DependentUpon>Browser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DockingWindows\AbstractListControl.resx">
       <DependentUpon>AbstractListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DockingWindows\LogWindow.resx">
       <DependentUpon>LogWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockingWindows\LuaReplWindow.resx">
+      <DependentUpon>LuaReplWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DockingWindows\LuaScriptsList.resx">
       <DependentUpon>LuaScriptsList.cs</DependentUpon>
@@ -183,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExtendedControls\SideMenuListBox.resx">
       <DependentUpon>SideMenuListBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FindToolBar.resx">
+      <DependentUpon>FindToolBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormWindow.resx">
       <DependentUpon>FormWindow.cs</DependentUpon>
@@ -238,7 +293,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>..\..\PostBuild.bat</PostBuildEvent>
+    <PostBuildEvent>..\..\..\PostBuild.bat</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\..\packages\System.Data.SQLite.Core.1.0.109.1\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\..\packages\System.Data.SQLite.Core.1.0.109.1\build\net46\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -246,7 +301,15 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\System.Data.SQLite.Core.1.0.109.1\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\System.Data.SQLite.Core.1.0.109.1\build\net46\System.Data.SQLite.Core.targets'))" />
+    <Error Condition="!Exists('..\..\packages\cef.redist.x64.3.3325.1758\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x64.3.3325.1758\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\..\packages\cef.redist.x86.3.3325.1758\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x86.3.3325.1758\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Common.65.0.1\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.65.0.1\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Common.65.0.1\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.65.0.1\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.WinForms.65.0.1\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.WinForms.65.0.1\build\CefSharp.WinForms.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.WinForms.65.0.1\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.WinForms.65.0.1\build\CefSharp.WinForms.targets'))" />
   </Target>
+  <Import Project="..\..\packages\CefSharp.Common.65.0.1\build\CefSharp.Common.targets" Condition="Exists('..\..\packages\CefSharp.Common.65.0.1\build\CefSharp.Common.targets')" />
+  <Import Project="..\..\packages\CefSharp.WinForms.65.0.1\build\CefSharp.WinForms.targets" Condition="Exists('..\..\packages\CefSharp.WinForms.65.0.1\build\CefSharp.WinForms.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

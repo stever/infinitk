@@ -13,8 +13,6 @@ namespace MoonPad
         [STAThread]
         private static void Main(string[] args)
         {
-            Log.Info("Started");
-
             try
             {
                 /*
@@ -31,8 +29,6 @@ namespace MoonPad
             {
                 Log.Error("EXCEPTION", ex);
             }
-
-            Log.Info("Finished");
         }
     }
 }

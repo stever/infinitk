@@ -43,6 +43,7 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.luaScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.luaReplToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -56,6 +57,7 @@
             this.sandDockManager1 = new TD.SandDock.SandDockManager();
             this.dockContainer2 = new TD.SandDock.DockContainer();
             this.logDockWindow = new TD.SandDock.DockableWindow();
+            this.luaReplWindow = new TD.SandDock.DockableWindow();
             this.tabContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.closeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllDocumentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -150,7 +152,8 @@
             this.openGLToolStripMenuItem,
             this.toolStripSeparator4,
             this.logToolStripMenuItem,
-            this.luaScriptsToolStripMenuItem});
+            this.luaScriptsToolStripMenuItem,
+            this.luaReplToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -158,28 +161,35 @@
             // openGLToolStripMenuItem
             // 
             this.openGLToolStripMenuItem.Name = "openGLToolStripMenuItem";
-            this.openGLToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.openGLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openGLToolStripMenuItem.Text = "OpenGL";
             this.openGLToolStripMenuItem.Click += new System.EventHandler(this.openGLToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(128, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // logToolStripMenuItem
             // 
             this.logToolStripMenuItem.Name = "logToolStripMenuItem";
-            this.logToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.logToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.logToolStripMenuItem.Text = "Log";
             this.logToolStripMenuItem.Click += new System.EventHandler(this.logToolStripMenuItem_Click);
             // 
             // luaScriptsToolStripMenuItem
             // 
             this.luaScriptsToolStripMenuItem.Name = "luaScriptsToolStripMenuItem";
-            this.luaScriptsToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.luaScriptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.luaScriptsToolStripMenuItem.Text = "Lua Scripts";
             this.luaScriptsToolStripMenuItem.Click += new System.EventHandler(this.luaScriptsToolStripMenuItem_Click);
+            // 
+            // luaReplToolStripMenuItem
+            // 
+            this.luaReplToolStripMenuItem.Name = "luaReplToolStripMenuItem";
+            this.luaReplToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.luaReplToolStripMenuItem.Text = "Lua REPL";
+            this.luaReplToolStripMenuItem.Click += new System.EventHandler(this.luaReplToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -285,10 +295,12 @@
             // 
             this.dockContainer2.ContentSize = 148;
             this.dockContainer2.Controls.Add(this.logDockWindow);
+            this.dockContainer2.Controls.Add(this.luaReplWindow);
             this.dockContainer2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dockContainer2.LayoutSystem = new TD.SandDock.SplitLayoutSystem(new System.Drawing.SizeF(250F, 400F), System.Windows.Forms.Orientation.Vertical, new TD.SandDock.LayoutSystemBase[] {
             ((TD.SandDock.LayoutSystemBase)(new TD.SandDock.ControlLayoutSystem(new System.Drawing.SizeF(250F, 400F), new TD.SandDock.DockControl[] {
-                        ((TD.SandDock.DockControl)(this.logDockWindow))}, this.logDockWindow)))});
+                        ((TD.SandDock.DockControl)(this.logDockWindow)),
+                        ((TD.SandDock.DockControl)(this.luaReplWindow))}, this.luaReplWindow)))});
             this.dockContainer2.Location = new System.Drawing.Point(0, 250);
             this.dockContainer2.Manager = this.sandDockManager1;
             this.dockContainer2.Name = "dockContainer2";
@@ -298,12 +310,21 @@
             // logDockWindow
             // 
             this.logDockWindow.Guid = new System.Guid("d90b7314-2d06-4edb-842b-20af56d4788e");
-            this.logDockWindow.Location = new System.Drawing.Point(0, 27);
+            this.logDockWindow.Location = new System.Drawing.Point(0, 0);
             this.logDockWindow.Name = "logDockWindow";
             this.logDockWindow.ShowOptions = false;
             this.logDockWindow.Size = new System.Drawing.Size(792, 101);
             this.logDockWindow.TabIndex = 1;
             this.logDockWindow.Text = "Log";
+            // 
+            // replWindow
+            // 
+            this.luaReplWindow.Guid = new System.Guid("ee4e7bd2-78a2-479b-8c50-507157160424");
+            this.luaReplWindow.Location = new System.Drawing.Point(0, 27);
+            this.luaReplWindow.Name = "luaReplWindow";
+            this.luaReplWindow.Size = new System.Drawing.Size(792, 101);
+            this.luaReplWindow.TabIndex = 1;
+            this.luaReplWindow.Text = "REPL";
             // 
             // tabContextMenu
             // 
@@ -396,5 +417,7 @@
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem closeAllDocumentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeAllButThisToolStripMenuItem;
+        private TD.SandDock.DockableWindow luaReplWindow;
+        private System.Windows.Forms.ToolStripMenuItem luaReplToolStripMenuItem;
     }
 }

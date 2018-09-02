@@ -70,6 +70,7 @@ namespace MoonPad
 
             logDockWindow.Controls.Add(Border.AddBorder(logWindow = new LogWindow()));
             luaScriptsWindow.Controls.Add(Border.AddBorder(new LuaScriptsList(this)));
+            luaReplWindow.Controls.Add(Border.AddBorder(new LuaReplWindow()));
         }
 
         private void FormWindow_Load(object sender, EventArgs e)
@@ -299,6 +300,20 @@ namespace MoonPad
             {
                 luaScriptsWindow.Open();
                 luaScriptsWindow.Focus();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("EXCEPTION", ex);
+                ErrorHandler.HandleException(ex);
+            }
+        }
+
+        private void luaReplToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                luaReplWindow.Open();
+                luaReplWindow.Focus();
             }
             catch (Exception ex)
             {
