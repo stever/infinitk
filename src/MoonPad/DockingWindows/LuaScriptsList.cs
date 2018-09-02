@@ -103,17 +103,6 @@ namespace MoonPad.DockingWindows
             });
         }
 
-        /*
-        private void ViewState_LuaScriptRenamed(string oldName, string newName)
-        {
-            Invoker.TryCatchInvoke(() =>
-            {
-                LoadList();
-                SideMenuListBox.SelectName(newName);
-            });
-        }
-        */
-
         #endregion
 
         #region Context menu
@@ -165,7 +154,9 @@ namespace MoonPad.DockingWindows
                 var newName = CommonDialogs.Prompt("Provide a new name for the Lua Script:", "Rename Lua Script", oldName, IsNameAvailable);
                 if (string.IsNullOrEmpty(newName)) return;
 
-                // TODO: WorkbookContext.RenameLuaScript(oldName, newName);
+                Database.RenameLuaScript(oldName, newName);
+                LoadList();
+                SideMenuListBox.SelectName(newName);
             }
             catch (Exception ex)
             {

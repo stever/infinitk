@@ -73,5 +73,15 @@ namespace MoonPad
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public void RenameLuaScript(string oldName, string newName)
+        {
+            using (var cmd = new SQLiteCommand("UPDATE LuaScripts SET Name=@NewName WHERE Name=@OldName", connection))
+            {
+                cmd.Parameters.Add(new SQLiteParameter("@NewName", newName));
+                cmd.Parameters.Add(new SQLiteParameter("@OldName", oldName));
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }
