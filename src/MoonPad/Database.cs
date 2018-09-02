@@ -64,5 +64,14 @@ namespace MoonPad
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public void DeleteLuaScript(string name)
+        {
+            using (var cmd = new SQLiteCommand("DELETE FROM LuaScripts WHERE Name=@Name", connection))
+            {
+                cmd.Parameters.Add(new SQLiteParameter("@Name", name));
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

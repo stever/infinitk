@@ -104,20 +104,6 @@ namespace MoonPad.DockingWindows
         }
 
         /*
-        private void ViewState_LuaScriptAdded(string name)
-        {
-            Invoker.TryCatchInvoke(() =>
-            {
-                LoadList();
-                SideMenuListBox.SelectName(name);
-            });
-        }
-
-        private void ViewState_LuaScriptRemoved(string name)
-        {
-            Invoker.TryCatchInvoke(LoadList);
-        }
-
         private void ViewState_LuaScriptRenamed(string oldName, string newName)
         {
             Invoker.TryCatchInvoke(() =>
@@ -161,7 +147,8 @@ namespace MoonPad.DockingWindows
             try
             {
                 var name = (string) SideMenuListBox.SelectedItem;
-                // TODO: WorkbookContext.RemoveLuaScript(name);
+                Database.DeleteLuaScript(name);
+                LoadList();
             }
             catch (Exception ex)
             {
