@@ -3,7 +3,7 @@
     internal partial class LuaReplWindow : Browser
     {
         public LuaReplWindow(FormWindow formWindow)
-            : base(formWindow, "about:blank")
+            : base(formWindow, "index.html")
         {
             InitializeComponent();
         }
