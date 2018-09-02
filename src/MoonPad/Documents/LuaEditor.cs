@@ -83,7 +83,7 @@ namespace MoonPad.Documents
             try
             {
                 if (isConstructing) return;
-                Database.SaveLuaScript(ScriptName, syntaxEditor1.Text);
+                Database.UpdateLuaScript(ScriptName, syntaxEditor1.Text);
             }
             catch (Exception ex)
             {

@@ -45,7 +45,7 @@ namespace MoonPad
             }
         }
 
-        public void SaveLuaScript(string name, string script)
+        public void UpdateLuaScript(string name, string script)
         {
             using (var cmd = new SQLiteCommand("UPDATE LuaScripts SET Script=@Script WHERE Name=@Name", connection))
             {
