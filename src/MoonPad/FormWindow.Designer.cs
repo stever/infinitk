@@ -276,6 +276,7 @@
             // 
             // sandDockManager1
             // 
+            this.sandDockManager1.BorderStyle = TD.SandDock.Rendering.BorderStyle.None;
             this.sandDockManager1.DockSystemContainer = this.sandDockPanel;
             this.sandDockManager1.OwnerForm = this;
             this.sandDockManager1.ShowControlContextMenu += new TD.SandDock.ShowControlContextMenuEventHandler(this.sandDockManager1_ShowControlContextMenu);

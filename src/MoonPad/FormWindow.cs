@@ -214,7 +214,7 @@ namespace MoonPad
                 return tab;
             }
 
-            return OpenTab(new OpenGlDocument(), "OpenGL", border: false);
+            return OpenTab(new OpenGlDocument(), "OpenGL");
         }
 
         public TabbedDocument OpenLuaScriptTab(string name)
