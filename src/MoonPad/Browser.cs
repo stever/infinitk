@@ -16,6 +16,9 @@ namespace MoonPad
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        public delegate void BrowserDocumentKeyPressEventHandler(KeyPressModifier modifier, KeyCodes keyCode);
+        public event BrowserDocumentKeyPressEventHandler BrowserDocumentKeyPress;
+
         private const string AppDataFolderCache = "Cache";
         private const string AppDataFolderUserData = "User Data";
 
@@ -28,7 +31,7 @@ namespace MoonPad
 
         public string StartPage { get; }
 
-        private readonly ApplicationContext appContext;
+        private readonly FormWindow formWindow;
         private readonly Invoker invoker;
         private readonly IClosable closable;
 
@@ -37,9 +40,9 @@ namespace MoonPad
         private ChromiumWebBrowser chromium;
         private FindToolBar findToolStrip;
 
-        public Browser(ApplicationContext appContext, string startPage, IClosable closable = null)
+        public Browser(FormWindow formWindow, string startPage, IClosable closable = null)
         {
-            this.appContext = appContext;
+            this.formWindow = formWindow;
             StartPage = startPage;
             this.closable = closable;
 
@@ -62,8 +65,7 @@ namespace MoonPad
             };
 
             CefSharpSettings.LegacyJavascriptBindingEnabled = true;
-            //chromium.RegisterAsyncJsObject("AppHost", new BrowserBoundAppHost(appContext));
-            //chromium.RegisterAsyncJsObject("AppSocketServer", new BrowserBoundSocketServer(appContext));
+            chromium.RegisterAsyncJsObject("AppHost", new BrowserBoundAppHost(formWindow));
             chromium.FrameLoadEnd += (o, args) => FrameLoaded?.Invoke();
             chromium.ConsoleMessage += (o, args) => Log.DebugFormat("{0}:{1} {2}", GetSource(args), args.Line, args.Message);
 
@@ -103,18 +105,16 @@ namespace MoonPad
             settings.RemoteDebuggingPort = 8088;
 #endif
 
-            /*
             settings.RegisterScheme(new CefCustomScheme
             {
                 SchemeName = "http",
-                SchemeHandlerFactory = new BrowserSchemeHandlerFactory(appContext,
+                SchemeHandlerFactory = new BrowserSchemeHandlerFactory(formWindow,
                     // ReSharper disable ArgumentsStyleStringLiteral
                     schemeName: "http", // No schemeName checking if null
                     hostName: "cefsharp", // No hostName checking if null
                     defaultPage: "index.html") // Default to index.html
                     // ReSharper restore ArgumentsStyleStringLiteral
             });
-            */
 
             Cef.Initialize(settings);
         }
@@ -295,33 +295,31 @@ namespace MoonPad
             {
                 Log.DebugFormat("OnKeyEvent {0}:{1}", modifiers, windowsKeyCode);
 
-                /*
-                var modifier = new ViewState.KeyPressModifier();
+                var modifier = new KeyPressModifier();
                 if ((modifiers & CefEventFlags.ControlDown) != 0) modifier.Control = true;
                 if ((modifiers & CefEventFlags.AltDown) != 0) modifier.Alt = true;
                 if ((modifiers & CefEventFlags.ShiftDown) != 0) modifier.Shift = true;
 
-                var keyCode = (ViewState.KeyCodes) windowsKeyCode;
+                var keyCode = (KeyCodes) windowsKeyCode;
 
-                ViewState.RaiseBrowserDocumentKeyPressEvent(modifier, keyCode);
+                BrowserDocumentKeyPress?.Invoke(modifier, keyCode);
 
-                if (modifier.Control && keyCode == ViewState.KeyCodes.F)
+                if (modifier.Control && keyCode == KeyCodes.F)
                 {
                     ToggleFindToolStrip();
                 }
 
-                if (chromium.IsBrowserInitialized && keyCode == ViewState.KeyCodes.F5)
+                if (chromium.IsBrowserInitialized && keyCode == KeyCodes.F5)
                 {
                     chromium.Reload();
                 }
 
 #if DEBUG
-                if (chromium.IsBrowserInitialized && keyCode == ViewState.KeyCodes.F12)
+                if (chromium.IsBrowserInitialized && keyCode == KeyCodes.F12)
                 {
                     chromium.ShowDevTools();
                 }
 #endif
-                */
             });
 
             return false; // Always returns false.

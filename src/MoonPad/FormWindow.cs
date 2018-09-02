@@ -38,7 +38,6 @@ namespace MoonPad
 
         private readonly string openFileOnLoad;
         private readonly WindowsFormGeometryPersistence geometry;
-        private readonly Invoker invoker;
         private readonly LogWindow logWindow;
 
         private bool exitInProgress;
@@ -47,6 +46,7 @@ namespace MoonPad
         private TabbedDocument contextClickTab;
 
         public Database Database { get; private set; }
+        public Invoker Invoker { get; }
 
         public FormWindow(string openFileOnLoad = null)
         {
@@ -58,7 +58,7 @@ namespace MoonPad
             geometry.Restore(this);
 
             CommonDialogs.Owner = this;
-            CommonDialogs.Invoker = invoker = new Invoker(this);
+            CommonDialogs.Invoker = Invoker = new Invoker(this);
 
             sandDockManager1.Renderer = new CombinedDockRenderer(TabColour);
 
@@ -70,7 +70,7 @@ namespace MoonPad
 
             logDockWindow.Controls.Add(Border.AddBorder(logWindow = new LogWindow()));
             luaScriptsWindow.Controls.Add(Border.AddBorder(new LuaScriptsList(this)));
-            luaReplWindow.Controls.Add(Border.AddBorder(new LuaReplWindow()));
+            luaReplWindow.Controls.Add(Border.AddBorder(new LuaReplWindow(this)));
         }
 
         private void FormWindow_Load(object sender, EventArgs e)
@@ -79,7 +79,7 @@ namespace MoonPad
             if (openFileOnLoad != null)
             {
                 // TODO: Open and load from file.
-                invoker.DelayedTryCatchInvoke(() => OpenGlTab(), 0);
+                Invoker.DelayedTryCatchInvoke(() => OpenGlTab(), 0);
             }
         }
 
@@ -133,8 +133,8 @@ namespace MoonPad
         {
             if (msg == null) msg = DefaultStatus;
             void Action() => toolStripStatusLabel1.Text = msg;
-            if (delay > 0) invoker.DelayedTryCatchInvoke(Action, delay);
-            else invoker.TryCatchInvoke(Action);
+            if (delay > 0) Invoker.DelayedTryCatchInvoke(Action, delay);
+            else Invoker.TryCatchInvoke(Action);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -437,7 +437,7 @@ namespace MoonPad
                 // TODO: Store layout in database.
                 // TODO: Copy database to new filename.
 
-                invoker.InvokeAndWaitFor(() =>
+                Invoker.InvokeAndWaitFor(() =>
                 {
                     UpdateWindowTitle(filename);
                     ShowTemporaryStatus("File saved");
@@ -462,7 +462,7 @@ namespace MoonPad
 
         private void UpdateWindowTitle(string filename = null)
         {
-            invoker.InvokeAndWaitFor(() =>
+            Invoker.InvokeAndWaitFor(() =>
             {
                 if (filename == null)
                 {
@@ -486,8 +486,8 @@ namespace MoonPad
                 SetStatus(null, delay: 5000);
             }
 
-            if (delay > 0) invoker.DelayedTryCatchInvoke(Action, delay);
-            else invoker.TryCatchInvoke(Action);
+            if (delay > 0) Invoker.DelayedTryCatchInvoke(Action, delay);
+            else Invoker.TryCatchInvoke(Action);
         }
 
         private void sandDockManager1_ShowControlContextMenu(object sender, ShowControlContextMenuEventArgs e)

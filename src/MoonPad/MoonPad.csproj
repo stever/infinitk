@@ -104,6 +104,9 @@
     <Compile Include="Browser.Designer.cs">
       <DependentUpon>Browser.cs</DependentUpon>
     </Compile>
+    <Compile Include="BrowserBoundAppHost.cs" />
+    <Compile Include="BrowserSchemeHandler.cs" />
+    <Compile Include="BrowserSchemeHandlerFactory.cs" />
     <Compile Include="CommonDialogs.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DialogCenteringService.cs" />
