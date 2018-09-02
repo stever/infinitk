@@ -1,18 +1,24 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using ActiproSoftware.Drawing;
 using ActiproSoftware.SyntaxEditor;
+using log4net;
 
 namespace MoonPad.Documents
 {
     internal partial class LuaEditor : UserControl
     {
+        private static readonly ILog Log = LogManager.
+            GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private const int FontLineHeight = 16;
 
-        public string ScriptName { get; set; }
+        public string ScriptName { get; }
 
         private readonly bool isConstructing;
         private readonly FormWindow formWindow;
@@ -72,10 +78,18 @@ namespace MoonPad.Documents
             isConstructing = false;
         }
 
-        private void syntaxEditor1_TextChanged(object sender, System.EventArgs e)
+        private void syntaxEditor1_TextChanged(object sender, EventArgs e)
         {
-            if (isConstructing) return;
-            Database.SaveLuaScript(ScriptName, syntaxEditor1.Text);
+            try
+            {
+                if (isConstructing) return;
+                Database.SaveLuaScript(ScriptName, syntaxEditor1.Text);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("EXCEPTION", ex);
+                ErrorHandler.HandleException(ex);
+            }
         }
     }
 }
