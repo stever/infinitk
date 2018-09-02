@@ -43,7 +43,7 @@ void main()
         /// </summary>
         public void SetupGL()
         {
-            GL.ClearColor(Color.SkyBlue);
+            GL.ClearColor(Color.Black);
 
             GL.Enable(EnableCap.DepthTest); // TODO: Work with transparent textures.
             GL.Enable(EnableCap.Texture2D);

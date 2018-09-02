@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
@@ -19,18 +21,36 @@ namespace MoonPad
 
         public delegate bool ValidatePromptInput(string input);
 
+        #region Events
+
+        public delegate void FileLoadedEventHandler();
+        public delegate void FileClosedEventHandler();
+
+        public event FileLoadedEventHandler FileLoaded;
+        public event FileClosedEventHandler FileClosed;
+
+        #endregion
+
+        private const string DatabaseFileFilter = "MoonPad File (*.mpdb)|*.mpdb";
         private const string DefaultStatus = "Ready";
         private static readonly Color TabColour = Color.FromArgb(0, 122, 204);
 
+        private readonly string openFileOnLoad;
         private readonly WindowsFormGeometryPersistence geometry;
         private readonly Invoker invoker;
         private readonly LogWindow logWindow;
 
         private bool exitInProgress;
+        private bool unsavedChanges;
+        private string initialWindowTitle;
+
+        public Database Database { get; private set; }
 
         public FormWindow(string openFileOnLoad = null)
         {
             InitializeComponent();
+
+            this.openFileOnLoad = openFileOnLoad;
 
             geometry = new WindowsFormGeometryPersistence("FormWindow");
             geometry.Restore(this);
@@ -47,12 +67,17 @@ namespace MoonPad
             }
 
             logDockWindow.Controls.Add(Border.AddBorder(logWindow = new LogWindow()));
-            luaScriptsWindow.Controls.Add(Border.AddBorder(new LuaScriptsList()));
+            luaScriptsWindow.Controls.Add(Border.AddBorder(new LuaScriptsList(this)));
         }
 
         private void FormWindow_Load(object sender, EventArgs e)
         {
-            invoker.DelayedTryCatchInvoke(() => OpenGlTab(), 0);
+            initialWindowTitle = Text;
+            if (openFileOnLoad != null)
+            {
+                // TODO: Open and load from file.
+                invoker.DelayedTryCatchInvoke(() => OpenGlTab(), 0);
+            }
         }
 
         private bool ExitApplication()
@@ -76,13 +101,12 @@ namespace MoonPad
         /// <returns>True to continue closing, otherwise cancel close.</returns>
         private bool ConfirmCloseUnsaved()
         {
-            /*
-            if (WorkbookContext == null || !WorkbookContext.UnsavedChanges) return true;
+            if (!unsavedChanges) return true;
 
             using (new DialogCenteringService(this))
             {
-                var confirm = MessageBox.Show("Do you want to save your changes?",
-                    "File content modified", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+                var confirm = MessageBox.Show("Do you want to save your new file?",
+                    "Unsaved file", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
 
                 switch (confirm)
                 {
@@ -90,18 +114,9 @@ namespace MoonPad
                         return false;
 
                     case DialogResult.Yes:
-                        if (WorkbookContext.Filename != null)
-                        {
-                            SaveFile();
-                        }
-                        else
-                        {
-                            return SaveFileAs();
-                        }
-                        break;
+                        return SaveFileAs();
                 }
             }
-            */
 
             return true;
         }
@@ -271,6 +286,174 @@ namespace MoonPad
                 Log.Error("EXCEPTION", ex);
                 ErrorHandler.HandleException(ex);
             }
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // TODO: Create new temp file database and require save-as on close.
+
+                closeToolStripMenuItem.Enabled = true;
+                saveAsToolStripMenuItem.Enabled = true;
+                openToolStripMenuItem.Enabled = false;
+                newToolStripMenuItem.Enabled = false;
+
+                unsavedChanges = true;
+            }
+            catch (Exception ex)
+            {
+                Log.Error("EXCEPTION", ex);
+                ErrorHandler.HandleException(ex);
+            }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dialog = new OpenFileDialog
+                {
+                    Filter = DatabaseFileFilter,
+                    Title = "Open File",
+                    RestoreDirectory = true,
+                };
+
+                if (dialog.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                logWindow.Clear();
+                UpdateWindowTitle(dialog.FileName);
+                Database = new Database(dialog.FileName);
+
+                closeToolStripMenuItem.Enabled = true;
+                saveAsToolStripMenuItem.Enabled = true;
+                openToolStripMenuItem.Enabled = false;
+                newToolStripMenuItem.Enabled = false;
+
+                unsavedChanges = false;
+                FileLoaded?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("EXCEPTION", ex);
+                ErrorHandler.HandleException(ex);
+            }
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                logWindow.Clear();
+
+                // TODO: Store layout in database.
+
+                Database.Dispose();
+                Database = null;
+
+                UpdateWindowTitle();
+
+                closeToolStripMenuItem.Enabled = false;
+                saveAsToolStripMenuItem.Enabled = false;
+                openToolStripMenuItem.Enabled = true;
+                newToolStripMenuItem.Enabled = true;
+
+                unsavedChanges = false;
+
+                FileClosed?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("EXCEPTION", ex);
+                ErrorHandler.HandleException(ex);
+            }
+        }
+
+        private bool SaveFileAs()
+        {
+            var dialog = new SaveFileDialog
+            {
+                Filter = DatabaseFileFilter,
+                Title = "Save File"
+            };
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                return false;
+            }
+
+            SaveFileAs(dialog.FileName);
+            return true;
+        }
+
+        private void SaveFileAs(string filename)
+        {
+            SetStatus("Saving file...");
+            CommonDialogs.ShowActionModal("Saving", "Saving file...", () =>
+            {
+                if (/*filename != currentFilename && */File.Exists(filename))
+                {
+                    // Allow overwrite of file currently used. No need to delete it in that case.
+                    File.Delete(filename);
+                }
+
+                // TODO: Store layout in database.
+                // TODO: Copy database to new filename.
+
+                invoker.InvokeAndWaitFor(() =>
+                {
+                    UpdateWindowTitle(filename);
+                    ShowTemporaryStatus("File saved");
+                });
+
+                unsavedChanges = false;
+            });
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveFileAs();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("EXCEPTION", ex);
+                ErrorHandler.HandleException(ex);
+            }
+        }
+
+        private void UpdateWindowTitle(string filename = null)
+        {
+            invoker.InvokeAndWaitFor(() =>
+            {
+                if (filename == null)
+                {
+                    Text = initialWindowTitle;
+                    return;
+                }
+
+                var name = Path.GetFileNameWithoutExtension(filename);
+                Debug.Assert(initialWindowTitle != null);
+                Text = !string.IsNullOrEmpty(name)
+                    ? $"{name} - {initialWindowTitle}"
+                    : initialWindowTitle;
+            });
+        }
+
+        private void ShowTemporaryStatus(string msg, int delay = 0)
+        {
+            void Action()
+            {
+                toolStripStatusLabel1.Text = msg;
+                SetStatus(null, delay: 5000);
+            }
+
+            if (delay > 0) invoker.DelayedTryCatchInvoke(Action, delay);
+            else invoker.TryCatchInvoke(Action);
         }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using log4net;
 
@@ -11,7 +9,7 @@ namespace MoonPad.DockingWindows
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public LuaScriptsList()
+        protected LuaScriptsList()
         {
             InitializeComponent();
         }
@@ -25,14 +23,8 @@ namespace MoonPad.DockingWindows
             contextMenuStrip1.Enabled = false;
             SideMenuListBox.ContextMenuStrip = contextMenuStrip1;
 
-            /*
-            // TODO: event handlers.
-            formWindow.WorkbookOpened += ViewState_WorkbookOpened;
-            ViewState.WorkbookClosed += ViewState_WorkbookClosed;
-            ViewState.LuaScriptAdded += ViewState_LuaScriptAdded;
-            ViewState.LuaScriptRenamed += ViewState_LuaScriptRenamed;
-            ViewState.LuaScriptRemoved += ViewState_LuaScriptRemoved;
-            */
+            formWindow.FileLoaded += FormWindow_FileLoaded;
+            formWindow.FileClosed += FormWindow_FileClosed;
         }
 
         private void LuaScriptsList_Load(object sender, EventArgs e)
@@ -57,14 +49,12 @@ namespace MoonPad.DockingWindows
         private void LoadList()
         {
             SideMenuListBox.Items.Clear();
-            /* TODO
-            var names = WorkbookContext.GetLuaScripts().Keys.ToList();
+            var names = formWindow.Database.GetLuaScriptNames();
             names.Sort();
             foreach (var name in names)
             {
                 SideMenuListBox.Items.Add(name);
             }
-            */
         }
 
         private bool IsNameAvailable(string name)
@@ -98,10 +88,9 @@ namespace MoonPad.DockingWindows
 
         #endregion
 
-        /*
-        #region ViewState event handlers
+        #region Event handlers
 
-        private void ViewState_WorkbookOpened(WorkbookContext workbookContext)
+        private void FormWindow_FileLoaded()
         {
             Invoker.TryCatchInvoke(() =>
             {
@@ -110,7 +99,7 @@ namespace MoonPad.DockingWindows
             });
         }
 
-        private void ViewState_WorkbookClosed()
+        private void FormWindow_FileClosed()
         {
             Invoker.TryCatchInvoke(() =>
             {
@@ -119,6 +108,7 @@ namespace MoonPad.DockingWindows
             });
         }
 
+        /*
         private void ViewState_LuaScriptAdded(string name)
         {
             Invoker.TryCatchInvoke(() =>
@@ -141,9 +131,9 @@ namespace MoonPad.DockingWindows
                 SideMenuListBox.SelectName(newName);
             });
         }
+        */
 
         #endregion
-        */
 
         #region Context menu
 
