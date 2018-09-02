@@ -52,11 +52,8 @@
     <Reference Include="SandDock, Version=3.0.4.1, Culture=neutral, PublicKeyToken=75b7ec17dd7c14c3" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionModal.cs">
@@ -191,7 +188,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="README.md" />
     <None Include="Artifacts\Sphere.obj" />
     <None Include="Resources\PragmataProR_0826.ttf" />
     <None Include="Resources\PragmataProR_liga_0826.ttf" />
@@ -206,7 +202,16 @@
     <Content Include="Artifacts\Starfield.png" />
     <Content Include="Artifacts\Terrain.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MoonSharp.Interpreter\MoonSharp.Interpreter.csproj">
+      <Project>{91ea9b9d-fe03-4273-bdaf-8ad42ede1e59}</Project>
+      <Name>MoonSharp.Interpreter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoonSharp.VsCodeDebugger\MoonSharp.VsCodeDebugger.csproj">
+      <Project>{eb7d4595-299f-489b-90ac-55066a4675f9}</Project>
+      <Name>MoonSharp.VsCodeDebugger</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>..\..\PostBuild.bat</PostBuildEvent>
