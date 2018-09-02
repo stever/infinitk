@@ -13,30 +13,12 @@ namespace MoonPad.Documents
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly Game game = new Game();
-
+        private Game game;
         private bool loaded;
 
         public OpenGlDocument()
         {
-            // TODO: Try to speed up loading of the tab, perhaps delaying the loading of the GLControl?
-
             InitializeComponent();
-
-            Log.Debug("Creating new GL document control");
-
-            glControl1.VSync = true;
-
-            // Keyboard
-            glControl1.KeyDown += KeyDownHandler;
-            glControl1.KeyUp += KeyUpHandler;
-
-            // Mouse
-            glControl1.MouseDown += MouseButtonDownHandler;
-            glControl1.MouseUp += MouseButtonUpHandler;
-
-            // World
-            game.SetupGame();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -49,9 +31,16 @@ namespace MoonPad.Documents
 
         private void glControl1_Load(object sender, EventArgs e)
         {
+            CommonDialogs.ShowActionModal("OpenGL", "Creating game world...", () =>
+            {
+                game = new Game();
+                game.SetupGame();
+            });
+
             game.SetupGL();
             game.SetupViewport(Width, Height);
             game.Load();
+
             loaded = true;
         }
 
@@ -70,13 +59,13 @@ namespace MoonPad.Documents
 
         #region Mouse
 
-        private void MouseButtonDownHandler(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void glControl1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
                 game.EnableMouseControl();
         }
 
-        private void MouseButtonUpHandler(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void glControl1_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
                 game.DisableMouseControl();
@@ -107,7 +96,7 @@ namespace MoonPad.Documents
             }
         }
 
-        private void KeyDownHandler(object sender, KeyEventArgs e)
+        private void glControl1_KeyDown(object sender, KeyEventArgs e)
         {
             var key = TranslateKey(e.KeyCode);
             if (key.HasValue)
@@ -124,7 +113,7 @@ namespace MoonPad.Documents
             }
         }
 
-        private void KeyUpHandler(object sender, KeyEventArgs e)
+        private void glControl1_KeyUp(object sender, KeyEventArgs e)
         {
             var key = TranslateKey(e.KeyCode);
             if (key.HasValue)
