@@ -39,6 +39,9 @@
     <StartupObject>MoonPad.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ActiproSoftware.Shared.Net20, Version=1.0.104.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9" />
+    <Reference Include="ActiproSoftware.SyntaxEditor.Net20, Version=4.0.290.0, Culture=neutral, PublicKeyToken=21a821480e210563, processorArchitecture=MSIL" />
+    <Reference Include="ActiproSoftware.WinUICore.Net20, Version=1.0.104.0, Culture=neutral, PublicKeyToken=1eba893a2bc55de5" />
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -58,8 +61,10 @@
     <Reference Include="System.Data.SQLite, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Data.SQLite.Core.1.0.109.1\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionModal.cs">
@@ -90,6 +95,13 @@
     <Compile Include="DockingWindows\LuaScriptsList.Designer.cs">
       <DependentUpon>LuaScriptsList.cs</DependentUpon>
     </Compile>
+    <Compile Include="DocumentNotFoundException.cs" />
+    <Compile Include="Documents\LuaEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Documents\LuaEditor.Designer.cs">
+      <DependentUpon>LuaEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Documents\OpenGlDocument.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -117,6 +129,7 @@
     <Compile Include="IProgress.cs" />
     <Compile Include="ListBoxLogger.cs" />
     <Compile Include="LogBoxLevel.cs" />
+    <Compile Include="LuaDynamicSyntaxLanguage.cs" />
     <Compile Include="Persistence\Settings.cs" />
     <Compile Include="Persistence\WindowsFormGeometry.cs" />
     <Compile Include="Persistence\WindowsFormGeometryPersistence.cs" />
@@ -161,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DockingWindows\LuaScriptsList.resx">
       <DependentUpon>LuaScriptsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Documents\LuaEditor.resx">
+      <DependentUpon>LuaEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Documents\OpenGlDocument.resx">
       <DependentUpon>OpenGlDocument.cs</DependentUpon>
@@ -208,6 +224,7 @@
   <ItemGroup>
     <Content Include="Artifacts\Starfield.png" />
     <Content Include="Artifacts\Terrain.png" />
+    <None Include="Resources\ActiproSoftware.Lua.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MoonSharp.Interpreter\MoonSharp.Interpreter.csproj">
@@ -218,9 +235,6 @@
       <Project>{eb7d4595-299f-489b-90ac-55066a4675f9}</Project>
       <Name>MoonSharp.VsCodeDebugger</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

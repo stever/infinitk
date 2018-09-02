@@ -24,10 +24,9 @@ namespace MoonPad
         {
             var names = new List<string>();
 
-            using (var cmd = connection.CreateCommand())
+            using (var cmd = new SQLiteCommand("SELECT Name FROM LuaScripts", connection))
+            using (var reader = cmd.ExecuteReader())
             {
-                cmd.CommandText = "SELECT Name FROM LuaScripts";
-                var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
                     names.Add(Convert.ToString(reader["Name"]));
@@ -38,6 +37,15 @@ namespace MoonPad
         }
 
         public string GetLuaScript(string name)
+        {
+            using (var cmd = new SQLiteCommand("SELECT Script FROM LuaScripts WHERE Name=@Name", connection))
+            {
+                cmd.Parameters.Add(new SQLiteParameter("@Name", name));
+                return (string) cmd.ExecuteScalar();
+            }
+        }
+
+        public void SaveLuaScript(string name, string script)
         {
             throw new NotImplementedException();
         }

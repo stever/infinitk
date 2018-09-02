@@ -61,6 +61,27 @@ namespace MoonPad.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;SyntaxLanguage Key=&quot;Lua&quot; LanguageDefinitionVersion=&quot;4.0&quot; Secure=&quot;True&quot; 
+        ///				SyntaxLanguageTypeName=&quot;Ingen.RAVE.WindowsForms.LuaDynamicSyntaxLanguage, RAVE&quot; 
+        ///				xmlns=&quot;http://ActiproSoftware/SyntaxEditor/4.0/LanguageDefinition&quot;&gt;
+        ///
+        ///	&lt;!-- String Properties --&gt;
+        ///	&lt;Properties&gt;
+        ///		&lt;Property Key=&quot;Creator&quot; Value=&quot;Actipro Software LLC&quot; /&gt;
+        ///		&lt;Property Key=&quot;Copyright&quot; Value=&quot;Copyright (c) 2001-2009 Actipro Software LLC.  All rights reserved.&quot; /&gt;
+        ///	&lt;/Properties&gt;
+        ///	
+        ///	&lt;!-- Highlighting Styles --&gt;	
+        ///	&lt;Styles&gt;		
+        ///		 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ActiproSoftware_Lua {
+            get {
+                return ResourceManager.GetString("ActiproSoftware_Lua", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] PragmataPro_Mono_R_0826 {

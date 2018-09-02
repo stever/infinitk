@@ -200,6 +200,7 @@ namespace MoonPad
             return tab;
         }
 
+        // ReSharper disable once UnusedMethodReturnValue.Local
         private TabbedDocument OpenGlTab()
         {
             // Check that the tab is not already open.
@@ -212,6 +213,22 @@ namespace MoonPad
             }
 
             return OpenTab(new OpenGlDocument(), "OpenGL", border: false);
+        }
+
+        public TabbedDocument OpenLuaScriptTab(string name)
+        {
+            // Check if the tab is already open. If so, then activate it.
+            foreach (var tab in GetOpenTabs())
+            {
+                var tabControl = GetFirstNonPanelChild(tab);
+                if (!(tabControl is LuaEditor control)) continue;
+                if (control.ScriptName != name) continue;
+                tab.Activate();
+                return tab;
+            }
+
+            // Otherwise open new tab document.
+            return OpenTab(new LuaEditor(this, name), name);
         }
 
         private IEnumerable<TabbedDocument> GetOpenTabs()

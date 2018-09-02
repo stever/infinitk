@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using log4net;
 
@@ -8,6 +9,8 @@ namespace MoonPad.DockingWindows
     {
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        private Database Database => formWindow?.Database;
 
         protected LuaScriptsList()
         {
@@ -31,13 +34,9 @@ namespace MoonPad.DockingWindows
         {
             try
             {
-                /* TODO
-                // If there is an active workbook, load the list box.
-                var activeWorkbook = WorkbookContext?.Workbook;
-                if (activeWorkbook == null) return;
+                if (Database == null) return;
                 LoadList();
                 contextMenuStrip1.Enabled = true;
-                */
             }
             catch (Exception ex)
             {
@@ -49,7 +48,7 @@ namespace MoonPad.DockingWindows
         private void LoadList()
         {
             SideMenuListBox.Items.Clear();
-            var names = formWindow.Database.GetLuaScriptNames();
+            var names = Database.GetLuaScriptNames();
             names.Sort();
             foreach (var name in names)
             {
@@ -59,12 +58,8 @@ namespace MoonPad.DockingWindows
 
         private bool IsNameAvailable(string name)
         {
-            /* TODO
-            var names = new HashSet<string>(WorkbookContext.GetLuaScripts().Keys.ToList());
+            var names = new HashSet<string>(Database.GetLuaScriptNames());
             return !names.Contains(name);
-            */
-
-            return true;
         }
 
         #region IListControl
@@ -83,7 +78,7 @@ namespace MoonPad.DockingWindows
 
         void IListControl.OpenItem(object selectedItem)
         {
-            // TODO: ViewState.RaiseLuaScriptOpeningEvent((string) selectedItem);
+            formWindow.OpenLuaScriptTab((string) selectedItem);
         }
 
         #endregion
