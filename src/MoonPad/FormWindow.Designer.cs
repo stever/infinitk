@@ -40,6 +40,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openGLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.developerToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.luaScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,7 +63,6 @@
             this.closeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllDocumentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllButThisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.developerToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.formBorderPanel.SuspendLayout();
@@ -163,33 +163,40 @@
             // openGLToolStripMenuItem
             // 
             this.openGLToolStripMenuItem.Name = "openGLToolStripMenuItem";
-            this.openGLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openGLToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.openGLToolStripMenuItem.Text = "OpenGL";
             this.openGLToolStripMenuItem.Click += new System.EventHandler(this.openGLToolStripMenuItem_Click);
+            // 
+            // developerToolsToolStripMenuItem
+            // 
+            this.developerToolsToolStripMenuItem.Name = "developerToolsToolStripMenuItem";
+            this.developerToolsToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.developerToolsToolStripMenuItem.Text = "Developer Tools";
+            this.developerToolsToolStripMenuItem.Click += new System.EventHandler(this.developerToolsToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(155, 6);
             // 
             // logToolStripMenuItem
             // 
             this.logToolStripMenuItem.Name = "logToolStripMenuItem";
-            this.logToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.logToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.logToolStripMenuItem.Text = "Log";
             this.logToolStripMenuItem.Click += new System.EventHandler(this.logToolStripMenuItem_Click);
             // 
             // luaScriptsToolStripMenuItem
             // 
             this.luaScriptsToolStripMenuItem.Name = "luaScriptsToolStripMenuItem";
-            this.luaScriptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.luaScriptsToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.luaScriptsToolStripMenuItem.Text = "Lua Scripts";
             this.luaScriptsToolStripMenuItem.Click += new System.EventHandler(this.luaScriptsToolStripMenuItem_Click);
             // 
             // luaReplToolStripMenuItem
             // 
             this.luaReplToolStripMenuItem.Name = "luaReplToolStripMenuItem";
-            this.luaReplToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.luaReplToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.luaReplToolStripMenuItem.Text = "Lua REPL";
             this.luaReplToolStripMenuItem.Click += new System.EventHandler(this.luaReplToolStripMenuItem_Click);
             // 
@@ -224,17 +231,19 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(95)))), ((int)(((byte)(160)))));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 428);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.White;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Padding = new System.Windows.Forms.Padding(1, 0, 0, 0);
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(40, 17);
@@ -324,6 +333,7 @@
             this.luaReplWindow.Guid = new System.Guid("ee4e7bd2-78a2-479b-8c50-507157160424");
             this.luaReplWindow.Location = new System.Drawing.Point(0, 27);
             this.luaReplWindow.Name = "luaReplWindow";
+            this.luaReplWindow.ShowOptions = false;
             this.luaReplWindow.Size = new System.Drawing.Size(792, 101);
             this.luaReplWindow.TabIndex = 1;
             this.luaReplWindow.Text = "REPL";
@@ -357,13 +367,6 @@
             this.closeAllButThisToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.closeAllButThisToolStripMenuItem.Text = "Close All But This";
             this.closeAllButThisToolStripMenuItem.Click += new System.EventHandler(this.closeAllButThisToolStripMenuItem_Click);
-            // 
-            // developerToolsToolStripMenuItem
-            // 
-            this.developerToolsToolStripMenuItem.Name = "developerToolsToolStripMenuItem";
-            this.developerToolsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.developerToolsToolStripMenuItem.Text = "Developer Tools";
-            this.developerToolsToolStripMenuItem.Click += new System.EventHandler(this.developerToolsToolStripMenuItem_Click);
             // 
             // FormWindow
             // 

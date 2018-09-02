@@ -29,6 +29,14 @@ namespace MoonPad
         private readonly IDictionary<string, object> resources = new Dictionary<string, object>
         {
             {"/index.html", Resources.htdocs_index_html},
+            {"/jquery-3.2.1.min.js", Resources.htdocs_jquery_3_2_1_min_js},
+            {"/jquery.terminal.min.css", Resources.htdocs_jquery_terminal_min_css},
+            {"/jquery.terminal.min.js", Resources.htdocs_jquery_terminal_min_js},
+            {"/PragmataProMono.eot", Resources.htdocs_PragmataProMono_eot},
+            {"/PragmataProMono.svg", Resources.htdocs_PragmataProMono_svg},
+            {"/PragmataProMono.ttf", Resources.htdocs_PragmataProMono_ttf},
+            {"/PragmataProMono.woff", Resources.htdocs_PragmataProMono_woff},
+            {"/PragmataProMono.woff2", Resources.htdocs_PragmataProMono_woff2},
         };
 
         public BrowserSchemeHandlerFactory(FormWindow formWindow, string schemeName, string hostName, string defaultPage)

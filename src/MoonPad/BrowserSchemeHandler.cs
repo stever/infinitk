@@ -42,11 +42,25 @@ namespace MoonPad
                     {
                         switch (path)
                         {
-                            case "/api/methods/example":
+                            case "/api/method/json-rpc":
                             {
-                                //var json = GetDataFromRequest(request);
-                                //var data = JsonConvert.DeserializeObject<object>(json);
-                                //formWindow.Invoker.InvokeAndWaitFor(() => DoSomething(data));
+                                var json = GetDataFromRequest(request);
+                                Log.DebugFormat("JSON-RPC\n{0}", json);
+                                var data = JsonConvert.DeserializeObject<JsonRpc>(json);
+
+                                // TODO: formWindow.Invoker.InvokeAndWaitFor(() => DoSomething(data));
+
+                                var response = new JsonRpcResponse
+                                {
+                                    jsonrpc = "2.0",
+                                    result = "OK", // TODO: Replace with result.
+                                    id = data.id
+                                };
+
+                                Stream = GetStream(JsonConvert.SerializeObject(response));
+                                MimeType = GetMimeType(".json");
+                                ResponseLength = Stream.Length;
+
                                 StatusCode = (int) HttpStatusCode.OK;
                                 break;
                             }

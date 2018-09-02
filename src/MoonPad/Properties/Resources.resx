@@ -139,4 +139,28 @@
   <data name="ProFontWindows" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ProFontWindows.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="htdocs_jquery_3_2_1_min_js" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\htdocs\jquery-3.2.1.min.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="htdocs_jquery_terminal_min_js" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\htdocs\jquery.terminal.min.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="htdocs_jquery_terminal_min_css" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\htdocs\jquery.terminal.min.css;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="htdocs_PragmataProMono_eot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\htdocs\PragmataProMono.eot;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="htdocs_PragmataProMono_svg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\htdocs\PragmataProMono.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="htdocs_PragmataProMono_ttf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\htdocs\PragmataProMono.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="htdocs_PragmataProMono_woff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\htdocs\PragmataProMono.woff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="htdocs_PragmataProMono_woff2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\htdocs\PragmataProMono.woff2;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
