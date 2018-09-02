@@ -52,7 +52,7 @@ namespace MoonPad
 
         private void FormWindow_Load(object sender, EventArgs e)
         {
-            //OpenGlTab();
+            invoker.DelayedTryCatchInvoke(() => OpenGlTab(), 0);
         }
 
         private bool ExitApplication()
