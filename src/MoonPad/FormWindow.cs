@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
@@ -43,6 +44,7 @@ namespace MoonPad
         private bool exitInProgress;
         private bool unsavedChanges;
         private string initialWindowTitle;
+        private TabbedDocument contextClickTab;
 
         public Database Database { get; private set; }
 
@@ -471,6 +473,39 @@ namespace MoonPad
 
             if (delay > 0) invoker.DelayedTryCatchInvoke(Action, delay);
             else invoker.TryCatchInvoke(Action);
+        }
+
+        private void sandDockManager1_ShowControlContextMenu(object sender, ShowControlContextMenuEventArgs e)
+        {
+            contextClickTab = e.DockControl as TabbedDocument;
+            if (contextClickTab == null) return;
+            tabContextMenu.Show(this, PointToClient(MousePosition));
+        }
+
+        private void closeToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            contextClickTab.Close();
+        }
+
+        private void closeAllButThisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var docs = sandDockManager1.GetDockControls(DockSituation.Document).ToList();
+            foreach (var doc in docs)
+            {
+                if (doc != contextClickTab)
+                {
+                    doc.Close();
+                }
+            }
+        }
+
+        private void closeAllDocumentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var docs = sandDockManager1.GetDockControls(DockSituation.Document).ToList();
+            foreach (var doc in docs)
+            {
+                doc.Close();
+            }
         }
     }
 }
