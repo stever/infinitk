@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Windows.Forms;
 using log4net;
 
 namespace MoonPad.DockingWindows
@@ -133,16 +134,26 @@ namespace MoonPad.DockingWindows
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            using (new DialogCenteringService(formWindow))
             {
-                var name = (string) SideMenuListBox.SelectedItem;
-                Database.DeleteLuaScript(name);
-                LoadList();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("EXCEPTION", ex);
-                ErrorHandler.HandleException(ex);
+                try
+                {
+                    var confirm = MessageBox.Show(
+                        "This will permanently delete this Lua script. Note that this operation cannot be undone!",
+                        "Delete confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+
+                    if (confirm == DialogResult.OK)
+                    {
+                        var name = (string) SideMenuListBox.SelectedItem;
+                        Database.DeleteLuaScript(name);
+                        LoadList();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("EXCEPTION", ex);
+                    ErrorHandler.HandleException(ex);
+                }
             }
         }
 
