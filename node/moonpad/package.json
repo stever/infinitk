@@ -1,0 +1,31 @@
+{
+  "name": "moonpad",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "xterm": "^3.6.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "less": "^3.8.1",
+    "less-plugin-clean-css": "^1.5.1",
+    "trash-cli": "^1.4.0",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0"
+  },
+  "scripts": {
+    "build:min": "npm run clean && npm run lessc:min && babel src/js --out-dir es5 && webpack --env.production && trash es5",
+    "clean": "trash htdocs/dist",
+    "lessc:min": "lessc htdocs/style/main.less htdocs/dist/bundle.min.css --clean-css",
+    "webpack": "webpack",
+    "webpack:watch": "webpack --watch"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  }
+}

@@ -1,4 +1,7 @@
+.idea/
 .vs/
 bin/
+node_modules/
 obj/
 packages/
+/node/moonpad/htdocs/dist/
