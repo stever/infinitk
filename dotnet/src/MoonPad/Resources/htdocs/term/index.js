@@ -1,4 +1,9 @@
-jQuery(function($, undefined) {
+jQuery(function ($, undefined) {
+
+    $(document).click(function () {
+        AppHost.click();
+    });
+
     var isContinued = false;
 
     var config = {

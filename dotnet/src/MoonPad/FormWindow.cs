@@ -83,6 +83,22 @@ namespace MoonPad
             }
         }
 
+        public void CloseMenus()
+        {
+            Invoker.TryCatchInvoke(() =>
+            {
+                tabContextMenu.Close();
+
+                foreach (var item in menuStrip1.Items)
+                {
+                    if (item is ToolStripMenuItem menu)
+                    {
+                        menu.HideDropDown();
+                    }
+                }
+            });
+        }
+
         private bool ExitApplication()
         {
             if (!ConfirmCloseUnsaved()) return false;
