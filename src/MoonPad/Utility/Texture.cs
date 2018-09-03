@@ -7,7 +7,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace MoonPad.Utility
 {
-    public class Texture
+    internal class Texture
     {
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

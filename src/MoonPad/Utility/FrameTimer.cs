@@ -9,7 +9,7 @@ namespace MoonPad.Utility
     /// <summary>
     /// Used to limit frame rate, or simply provides an FPS counter and idle timer.
     /// </summary>
-    public class FrameTimer
+    internal class FrameTimer
     {
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

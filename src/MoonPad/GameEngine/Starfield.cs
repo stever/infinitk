@@ -9,7 +9,7 @@ namespace MoonPad.GameEngine
     /// Stars in the sky using a starfield texture from
     /// http://paulbourke.net/miscellaneous/starfield/
     /// </summary>
-    public class Starfield : IRender
+    internal class Starfield : IRender
     {
         private readonly MeshObject meshObject = new MeshObject();
         private Vector3d relativePosition;

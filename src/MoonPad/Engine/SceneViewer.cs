@@ -6,7 +6,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace MoonPad.Engine
 {
-    public class SceneViewer
+    internal class SceneViewer
     {
         // NOTE: 60 - 100 used in Minecraft. 45 was used in the original example.
         private const float PerspectiveFovDegrees = 60;

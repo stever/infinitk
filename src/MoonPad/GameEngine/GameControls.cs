@@ -6,7 +6,7 @@ using OpenTK.Input;
 
 namespace MoonPad.GameEngine
 {
-    public class GameControls : SceneViewerControls
+    internal class GameControls : SceneViewerControls
     {
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

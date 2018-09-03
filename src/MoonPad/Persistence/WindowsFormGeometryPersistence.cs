@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace MoonPad.Persistence
 {
-    public class WindowsFormGeometryPersistence
+    internal class WindowsFormGeometryPersistence
     {
         private readonly string id;
         private readonly int? defaultHeight;

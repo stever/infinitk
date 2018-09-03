@@ -2,7 +2,7 @@
 
 namespace MoonPad.Persistence
 {
-    public class WindowsFormGeometry
+    internal class WindowsFormGeometry
     {
         public int? Top { get; set; }
         public int? Left { get; set; }

@@ -28,7 +28,7 @@ or implied, of Simon Heath.
 
 namespace MoonPad.Utility.Meshomatic
 {
-    public class MeshTri
+    internal class MeshTri
     {
         public MeshPoint P1;
         public MeshPoint P2;

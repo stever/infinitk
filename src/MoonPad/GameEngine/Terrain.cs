@@ -6,7 +6,7 @@ using log4net;
 
 namespace MoonPad.GameEngine
 {
-    public class Terrain
+    internal class Terrain
     {
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

@@ -46,7 +46,7 @@ namespace MoonPad.Utility.Meshomatic
     /// contains integer offsets into the vertex/normal/texcoord arrays to
     /// define a face.
     /// </summary>
-    public class MeshData
+    internal class MeshData
     {
         public MeshVector3[] Vertices { get; }
         public MeshVector2[] TexCoords { get; }

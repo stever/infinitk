@@ -6,7 +6,7 @@ using OpenTK;
 
 namespace MoonPad.GameEngine
 {
-    public class Player : SceneObject
+    internal class Player : SceneObject
     {
         private const float MouseLookSpeed = 0.2f;
         private const float MovementSpeed = 0.01f;

@@ -4,7 +4,7 @@ using OpenTK.Input;
 
 namespace MoonPad.Engine
 {
-    public class SceneViewerControls
+    internal class SceneViewerControls
     {
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

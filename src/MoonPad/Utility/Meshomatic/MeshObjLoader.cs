@@ -33,7 +33,7 @@ using System.IO;
 
 namespace MoonPad.Utility.Meshomatic
 {
-    public class MeshObjLoader
+    internal class MeshObjLoader
     {
         public MeshData LoadStream(Stream stream)
         {

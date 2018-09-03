@@ -4,7 +4,7 @@ using OpenTK;
 
 namespace MoonPad.GameEngine.Actions
 {
-    public class Jump : IAction
+    internal class Jump : IAction
     {
         private readonly IMove entity;
         private readonly GameControls controls;

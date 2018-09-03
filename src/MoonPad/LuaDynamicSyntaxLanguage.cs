@@ -10,7 +10,7 @@ namespace MoonPad
     /// Provides an implementation of a <c>Lua</c> syntax language that can perform automatic outlining.
     /// </summary>
     // ReSharper disable once UnusedMember.Global
-    public class LuaDynamicSyntaxLanguage : DynamicOutliningSyntaxLanguage
+    internal class LuaDynamicSyntaxLanguage : DynamicOutliningSyntaxLanguage
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 

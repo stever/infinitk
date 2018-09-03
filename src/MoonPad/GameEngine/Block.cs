@@ -5,7 +5,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace MoonPad.GameEngine
 {
-    public class Block : SceneObject
+    internal class Block : SceneObject
     {
         private readonly MeshObject meshObject;
         private readonly Texture texture;
