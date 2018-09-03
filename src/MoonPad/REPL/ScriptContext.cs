@@ -1,14 +1,12 @@
-﻿using MoonSharp.Interpreter;
-
-namespace MoonPad.REPL
+﻿namespace MoonPad.REPL
 {
     internal class ScriptContext
     {
-        public Script Script { get; }
+        public LuaRepl LuaRepl { get; }
 
-        public ScriptContext(Script script)
+        public ScriptContext(LuaRepl luaRepl)
         {
-            Script = script;
+            LuaRepl = luaRepl;
         }
     }
 }

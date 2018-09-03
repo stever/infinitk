@@ -17,7 +17,8 @@
 
         public string Execute(ScriptContext context, string arg)
         {
-            return "TODO";
+            context.LuaRepl.Restart();
+            return "Restarted";
         }
     }
 }

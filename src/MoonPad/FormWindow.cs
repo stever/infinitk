@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -20,8 +19,6 @@ namespace MoonPad
     {
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
-        public delegate bool ValidatePromptInput(string input);
 
         #region Events
 
@@ -474,7 +471,6 @@ namespace MoonPad
                 }
 
                 var name = Path.GetFileNameWithoutExtension(filename);
-                Debug.Assert(initialWindowTitle != null);
                 Text = !string.IsNullOrEmpty(name)
                     ? $"{name} - {initialWindowTitle}"
                     : initialWindowTitle;

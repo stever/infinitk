@@ -12,16 +12,28 @@ namespace MoonPad.REPL
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly ReplInterpreter interpreter;
+        private readonly FormWindow formWindow;
         private readonly ScriptContext context;
+
+        private ReplInterpreter interpreter;
 
         public LuaRepl(FormWindow formWindow)
         {
+            this.formWindow = formWindow;
+            context = new ScriptContext(this);
+            CommandManager.Initialize();
+            Restart();
+        }
+
+        public void Restart()
+        {
+            // TODO: Identify the sandbox requirement for using the inspect module.
             //const CoreModules sandbox = CoreModules.Preset_HardSandbox | CoreModules.LoadMethods;
             const CoreModules sandbox = CoreModules.Preset_Complete;
 
             var script = new Script(sandbox) {Options =
             {
+                // TODO: Capture and return print output.
                 DebugPrint = s => Log.InfoFormat("Lua print: {0}", s),
                 ScriptLoader = new LuaReplScriptLoader(formWindow)
             }};
@@ -31,10 +43,6 @@ namespace MoonPad.REPL
                 HandleDynamicExprs = false,
                 HandleClassicExprsSyntax = true
             };
-
-            context = new ScriptContext(script);
-
-            CommandManager.Initialize();
         }
 
         public string HandleInput(string s)
