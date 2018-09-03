@@ -6,9 +6,6 @@ jQuery(function($, undefined) {
         width: '100vw',
         prompt: '> ',
         greetings: '',
-        prompt: function(callback) {
-            callback(isContinued ? '>> ' : '> ');
-        },
         name: 'shell',
         onBlur: function() {
             return false;
@@ -22,9 +19,13 @@ jQuery(function($, undefined) {
             dataType: 'json',
             data: JSON.stringify({Input: command})
         }).done((data) => {
-            term.echo(data['Output']);
+            var output = data['Output'];
+            if (output == null) isContinued = true;
+            isContinued = output == null;
+            terminal.set_prompt(isContinued ? '  ' : '> ');
+            term.echo(output == null ? "" : output);
         });
     };
 
-    $('#term').terminal(handler, config);
+    var terminal = $('#term').terminal(handler, config);
 });

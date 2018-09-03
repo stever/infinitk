@@ -40,12 +40,10 @@ namespace MoonPad
                 {
                     Log.Debug("Lua REPL command is incomplete (null returned)");
                     Log.DebugFormat("HasPendingCommand: {0}", interpreter.HasPendingCommand);
+                    return null;
                 }
 
-                if (result != null && result.Type != DataType.Void)
-                {
-                    return result.ToString();
-                }
+                return result.Type != DataType.Void ? result.ToString() : "";
             }
             catch (InterpreterException ex)
             {
@@ -63,8 +61,6 @@ namespace MoonPad
             {
                 return $"{ex.GetType().Name}: {ex.Message}";
             }
-
-            return "";
         }
     }
 }
