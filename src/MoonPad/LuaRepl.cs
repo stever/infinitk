@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Reflection;
-using log4net;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.REPL;
 
@@ -8,9 +6,6 @@ namespace MoonPad
 {
     internal class LuaRepl
     {
-        private static readonly ILog Log = LogManager.
-            GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
         private readonly FormWindow formWindow;
         private readonly ReplInterpreter interpreter;
 
@@ -30,16 +25,12 @@ namespace MoonPad
 
         public string HandleInput(string s)
         {
-            Log.DebugFormat("Lua REPL line: {0}", s);
-            Log.DebugFormat("HasPendingCommand: {0}", interpreter.HasPendingCommand);
             try
             {
                 var result = interpreter.Evaluate(s);
 
                 if (result == null)
                 {
-                    Log.Debug("Lua REPL command is incomplete (null returned)");
-                    Log.DebugFormat("HasPendingCommand: {0}", interpreter.HasPendingCommand);
                     return null;
                 }
 
