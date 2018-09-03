@@ -187,6 +187,7 @@
     <Compile Include="LogBoxLevel.cs" />
     <Compile Include="LuaDynamicSyntaxLanguage.cs" />
     <Compile Include="LuaRepl.cs" />
+    <Compile Include="LuaReplScriptLoader.cs" />
     <Compile Include="Persistence\Settings.cs" />
     <Compile Include="Persistence\WindowsFormGeometry.cs" />
     <Compile Include="Persistence\WindowsFormGeometryPersistence.cs" />

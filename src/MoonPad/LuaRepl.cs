@@ -13,8 +13,8 @@ namespace MoonPad
         {
             this.formWindow = formWindow;
 
-            Script.DefaultOptions.ScriptLoader = new ReplInterpreterScriptLoader();
-            var script = new Script(CoreModules.Preset_HardSandbox);
+            Script.DefaultOptions.ScriptLoader = new LuaReplScriptLoader(formWindow);
+            var script = new Script(CoreModules.Preset_Complete);
 
             interpreter = new ReplInterpreter(script)
             {
