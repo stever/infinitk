@@ -20,13 +20,21 @@ namespace MoonPad.REPL
 
         public override bool ScriptFileExists(string name)
         {
+            if (Database == null) return false;
             var names = Database.GetLuaScriptNames();
             return new HashSet<string>(names).Contains(name);
         }
 
         public override object LoadFile(string name, Table globalContext)
         {
-            return Database.GetLuaScript(name);
+            var script = Database?.GetLuaScript(name);
+
+            if (script == null)
+            {
+                throw new ScriptRuntimeException($"file '{name}' not found");
+            }
+
+            return script;
         }
     }
 }

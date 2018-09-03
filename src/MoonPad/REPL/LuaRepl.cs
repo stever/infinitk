@@ -28,15 +28,43 @@ namespace MoonPad.REPL
 
         public void InitContext()
         {
-            // TODO: Identify the sandbox requirement for using the inspect module.
-            //const CoreModules sandbox = CoreModules.Preset_HardSandbox | CoreModules.LoadMethods;
-            const CoreModules sandbox = CoreModules.Preset_Complete;
+            // NOTE: Inspect script requires Metatables, and requiring scripts requires LoadMethods.
+            const CoreModules sandbox = CoreModules.Preset_HardSandbox | CoreModules.LoadMethods | CoreModules.Metatables;
 
-            var script = new Script(sandbox) {Options =
+            //const CoreModules sandbox = CoreModules.Preset_HardSandbox | CoreModules.LoadMethods;
+            //const CoreModules sandbox = CoreModules.Preset_SoftSandbox | CoreModules.LoadMethods;
+            //const CoreModules sandbox = CoreModules.Preset_Complete;
+
+            /*
+            const CoreModules sandbox = CoreModules.None
+                | CoreModules.Basic             // Preset_HardSandbox, Preset_SoftSandbox, Preset_Default, Preset_Complete
+                | CoreModules.GlobalConsts      // Preset_HardSandbox, Preset_SoftSandbox, Preset_Default, Preset_Complete
+                | CoreModules.TableIterators    // Preset_HardSandbox, Preset_SoftSandbox, Preset_Default, Preset_Complete
+                | CoreModules.Metatables        //                     Preset_SoftSandbox, Preset_Default, Preset_Complete
+                | CoreModules.String            // Preset_HardSandbox, Preset_SoftSandbox, Preset_Default, Preset_Complete
+                | CoreModules.LoadMethods       //                                         Preset_Default, Preset_Complete
+                | CoreModules.Table             // Preset_HardSandbox, Preset_SoftSandbox, Preset_Default, Preset_Complete
+//              | CoreModules.ErrorHandling     //                     Preset_SoftSandbox, Preset_Default, Preset_Complete
+                | CoreModules.Math              // Preset_HardSandbox, Preset_SoftSandbox, Preset_Default, Preset_Complete
+//              | CoreModules.Coroutine         //                     Preset_SoftSandbox, Preset_Default, Preset_Complete
+                | CoreModules.Bit32             // Preset_HardSandbox, Preset_SoftSandbox, Preset_Default, Preset_Complete
+//              | CoreModules.OS_Time           //                     Preset_SoftSandbox, Preset_Default, Preset_Complete
+//              | CoreModules.OS_System         //                                         Preset_Default, Preset_Complete
+//              | CoreModules.IO                //                                         Preset_Default, Preset_Complete
+//              | CoreModules.Debug             //                                                         Preset_Complete
+//              | CoreModules.Dynamic           //                     Preset_SoftSandbox, Preset_Default, Preset_Complete
+                | CoreModules.Json              //                     Preset_SoftSandbox, Preset_Default, Preset_Complete
+                ;
+            */
+
+            var script = new Script(sandbox)
+            {
+                Options =
             {
                 DebugPrint = s => printBuffer.Append(s).Append('\n'),
                 ScriptLoader = new LuaReplScriptLoader(formWindow)
-            }};
+            }
+            };
 
             interpreter = new ReplInterpreter(script)
             {
@@ -87,6 +115,7 @@ namespace MoonPad.REPL
             }
             catch (Exception ex)
             {
+                Log.Error("EXCEPTION", ex);
                 return $"{ex.GetType().Name}: {ex.Message}";
             }
         }
