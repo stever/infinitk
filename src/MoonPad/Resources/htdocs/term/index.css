@@ -8,11 +8,16 @@ body {
     src: url('../fonts/PragmataProMono.woff2') format('woff2');
 }
 
+.cmd, .cmd *, .terminal, .terminal-wrapper * {
+    font-family: 'PragmataPro Mono', monospace;
+}
+
 .terminal {
     padding: 2px;
-    --size: 1.15;
+    --size: 1.3;
     --color: black;
     --background: white;
+    /* --animation: terminal-bar; */
 }
 
 .cursor {
