@@ -59,6 +59,8 @@ namespace MoonPad
                         {
                             case "/api/method/luaRepl":
                             {
+                                // TODO: Replace this with a websocket type request, so that print statements can be immediate.
+
                                 var json = GetDataFromRequest(request);
                                 var data = JsonConvert.DeserializeObject<JsonReplRequest>(json);
 

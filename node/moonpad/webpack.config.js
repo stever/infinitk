@@ -15,6 +15,11 @@ module.exports = env => {
         }));
     }
 
+    plugins.push(new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery'
+    }));
+
     // Script loader executes JS script once in global context.
     // Useful for including jQuery plugins, for example.
     const loaders = [];

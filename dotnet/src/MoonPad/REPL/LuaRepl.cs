@@ -18,6 +18,8 @@ namespace MoonPad.REPL
         private ReplInterpreter interpreter;
         private StringBuilder printBuffer;
 
+        private BrowserBoundAppHost BrowserBoundAppHost => formWindow.BrowserBoundAppHost;
+
         public LuaRepl(FormWindow formWindow)
         {
             this.formWindow = formWindow;
@@ -61,7 +63,7 @@ namespace MoonPad.REPL
             {
                 Options =
             {
-                DebugPrint = s => printBuffer.Append(s).Append('\n'),
+                DebugPrint = s => BrowserBoundAppHost.SendPrintOutput(s),
                 ScriptLoader = new LuaReplScriptLoader(formWindow)
             }
             };

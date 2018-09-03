@@ -28,10 +28,16 @@ jQuery(function ($, undefined) {
             var output = data['Output'];
             if (output == null) isContinued = true;
             isContinued = output == null;
-            terminal.set_prompt(isContinued ? '  ' : '> ');
+            term.set_prompt(isContinued ? '  ' : '> ');
             term.echo(output == null ? "" : output).resume();
         });
     };
 
     var terminal = $('#term').terminal(handler, config);
+
+    AppHost.registerCallback(function (o) {
+        console.log(`Got message: ${o}`);
+        const data = JSON.parse(o);
+        terminal.echo(data['Output']);
+    });
 });

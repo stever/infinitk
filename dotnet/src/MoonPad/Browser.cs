@@ -16,13 +16,13 @@ namespace MoonPad
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public delegate void BrowserDocumentKeyPressEventHandler(KeyPressModifier modifier, KeyCodes keyCode);
-        public event BrowserDocumentKeyPressEventHandler BrowserDocumentKeyPress;
-
         private const string AppDataFolderCache = "Cache";
         private const string AppDataFolderUserData = "User Data";
 
-        #region FrameLoaded event
+        #region Events
+
+        public delegate void BrowserDocumentKeyPressEventHandler(KeyPressModifier modifier, KeyCodes keyCode);
+        public event BrowserDocumentKeyPressEventHandler BrowserDocumentKeyPress;
 
         public delegate void FrameLoadedEventHandler();
         public event FrameLoadedEventHandler FrameLoaded;
@@ -65,7 +65,7 @@ namespace MoonPad
             };
 
             CefSharpSettings.LegacyJavascriptBindingEnabled = true;
-            chromium.RegisterAsyncJsObject("AppHost", new BrowserBoundAppHost(formWindow));
+            chromium.RegisterAsyncJsObject("AppHost", formWindow.BrowserBoundAppHost);
             chromium.FrameLoadEnd += (o, args) => FrameLoaded?.Invoke();
             chromium.ConsoleMessage += (o, args) => Log.DebugFormat("{0}:{1} {2}", GetSource(args), args.Line, args.Message);
 
