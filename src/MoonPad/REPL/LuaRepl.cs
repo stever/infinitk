@@ -16,16 +16,17 @@ namespace MoonPad.REPL
         private readonly ScriptContext context;
 
         private ReplInterpreter interpreter;
+        private StringBuilder printBuffer;
 
         public LuaRepl(FormWindow formWindow)
         {
             this.formWindow = formWindow;
             context = new ScriptContext(this);
             CommandManager.Initialize();
-            Restart();
+            InitContext();
         }
 
-        public void Restart()
+        public void InitContext()
         {
             // TODO: Identify the sandbox requirement for using the inspect module.
             //const CoreModules sandbox = CoreModules.Preset_HardSandbox | CoreModules.LoadMethods;
@@ -33,8 +34,7 @@ namespace MoonPad.REPL
 
             var script = new Script(sandbox) {Options =
             {
-                // TODO: Capture and return print output.
-                DebugPrint = s => Log.InfoFormat("Lua print: {0}", s),
+                DebugPrint = s => printBuffer.Append(s).Append('\n'),
                 ScriptLoader = new LuaReplScriptLoader(formWindow)
             }};
 
@@ -43,25 +43,31 @@ namespace MoonPad.REPL
                 HandleDynamicExprs = false,
                 HandleClassicExprsSyntax = true
             };
+
+            printBuffer = new StringBuilder();
         }
 
-        public string HandleInput(string s)
+        public string HandleInput(string input)
         {
             try
             {
-                if (s.StartsWith("!"))
+                if (input.StartsWith("!"))
                 {
-                    return ExecuteCommand(context, s.Substring(1));
+                    return ExecuteCommand(context, input.Substring(1));
                 }
 
-                var result = interpreter.Evaluate(s);
-
+                var result = interpreter.Evaluate(input);
                 if (result == null)
                 {
                     return null;
                 }
 
-                return result.Type != DataType.Void ? result.ToString() : "";
+                var sb = new StringBuilder(printBuffer.ToString());
+                printBuffer = new StringBuilder();
+                if (result.Type != DataType.Void) sb.Append(result);
+                var output = sb.ToString().TrimEnd('\r', '\n');
+                Log.DebugFormat("In: \"{0}\", Out: \"{1}\"", input, output);
+                return output;
             }
             catch (SyntaxErrorException ex)
             {
