@@ -31,6 +31,16 @@ namespace MoonPad
             this.formWindow = formWindow;
         }
 
+        private class JsonReplRequest
+        {
+            public string Input { get; set; }
+        }
+
+        private class JsonReplResponse
+        {
+            public string Output { get; set; }
+        }
+
         public override bool ProcessRequestAsync(IRequest request, ICallback callback)
         {
             var uri = new Uri(request.Url);
@@ -46,28 +56,19 @@ namespace MoonPad
                     {
                         switch (path)
                         {
-                            case "/api/method/json-rpc":
+                            case "/api/method/luaRepl":
                             {
                                 var json = GetDataFromRequest(request);
                                 Log.DebugFormat("JSON-RPC\n{0}", json);
-                                var data = JsonConvert.DeserializeObject<JsonRpc>(json);
+                                var data = JsonConvert.DeserializeObject<JsonReplRequest>(json);
 
                                 string result = null;
-                                if (data.method == "system.describe")
-                                {
-                                    result = "MoonPad";
-                                }
-                                else
-                                {
-                                    Invoker.InvokeAndWaitFor(() =>
-                                        result = LuaRepl.HandleInput(data.GetLine()));
-                                }
+                                Invoker.InvokeAndWaitFor(() =>
+                                    result = LuaRepl.HandleInput(data.Input));
 
-                                var response = new JsonRpcResponse
+                                var response = new JsonReplResponse
                                 {
-                                    jsonrpc = "2.0",
-                                    result = result,
-                                    id = data.id
+                                    Output = result
                                 };
 
                                 var s = JsonConvert.SerializeObject(response);

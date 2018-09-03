@@ -180,8 +180,6 @@
     <Compile Include="IClosable.cs" />
     <Compile Include="Invoker.cs" />
     <Compile Include="IProgress.cs" />
-    <Compile Include="JsonRpc.cs" />
-    <Compile Include="JsonRpcResponse.cs" />
     <Compile Include="KeyCodes.cs" />
     <Compile Include="KeyEventArgsExtensionMethods.cs" />
     <Compile Include="KeyPressModifier.cs" />
