@@ -59,7 +59,6 @@ namespace MoonPad
                             case "/api/method/luaRepl":
                             {
                                 var json = GetDataFromRequest(request);
-                                Log.DebugFormat("JSON-RPC\n{0}", json);
                                 var data = JsonConvert.DeserializeObject<JsonReplRequest>(json);
 
                                 string result = null;
@@ -72,7 +71,6 @@ namespace MoonPad
                                 };
 
                                 var s = JsonConvert.SerializeObject(response);
-                                Log.DebugFormat("JSON-RPC response\n{0}", s);
                                 Stream = GetStream(s);
                                 MimeType = GetMimeType(".json");
                                 ResponseLength = Stream.Length;
