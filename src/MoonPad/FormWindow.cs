@@ -45,9 +45,9 @@ namespace MoonPad
         private string initialWindowTitle;
         private TabbedDocument contextClickTab;
 
-        public Database Database { get; private set; }
         public Invoker Invoker { get; }
         public LuaRepl LuaRepl { get; }
+        public Database Database { get; private set; }
 
         public FormWindow(string openFileOnLoad = null)
         {
@@ -60,6 +60,7 @@ namespace MoonPad
 
             CommonDialogs.Owner = this;
             CommonDialogs.Invoker = Invoker = new Invoker(this);
+            LuaRepl = new LuaRepl(this);
 
             sandDockManager1.Renderer = new CombinedDockRenderer(TabColour);
 
@@ -72,8 +73,6 @@ namespace MoonPad
             logDockWindow.Controls.Add(Border.AddBorder(logWindow = new LogWindow()));
             luaScriptsWindow.Controls.Add(Border.AddBorder(new LuaScriptsList(this)));
             luaReplWindow.Controls.Add(Border.AddBorder(new LuaReplWindow(this)));
-
-            LuaRepl = new LuaRepl(this);
         }
 
         private void FormWindow_Load(object sender, EventArgs e)
