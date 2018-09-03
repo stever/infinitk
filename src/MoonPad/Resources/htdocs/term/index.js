@@ -13,6 +13,7 @@ jQuery(function($, undefined) {
     };
 
     var handler = function(command, term) {
+        term.pause();
         $.ajax({
             type: 'POST',
             url: '/api/method/luaRepl',
@@ -23,7 +24,7 @@ jQuery(function($, undefined) {
             if (output == null) isContinued = true;
             isContinued = output == null;
             terminal.set_prompt(isContinued ? '  ' : '> ');
-            term.echo(output == null ? "" : output);
+            term.echo(output == null ? "" : output).resume();
         });
     };
 
