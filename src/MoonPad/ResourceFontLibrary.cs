@@ -21,7 +21,7 @@ namespace MoonPad
         {
             if (pragmataPro == null)
             {
-                pragmataPro = new ResourceFont(Properties.Resources.PragmataPro_Mono_R_0826);
+                pragmataPro = new ResourceFont(Properties.Resources.PragmataPro_Mono_R_liga_0826);
             }
 
             return pragmataPro.GetFontFamily();

@@ -30,7 +30,9 @@ namespace MoonPad
         {
             {"/fonts/PragmataProMono.woff2", Resources.htdocs_fonts_PragmataProMono_woff2},
             {"/js/jquery-3.2.1.min.js", Resources.htdocs_js_jquery_3_2_1_min_js},
+            {"/term/index.css", Resources.htdocs_term_index_css},
             {"/term/index.html", Resources.htdocs_term_index_html},
+            {"/term/index.js", Resources.htdocs_term_index_js},
             {"/term/jquery.terminal.min.css", Resources.htdocs_term_jquery_terminal_min_css},
             {"/term/jquery.terminal.min.js", Resources.htdocs_term_jquery_terminal_min_js},
         };

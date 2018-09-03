@@ -102,6 +102,33 @@ namespace MoonPad.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to body {
+        ///    padding: 0;
+        ///    margin: 0;
+        ///}
+        ///
+        ///@font-face {
+        ///    font-family: &apos;PragmataPro Mono&apos;;
+        ///    src: url(&apos;../fonts/PragmataProMono.woff2&apos;) format(&apos;woff2&apos;);
+        ///}
+        ///
+        ///.terminal {
+        ///    padding: 2px;
+        ///    --size: 1.2;
+        ///}
+        ///
+        ///.terminal, .cmd, .terminal .terminal-output div div, .cmd .prompt {
+        ///    font-family: &apos;PragmataPro Mono&apos;, monospace;
+        ///}
+        ///.
+        /// </summary>
+        internal static string htdocs_term_index_css {
+            get {
+                return ResourceManager.GetString("htdocs_term_index_css", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html lang=&quot;en&quot;&gt;
         ///&lt;head&gt;
@@ -109,21 +136,34 @@ namespace MoonPad.Properties {
         ///    &lt;script src=&quot;../js/jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;
         ///    &lt;script src=&quot;jquery.terminal.min.js&quot;&gt;&lt;/script&gt;
         ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;jquery.terminal.min.css&quot; /&gt;
-        ///    &lt;style&gt;
-        ///        body {
-        ///            padding: 0;
-        ///            margin: 0;
-        ///        }
-        ///        @font-face {
-        ///            font-family: &apos;PragmataPro Mono&apos;;
-        ///            src: url(&apos;../fonts/PragmataProMono.woff2&apos;) format(&apos;woff2&apos;);
-        ///        }
-        ///        .terminal {
-        ///           [rest of string was truncated]&quot;;.
+        ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;index.css&quot; /&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;div id=&quot;term_demo&quot;&gt;&lt;/div&gt;
+        ///    &lt;script src=&quot;index.js&quot;&gt;&lt;/script&gt;
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;.
         /// </summary>
         internal static string htdocs_term_index_html {
             get {
                 return ResourceManager.GetString("htdocs_term_index_html", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to jQuery(function ($, undefined) {
+        ///    $(&apos;#term_demo&apos;).terminal(&apos;/api/method/json-rpc&apos;, {
+        ///        height: &apos;100vh&apos;,
+        ///        width: &apos;100vw&apos;,
+        ///        prompt: &apos;&gt; &apos;,
+        ///        greetings: &apos;&apos;
+        ///    });
+        ///});
+        ///.
+        /// </summary>
+        internal static string htdocs_term_index_js {
+            get {
+                return ResourceManager.GetString("htdocs_term_index_js", resourceCulture);
             }
         }
         

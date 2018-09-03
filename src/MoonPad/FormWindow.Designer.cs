@@ -336,7 +336,7 @@
             this.luaReplWindow.ShowOptions = false;
             this.luaReplWindow.Size = new System.Drawing.Size(792, 101);
             this.luaReplWindow.TabIndex = 1;
-            this.luaReplWindow.Text = "REPL";
+            this.luaReplWindow.Text = "Lua REPL";
             // 
             // tabContextMenu
             // 
