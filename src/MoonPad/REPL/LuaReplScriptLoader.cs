@@ -2,7 +2,7 @@
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Loaders;
 
-namespace MoonPad
+namespace MoonPad.REPL
 {
     internal class LuaReplScriptLoader : ScriptLoaderBase
     {

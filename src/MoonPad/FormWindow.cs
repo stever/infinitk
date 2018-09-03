@@ -10,6 +10,7 @@ using log4net;
 using MoonPad.DockingWindows;
 using MoonPad.Documents;
 using MoonPad.Persistence;
+using MoonPad.REPL;
 using MoonPad.SandDockRendering;
 using TD.SandDock;
 

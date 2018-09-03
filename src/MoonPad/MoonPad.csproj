@@ -180,17 +180,22 @@
     <Compile Include="IClosable.cs" />
     <Compile Include="Invoker.cs" />
     <Compile Include="IProgress.cs" />
+    <Compile Include="REPL\ICommand.cs" />
     <Compile Include="KeyCodes.cs" />
     <Compile Include="KeyEventArgsExtensionMethods.cs" />
     <Compile Include="KeyPressModifier.cs" />
     <Compile Include="ListBoxLogger.cs" />
     <Compile Include="LogBoxLevel.cs" />
     <Compile Include="LuaDynamicSyntaxLanguage.cs" />
-    <Compile Include="LuaRepl.cs" />
-    <Compile Include="LuaReplScriptLoader.cs" />
+    <Compile Include="REPL\LuaRepl.cs" />
+    <Compile Include="REPL\LuaReplScriptLoader.cs" />
     <Compile Include="Persistence\Settings.cs" />
     <Compile Include="Persistence\WindowsFormGeometry.cs" />
     <Compile Include="Persistence\WindowsFormGeometryPersistence.cs" />
+    <Compile Include="REPL\CommandManager.cs" />
+    <Compile Include="REPL\RestartCommand.cs" />
+    <Compile Include="REPL\ScriptContext.cs" />
+    <Compile Include="REPL\HelpCommand.cs" />
     <Compile Include="ResourceFont.cs" />
     <Compile Include="ResourceFontLibrary.cs" />
     <Compile Include="SandDockRendering\CombinedDockRenderer.cs" />
@@ -305,6 +310,7 @@
       <Name>MoonSharp.VsCodeDebugger</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>..\..\..\PostBuild.bat</PostBuildEvent>

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CefSharp;
 using log4net;
+using MoonPad.REPL;
 using Newtonsoft.Json;
 
 namespace MoonPad
