@@ -82,28 +82,12 @@ namespace MoonPad.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html lang=&quot;en&quot;&gt;
-        ///&lt;head&gt;
-        ///    &lt;meta charset=&quot;utf-8&quot;&gt;
-        ///    &lt;script src=&quot;jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;
-        ///    &lt;script src=&quot;jquery.terminal.min.js&quot;&gt;&lt;/script&gt;
-        ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;jquery.terminal.min.css&quot; /&gt;
-        ///    &lt;style&gt;
-        ///        body {padding: 0; margin: 0;}
-        ///        .terminal {padding: 2px;}
-        ///    &lt;/style&gt;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;
-        ///    &lt;div id=&quot;term_demo&quot;&gt;&lt;/div&gt;
-        ///    &lt;script&gt;
-        ///        jQuery(function ($, undefined) {
-        ///            $(&apos;#term_demo&apos;).terminal(&apos;/api/method/json-rpc&apos;, {
-        ///         [rest of string was truncated]&quot;;.
+        ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static string htdocs_index_html {
+        internal static byte[] htdocs_fonts_PragmataProMono_woff2 {
             get {
-                return ResourceManager.GetString("htdocs_index_html", resourceCulture);
+                object obj = ResourceManager.GetObject("htdocs_fonts_PragmataProMono_woff2", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -111,9 +95,35 @@ namespace MoonPad.Properties {
         ///   Looks up a localized string similar to /*! jQuery v3.2.1 | (c) JS Foundation and other contributors | jquery.org/license */
         ///!function(a,b){&quot;use strict&quot;;&quot;object&quot;==typeof module&amp;&amp;&quot;object&quot;==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw new Error(&quot;jQuery requires a window with a document&quot;);return b(a)}:b(a)}(&quot;undefined&quot;!=typeof window?window:this,function(a,b){&quot;use strict&quot;;var c=[],d=a.document,e=Object.getPrototypeOf,f=c.slice,g=c.concat,h=c.push,i=c.indexOf,j={},k=j.toString,l=j.hasOwnProperty,m=l.toStrin [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string htdocs_jquery_3_2_1_min_js {
+        internal static string htdocs_js_jquery_3_2_1_min_js {
             get {
-                return ResourceManager.GetString("htdocs_jquery_3_2_1_min_js", resourceCulture);
+                return ResourceManager.GetString("htdocs_js_jquery_3_2_1_min_js", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html lang=&quot;en&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot;&gt;
+        ///    &lt;script src=&quot;../js/jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;
+        ///    &lt;script src=&quot;jquery.terminal.min.js&quot;&gt;&lt;/script&gt;
+        ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;jquery.terminal.min.css&quot; /&gt;
+        ///    &lt;style&gt;
+        ///        body {
+        ///            padding: 0;
+        ///            margin: 0;
+        ///        }
+        ///        @font-face {
+        ///            font-family: &apos;PragmataPro Mono&apos;;
+        ///            src: url(&apos;../fonts/PragmataProMono.woff2&apos;) format(&apos;woff2&apos;);
+        ///        }
+        ///        .terminal {
+        ///           [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string htdocs_term_index_html {
+            get {
+                return ResourceManager.GetString("htdocs_term_index_html", resourceCulture);
             }
         }
         
@@ -129,9 +139,9 @@ namespace MoonPad.Properties {
         /// *
         /// * [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string htdocs_jquery_terminal_min_css {
+        internal static string htdocs_term_jquery_terminal_min_css {
             get {
-                return ResourceManager.GetString("htdocs_jquery_terminal_min_css", resourceCulture);
+                return ResourceManager.GetString("htdocs_term_jquery_terminal_min_css", resourceCulture);
             }
         }
         
@@ -146,59 +156,9 @@ namespace MoonPad.Properties {
         /// *
         /// * This file is part of [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string htdocs_jquery_terminal_min_js {
+        internal static string htdocs_term_jquery_terminal_min_js {
             get {
-                return ResourceManager.GetString("htdocs_jquery_terminal_min_js", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] htdocs_PragmataProMono_eot {
-            get {
-                object obj = ResourceManager.GetObject("htdocs_PragmataProMono_eot", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] htdocs_PragmataProMono_svg {
-            get {
-                object obj = ResourceManager.GetObject("htdocs_PragmataProMono_svg", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] htdocs_PragmataProMono_ttf {
-            get {
-                object obj = ResourceManager.GetObject("htdocs_PragmataProMono_ttf", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] htdocs_PragmataProMono_woff {
-            get {
-                object obj = ResourceManager.GetObject("htdocs_PragmataProMono_woff", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] htdocs_PragmataProMono_woff2 {
-            get {
-                object obj = ResourceManager.GetObject("htdocs_PragmataProMono_woff2", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("htdocs_term_jquery_terminal_min_js", resourceCulture);
             }
         }
         
@@ -218,26 +178,6 @@ namespace MoonPad.Properties {
         internal static byte[] PragmataPro_Mono_R_liga_0826 {
             get {
                 object obj = ResourceManager.GetObject("PragmataPro_Mono_R_liga_0826", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] PragmataProR_0826 {
-            get {
-                object obj = ResourceManager.GetObject("PragmataProR_0826", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] PragmataProR_liga_0826 {
-            get {
-                object obj = ResourceManager.GetObject("PragmataProR_liga_0826", resourceCulture);
                 return ((byte[])(obj));
             }
         }

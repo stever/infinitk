@@ -121,15 +121,6 @@
   <data name="ActiproSoftware_Lua" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ActiproSoftware.Lua.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="htdocs_index_html" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\htdocs\index.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="PragmataProR_0826" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PragmataProR_0826.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PragmataProR_liga_0826" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PragmataProR_liga_0826.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="PragmataPro_Mono_R_0826" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PragmataPro_Mono_R_0826.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -139,28 +130,19 @@
   <data name="ProFontWindows" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ProFontWindows.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="htdocs_jquery_3_2_1_min_js" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\htdocs\jquery-3.2.1.min.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="htdocs_fonts_PragmataProMono_woff2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\htdocs\fonts\PragmataProMono.woff2;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="htdocs_jquery_terminal_min_js" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\htdocs\jquery.terminal.min.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="htdocs_js_jquery_3_2_1_min_js" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\htdocs\js\jquery-3.2.1.min.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="htdocs_jquery_terminal_min_css" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\htdocs\jquery.terminal.min.css;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="htdocs_term_index_html" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\htdocs\term\index.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="htdocs_PragmataProMono_eot" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\htdocs\PragmataProMono.eot;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="htdocs_term_jquery_terminal_min_css" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\htdocs\term\jquery.terminal.min.css;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="htdocs_PragmataProMono_svg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\htdocs\PragmataProMono.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="htdocs_PragmataProMono_ttf" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\htdocs\PragmataProMono.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="htdocs_PragmataProMono_woff" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\htdocs\PragmataProMono.woff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="htdocs_PragmataProMono_woff2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\htdocs\PragmataProMono.woff2;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="htdocs_term_jquery_terminal_min_js" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\htdocs\term\jquery.terminal.min.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>

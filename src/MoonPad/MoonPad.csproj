@@ -276,12 +276,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Artifacts\Sphere.obj" />
-    <None Include="Resources\htdocs\PragmataProMono.eot" />
-    <None Include="Resources\htdocs\PragmataProMono.ttf" />
-    <None Include="Resources\htdocs\PragmataProMono.woff" />
-    <None Include="Resources\htdocs\PragmataProMono.woff2" />
-    <None Include="Resources\PragmataProR_0826.ttf" />
-    <None Include="Resources\PragmataProR_liga_0826.ttf" />
+    <None Include="Resources\htdocs\fonts\PragmataProMono.woff2" />
     <None Include="Resources\PragmataPro_Mono_R_0826.ttf" />
     <None Include="Resources\PragmataPro_Mono_R_liga_0826.ttf" />
     <None Include="Resources\ProFontWindows.ttf" />
@@ -292,11 +287,10 @@
   <ItemGroup>
     <Content Include="Artifacts\Starfield.png" />
     <Content Include="Artifacts\Terrain.png" />
-    <None Include="Resources\htdocs\PragmataProMono.svg" />
-    <None Include="Resources\htdocs\jquery.terminal.min.css" />
-    <None Include="Resources\htdocs\jquery.terminal.min.js" />
-    <None Include="Resources\htdocs\jquery-3.2.1.min.js" />
-    <None Include="Resources\htdocs\index.html" />
+    <None Include="Resources\htdocs\term\jquery.terminal.min.js" />
+    <None Include="Resources\htdocs\term\jquery.terminal.min.css" />
+    <None Include="Resources\htdocs\term\index.html" />
+    <None Include="Resources\htdocs\js\jquery-3.2.1.min.js" />
     <None Include="Resources\ActiproSoftware.Lua.xml" />
   </ItemGroup>
   <ItemGroup>
