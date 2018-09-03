@@ -36,18 +36,22 @@ namespace MoonPad
 
                 return result.Type != DataType.Void ? result.ToString() : "";
             }
+            catch (SyntaxErrorException ex)
+            {
+                return ex.DecoratedMessage != null
+                    ? $"Syntax Error. {ex.DecoratedMessage}"
+                    : $"Syntax Error: {ex.Message}";
+            }
+            catch (ScriptRuntimeException ex)
+            {
+                return ex.DecoratedMessage != null
+                    ? $"Script Error. {ex.DecoratedMessage}"
+                    : $"Script Error: {ex.Message}";
+            }
             catch (InterpreterException ex)
             {
                 return $"{ex.DecoratedMessage ?? ex.Message}";
             }
-            //catch (SyntaxErrorException ex)
-            //{
-            //    return $"Syntax Error: {ex.Message}";
-            //}
-            //catch (ScriptRuntimeException ex)
-            //{
-            //    return $"Script Error: {ex.Message}";
-            //}
             catch (Exception ex)
             {
                 return $"{ex.GetType().Name}: {ex.Message}";
