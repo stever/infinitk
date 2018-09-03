@@ -47,6 +47,7 @@ namespace MoonPad
 
         public Database Database { get; private set; }
         public Invoker Invoker { get; }
+        public LuaRepl LuaRepl { get; }
 
         public FormWindow(string openFileOnLoad = null)
         {
@@ -71,6 +72,8 @@ namespace MoonPad
             logDockWindow.Controls.Add(Border.AddBorder(logWindow = new LogWindow()));
             luaScriptsWindow.Controls.Add(Border.AddBorder(new LuaScriptsList(this)));
             luaReplWindow.Controls.Add(Border.AddBorder(new LuaReplWindow(this)));
+
+            LuaRepl = new LuaRepl(this);
         }
 
         private void FormWindow_Load(object sender, EventArgs e)

@@ -22,8 +22,12 @@ namespace MoonPad
 
         private readonly FormWindow formWindow;
 
+        private Invoker Invoker => formWindow.Invoker;
+        private LuaRepl LuaRepl => formWindow.LuaRepl;
+
         public BrowserSchemeHandler(FormWindow formWindow)
         {
+            Log.Debug("new BrowserSchemeHandler");
             this.formWindow = formWindow;
         }
 
@@ -48,16 +52,27 @@ namespace MoonPad
                                 Log.DebugFormat("JSON-RPC\n{0}", json);
                                 var data = JsonConvert.DeserializeObject<JsonRpc>(json);
 
-                                // TODO: formWindow.Invoker.InvokeAndWaitFor(() => DoSomething(data));
+                                string result = null;
+                                if (data.method == "system.describe")
+                                {
+                                    result = "MoonPad";
+                                }
+                                else
+                                {
+                                    Invoker.InvokeAndWaitFor(() =>
+                                        result = LuaRepl.HandleInput(data.GetLine()));
+                                }
 
                                 var response = new JsonRpcResponse
                                 {
                                     jsonrpc = "2.0",
-                                    result = "OK", // TODO: Replace with result.
+                                    result = result,
                                     id = data.id
                                 };
 
-                                Stream = GetStream(JsonConvert.SerializeObject(response));
+                                var s = JsonConvert.SerializeObject(response);
+                                Log.DebugFormat("JSON-RPC response\n{0}", s);
+                                Stream = GetStream(s);
                                 MimeType = GetMimeType(".json");
                                 ResponseLength = Stream.Length;
 
