@@ -4,6 +4,7 @@ using System.Text;
 using log4net;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.REPL;
+using MoonSharp.VsCodeDebugger;
 
 namespace MoonPad.REPL
 {
@@ -12,11 +13,14 @@ namespace MoonPad.REPL
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        private const string DebuggerScriptName = "MoonSharp REPL interpreter";
+
         private readonly FormWindow formWindow;
         private readonly ScriptContext context;
 
+        private Script script;
         private ReplInterpreter interpreter;
-        private StringBuilder printBuffer;
+        private MoonSharpVsCodeDebugServer debugger;
 
         private BrowserBoundAppHost BrowserBoundAppHost => formWindow.BrowserBoundAppHost;
 
@@ -59,7 +63,9 @@ namespace MoonPad.REPL
                 ;
             */
 
-            var script = new Script(sandbox)
+            debugger?.Detach(script);
+
+            script = new Script(sandbox)
             {
                 Options =
             {
@@ -68,13 +74,23 @@ namespace MoonPad.REPL
             }
             };
 
+            debugger?.AttachToScript(script, DebuggerScriptName);
+
             interpreter = new ReplInterpreter(script)
             {
                 HandleDynamicExprs = false,
                 HandleClassicExprsSyntax = true
             };
+        }
 
-            printBuffer = new StringBuilder();
+        public void StartDebugger()
+        {
+            debugger = new MoonSharpVsCodeDebugServer();
+            debugger.Start();
+
+            // http://www.moonsharp.org/debugger.html
+            // See also "Mapping VSCode debugger to file system files"
+            debugger.AttachToScript(script, DebuggerScriptName);
         }
 
         public string HandleInput(string input)
@@ -92,10 +108,10 @@ namespace MoonPad.REPL
                     return null;
                 }
 
-                var sb = new StringBuilder(printBuffer.ToString());
-                printBuffer = new StringBuilder();
-                if (result.Type != DataType.Void) sb.Append(result);
-                var output = sb.ToString().TrimEnd('\r', '\n');
+                var output = result.Type != DataType.Void
+                    ? result.ToString().TrimEnd('\r', '\n')
+                    : "";
+
                 Log.DebugFormat("In: \"{0}\", Out: \"{1}\"", input, output);
                 return output;
             }

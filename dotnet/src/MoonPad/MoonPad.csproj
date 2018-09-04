@@ -183,6 +183,7 @@
     <Compile Include="IClosable.cs" />
     <Compile Include="Invoker.cs" />
     <Compile Include="IProgress.cs" />
+    <Compile Include="REPL\DebugCommand.cs" />
     <Compile Include="REPL\ICommand.cs" />
     <Compile Include="KeyCodes.cs" />
     <Compile Include="KeyEventArgsExtensionMethods.cs" />

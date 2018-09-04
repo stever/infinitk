@@ -21,10 +21,10 @@ let input = '';
 xterm.on('key', (key, ev) => {
     const printable = !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
 
-    // Ignore arrow keys
-    if (ev.code === 'ArrowUp' || ev.code === 'ArrowDown' || ev.code === 'ArrowLeft' || ev.code === 'ArrowRight') {
-        return;
-    }
+    // // Ignore arrow keys
+    // if (ev.code === 'ArrowUp' || ev.code === 'ArrowDown' || ev.code === 'ArrowLeft' || ev.code === 'ArrowRight') {
+    //     return;
+    // }
 
     if (ev.keyCode === 13) { // RETURN
         xterm.write('\r\n');
