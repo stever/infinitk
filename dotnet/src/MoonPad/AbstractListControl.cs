@@ -3,9 +3,8 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
-using MoonPad.ExtendedControls;
 
-namespace MoonPad.DockingWindows
+namespace MoonPad
 {
     /// <remarks>
     /// This would be an abstract class but the Windows Forms designer doesn't

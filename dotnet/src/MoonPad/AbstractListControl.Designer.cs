@@ -1,4 +1,4 @@
-﻿namespace MoonPad.DockingWindows
+﻿namespace MoonPad
 {
     internal partial class AbstractListControl
     {

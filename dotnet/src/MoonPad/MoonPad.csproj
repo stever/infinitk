@@ -120,10 +120,10 @@
     <Compile Include="CommonDialogs.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DialogCenteringService.cs" />
-    <Compile Include="DockingWindows\AbstractListControl.cs">
+    <Compile Include="AbstractListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DockingWindows\AbstractListControl.Designer.cs">
+    <Compile Include="AbstractListControl.Designer.cs">
       <DependentUpon>AbstractListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="DockingWindows\LogWindow.cs">
@@ -160,10 +160,10 @@
     <Compile Include="Engine\SceneObject.cs" />
     <Compile Include="Engine\SceneViewer.cs" />
     <Compile Include="ErrorHandler.cs" />
-    <Compile Include="ExtendedControls\FlickerFreeListBox.cs">
+    <Compile Include="FlickerFreeListBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ExtendedControls\SideMenuListBox.cs">
+    <Compile Include="SideMenuListBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FindToolBar.cs">
@@ -236,7 +236,7 @@
     <EmbeddedResource Include="Browser.resx">
       <DependentUpon>Browser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DockingWindows\AbstractListControl.resx">
+    <EmbeddedResource Include="AbstractListControl.resx">
       <DependentUpon>AbstractListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DockingWindows\LogWindow.resx">
@@ -251,7 +251,7 @@
     <EmbeddedResource Include="Documents\OpenGlDocument.resx">
       <DependentUpon>OpenGlDocument.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExtendedControls\SideMenuListBox.resx">
+    <EmbeddedResource Include="SideMenuListBox.resx">
       <DependentUpon>SideMenuListBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FindToolBar.resx">

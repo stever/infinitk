@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace MoonPad.ExtendedControls
+namespace MoonPad
 {
     internal sealed class FlickerFreeListBox : ListBox
     {
