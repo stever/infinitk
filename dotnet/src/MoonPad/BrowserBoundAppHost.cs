@@ -1,29 +1,38 @@
-﻿using CefSharp;
+﻿using System;
+using CefSharp;
 using Newtonsoft.Json;
 
 namespace MoonPad
 {
-    internal class BrowserBoundAppHost
+    internal class BrowserBoundAppHost : IDisposable
     {
         private readonly FormWindow formWindow;
 
-        // This property may be accessed by FormWindow, not the browser script.
         private IJavascriptCallback callback;
 
         public BrowserBoundAppHost(FormWindow formWindow)
         {
             this.formWindow = formWindow;
+            formWindow.LuaRepl.LuaReplPrint += LuaRepl_OnLuaReplPrint;
+        }
+
+        public void Dispose()
+        {
+            formWindow.LuaRepl.LuaReplPrint -= LuaRepl_OnLuaReplPrint;
         }
 
         private class JsonPrintMsg
         {
+            // ReSharper disable once UnusedAutoPropertyAccessor.Local
             public string Output { get; set; }
         }
 
-        internal void SendPrintOutput(string s)
+        private void LuaRepl_OnLuaReplPrint(string s)
         {
             callback.ExecuteAsync(JsonConvert.SerializeObject(new JsonPrintMsg {Output = s}));
         }
+
+        #region Browser script interface
 
         // This method is called by the browser script.
         // ReSharper disable once UnusedMember.Global
@@ -42,5 +51,7 @@ namespace MoonPad
             // NOTE: If the page is refreshed, this is re-assigned.
             this.callback = callback;
         }
+
+        #endregion
     }
 }

@@ -32,13 +32,16 @@ namespace MoonPad
             this.formWindow = formWindow;
         }
 
+        // ReSharper disable once ClassNeverInstantiated.Local
         private class JsonReplRequest
         {
+            // ReSharper disable once UnusedAutoPropertyAccessor.Local
             public string Input { get; set; }
         }
 
         private class JsonReplResponse
         {
+            // ReSharper disable once UnusedAutoPropertyAccessor.Local
             public string Output { get; set; }
         }
 

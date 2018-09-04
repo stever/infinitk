@@ -29,6 +29,7 @@ namespace MoonPad
 
         #endregion
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public string StartPage { get; }
 
         private readonly FormWindow formWindow;
@@ -39,8 +40,9 @@ namespace MoonPad
 
         private ChromiumWebBrowser chromium;
         private FindToolBar findToolStrip;
+        private BrowserBoundAppHost appHost;
 
-        public Browser(FormWindow formWindow, string startPage, IClosable closable = null)
+        protected Browser(FormWindow formWindow, string startPage, IClosable closable = null)
         {
             this.formWindow = formWindow;
             StartPage = startPage;
@@ -51,6 +53,11 @@ namespace MoonPad
 
             invoker = new Invoker(this);
             Name = "CefSharpBrowser";
+
+            Disposed += (sender, e) =>
+            {
+                appHost.Dispose();
+            };
         }
 
         private void CefSharpBrowser_Load(object sender, EventArgs e)
@@ -65,7 +72,7 @@ namespace MoonPad
             };
 
             CefSharpSettings.LegacyJavascriptBindingEnabled = true;
-            chromium.RegisterAsyncJsObject("AppHost", formWindow.BrowserBoundAppHost);
+            chromium.RegisterAsyncJsObject("AppHost", appHost = new BrowserBoundAppHost(formWindow));
             chromium.FrameLoadEnd += (o, args) => FrameLoaded?.Invoke();
             chromium.ConsoleMessage += (o, args) => Log.DebugFormat("{0}:{1} {2}", GetSource(args), args.Line, args.Message);
 

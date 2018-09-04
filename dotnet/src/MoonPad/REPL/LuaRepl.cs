@@ -13,6 +13,13 @@ namespace MoonPad.REPL
         private static readonly ILog Log = LogManager.
             GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        #region Events
+
+        public delegate void LuaReplPrintEventHandler(string s);
+        public event LuaReplPrintEventHandler LuaReplPrint;
+
+        #endregion
+
         private const string DebuggerScriptName = "MoonSharp REPL interpreter";
 
         private readonly FormWindow formWindow;
@@ -21,8 +28,6 @@ namespace MoonPad.REPL
         private Script script;
         private ReplInterpreter interpreter;
         private MoonSharpVsCodeDebugServer debugger;
-
-        private BrowserBoundAppHost BrowserBoundAppHost => formWindow.BrowserBoundAppHost;
 
         public LuaRepl(FormWindow formWindow)
         {
@@ -69,7 +74,7 @@ namespace MoonPad.REPL
             {
                 Options =
             {
-                DebugPrint = s => BrowserBoundAppHost.SendPrintOutput(s),
+                DebugPrint = s => LuaReplPrint?.Invoke(s),
                 ScriptLoader = new LuaReplScriptLoader(formWindow)
             }
             };
