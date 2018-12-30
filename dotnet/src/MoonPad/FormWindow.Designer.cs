@@ -293,6 +293,7 @@
             this.luaScriptsWindow.ShowOptions = false;
             this.luaScriptsWindow.Size = new System.Drawing.Size(200, 203);
             this.luaScriptsWindow.TabIndex = 0;
+            this.luaScriptsWindow.TabText = "Lua";
             this.luaScriptsWindow.Text = "Lua Scripts";
             // 
             // sandDockManager1
@@ -336,6 +337,7 @@
             this.luaReplWindow.ShowOptions = false;
             this.luaReplWindow.Size = new System.Drawing.Size(792, 101);
             this.luaReplWindow.TabIndex = 1;
+            this.luaReplWindow.TabText = "REPL";
             this.luaReplWindow.Text = "Lua REPL";
             // 
             // tabContextMenu
